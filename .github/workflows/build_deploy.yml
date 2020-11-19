@@ -1,4 +1,4 @@
-name: Build/Test/Deploy
+name: Build & Deploy
 on:
   push:
     branches-ignore:
@@ -7,7 +7,7 @@ on:
   pull_request:
 jobs:
   build:
-    name: Build and Deploy
+    name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v2-beta

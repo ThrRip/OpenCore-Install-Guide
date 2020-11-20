@@ -1,34 +1,34 @@
-# Getting started with OpenCore
+# OpenCore 快速入门
 
-Before we can jump head first into making an OpenCore based system, we need to go over a few things.
+在我们可以着手于制作一套 OpenCore 基层系统之前，我们需要先顾及到一些事情。
 
-## Prerequisites
+## 先决条件
   
-1. _**[CRUCIAL]**_ Time and patience.
-   * Don't start working on this if you have deadlines or important work. Hackintoshes are not something you should be relying on as a work machine.
-2. _**[CRUCIAL]**_ **KNOW YOUR HARDWARE**
-   * Your CPU name and generation
-   * Your GPUs
-   * Your storage devices (HDD/SSD, NVMe/AHCI/RAID/IDE configuration)
-   * Your laptop/desktop model if from an OEM
-   * Your **Ethernet chipset**
-   * Your WLAN/Bluetooth chipset
-3. _**[CRUCIAL]**_ **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
-   * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
-4. _**[CRUCIAL]**_ A machine that is compatible as seen in the _**Compatibility**_ section.
-   * [Hardware Limitations page](macos-limits.md)
-5. _**[CRUCIAL]**_ A minimum of:
-   * 12GB USB if you're going to use macOS to create the USB
-   * 4GB USB if you're going to use Windows or Linux for USB creation
-6. _**[CRUCIAL]**_ An **Ethernet connection** (no WiFi dongles, Ethernet USB adapter may work depending on macOS support) and you must know your LAN card's model
-   * You must either have a physical Ethernet port, or a compatible macOS Ethernet dongle/adapter. In case you have a [compatible WiFi card](https://dortania.github.io/Wireless-Buyers-Guide/), you can also use that.
-     * Note the majority of Wifi cards are not supported by macOS
-   * For people who can't use ethernet but have an Android phone, you can connect your Android phone to WiFi and then tether it using USB with [HoRNDIS](https://joshuawise.com/horndis#available_versions).
-7. _**[CRUCIAL]**_ **Proper OS Installation:**
-   * Be it:
-     * macOS (a fairly recent one would be better)
-     * Windows (Windows 10, 1703 or newer)
-     * Linux (with Python 2.7 or later), make sure it's clean and properly functioning.
-   * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have 15GB free at least.
-   * For macOS users, **30GB** of free space on the system's drive.
-   * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/)
+1. _**[重要]**_ 时间和耐心。
+   * 如果你有截止日期的限制或者重要的工作，不要开始做这件事。Hacintosh 在你用于工作的设备上，不应该被作为一项依赖。
+2. _**[重要]**_ **了解你的硬件**
+   * 你的 CPU 名称和生产时期
+   * 你的显卡
+   * 你的存储设备（机械硬盘/固态硬盘，NVMe/AHCI/RAID/IDE 配置）
+   * 如果你的笔记本电脑/台式电脑来自于一家设备制造商，你还需要了解它的型号
+   * 你的 **以太网芯片组**
+   * 你的无线局域网/蓝牙芯片组
+3. _**[重要]**_ **对于命令行的基本知识，知道如何立即开始使用终端/命令行**
+   * 这不仅仅是 [重要]，这是整个指南的基础。如果你不知道如何 `cd` 到一个目录或者删除一个文件，很抱歉，我们没办法帮助你。
+4. _**[重要]**_ 有一台与在 _**兼容性**_ 部分看到的相似的设备。
+   * [关于硬件限制的页面](macos-limits.md)
+5. _**[重要]**_ 最少拥有：
+   * 12GB USB，如果你想要在 macOS 下创建用于安装的 USB
+   * 4GB USB，如果你想要执行 Windows 或 Linux 下的 USB 创建
+6. _**[重要]**_ **以太网连接**（没有 Wi-Fi 驱动，USB 以太网适配器就可能成为 macOS 运行的依赖）而且也需要知道你的有线网卡型号
+   * 你必须要么有一个物理的以太网接口，要么一个兼容 macOS的以太网驱动/适配器。最好再有一张 [兼容的无线网卡](https://dortania.github.io/Wireless-Buyers-Guide/)，那么你也可以使用它作为后备。
+     * 注意，大多数的无线网卡是不被 macOS 支持的
+   * 如果无法使用以太网，但是有一台 Android 手机，你可以将你的 Android 手机连接至 Wi-Fi 然后用 USB 和 [HoRNDIS](https://joshuawise.com/horndis#available_versions) 使你的 PC 连接至 Internet。
+7. _**[重要]**_ **合理的系统安装：**
+   * 像这样：
+     * macOS（一个较新的版本会更好）
+     * Windows（Windows 10，版本 1703 或者更高版本）
+     * Linux（带有 Python 2.7 或更高版本，确保它纯净且正常运行）
+   * 对于 Windows 和 Linux 用户，你正在使用的磁盘驱动器上要留有 **15GB** 空闲空间。在 Windows 中，你的系统盘 (C:) 必须最少留有 15GB 的空闲。
+   * 对于 macOS 用户，系统盘上要留有 **30GB** 的空闲空间。
+   * 本指南中的很多工具也依赖于 [已安装的 Python](https://www.python.org/downloads/)

@@ -18,10 +18,10 @@
 4. _**[重要]**_ 有一台与在 _**兼容性**_ 部分看到的相似的设备。
    * [关于硬件限制的页面](macos-limits.md)
 5. _**[重要]**_ 最少拥有：
-   * 12GB USB，如果你想要在 macOS 下创建用于安装的 USB
-   * 4GB USB，如果你想要执行 Windows 或 Linux 下的 USB 创建
+   * 12GB USB，如果你想要创建用于安装 macOS 的 USB
+   * 4GB USB，如果你想要创建用于安装 Windows 或 Linux 的 USB
 6. _**[重要]**_ **以太网连接**（没有 Wi-Fi 驱动，USB 以太网适配器就可能成为 macOS 运行的依赖）而且也需要知道你的有线网卡型号
-   * 你必须要么有一个物理的以太网接口，要么一个兼容 macOS的以太网驱动/适配器。最好再有一张 [兼容的无线网卡](https://dortania.github.io/Wireless-Buyers-Guide/)，那么你也可以使用它作为后备。
+   * 你必须要么有一个物理的以太网接口，要么一个兼容 macOS的以太网驱动/适配器。最好再有一张 [兼容的无线网卡](https://dortania.github.io/Wireless-Buyers-Guide/)，这样你也可以使用它作为后备。
      * 注意，大多数的无线网卡是不被 macOS 支持的
    * 如果无法使用以太网，但是有一台 Android 手机，你可以将你的 Android 手机连接至 Wi-Fi 然后用 USB 和 [HoRNDIS](https://joshuawise.com/horndis#available_versions) 使你的 PC 连接至 Internet。
 7. _**[重要]**_ **合理的系统安装：**

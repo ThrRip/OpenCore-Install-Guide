@@ -1,28 +1,28 @@
-# Laptop Broadwell
+# Broadwell 笔记本电脑
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.3 |
-| Initial macOS Support | OS X 10.10, Yosemite |
+| 支持的 OpenCore 版本 | 0.6.3 |
+| 初始 macOS 支持版本 | OS X 10.10, Yosemite |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+虽然制作一个 config.plist 文件似乎很难，但其实并不是。它只是需要一些时间，但是此指南将会告诉你如何配置所有项目，你不会被抛弃在寒风中。这同时代表，如果你有问题，再浏览一遍你的配置以确保它们全部正确。使用 OpenCore 时较为重要的几点：
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有属性都必须被定义**，OpenCore 不会自动填上默认值，所以**不要删除任何属性，除非明确地告知了需要删除**。如果本指南没有阐述某个属性，保留它的默认值。
+* **Sample.plist 不能直接使用**，你必须将它配置得适合你的电脑。
+* **不要使用针对性的配置器（configurator）**，它们只会几乎不会考虑到 OpenCore 的配置，甚至有些配置器——例如 Mackie 的——会添加 Clover 的属性然后使 plist 出错！
 
-Now with all that, a quick reminder of the tools we need
+尽管如此，还是简短地提示一下我们需要的工具：
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用的 plist 编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
-* [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 用于生成 SMBIOS 数据
+* [示例/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
+  * 查看之前的部分以了解如何获得：[config.plist Setup](../config.plist/README.md)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+**而且，请在放置好 OpenCore 之前不止一遍地阅读此指南，以确保你已经无误地配置了 OpenCore。记住，指南中的图片并非一直都是最新的，所以请阅读它们下面的文本，如果遇到没有提及的属性，保留它们的默认值即可。**
 
 ## ACPI
 
@@ -30,37 +30,37 @@ Now with all that, a quick reminder of the tools we need
 
 ### Add
 
-::: tip Info
+::: tip 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你为你的系统添加 SSDT 的地方，它们对于 **引导 macOS** 非常重要，而且很多用于 [定位 USB](https://dortania.github.io/OpenCore-Post-Install/usb/)、 [屏蔽不支持的显卡](https://dortania.github.io/OpenCore-Post-Install/) 等等。 对于我们的的系统来说，**它们甚至是引导时不可或缺的项目**。可以在这里找到制作和使用它们的指南：[**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+我们需要添加一些 SSDT 来得到一些 Clover 提供的功能：
 
-| Required_SSDTs | Description |
+| 需要的 SSDT | 说明 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead. Note that Intel NUCs do not need this |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
+| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 允许使用 Haswell 或更高版本的 CPU 的原生电源管理。查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
+| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建根端，让 VoodooI2C 可以连接，如果 VoodooI2C 运行出现问题可以尝试使用 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 来代替。注意，英特尔 NUC 不需要此 SSDT。 |
+| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。注意，英特尔 NUC 不需要此 SSDT。 |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+注意，你**不应该**在这里添加你生成的 `DSDT.aml`，因为他已经在你的硬件里了。所以它如果已经存在，删除你的 `config.plist` 中对应的条目和位于 EFI/OC/ACPI 目录下的 `DSDT.aml` 。
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+想了解更深层的内容，例如转存 DSDT、怎样编译 SSDT 并使其符合标准，请查看 [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **页面。** 符合标准的 SSDT 的后缀名为 **.aml** （有些情况下隐藏）而且应当放在 `EFI/OC/ACPI` 目录下，**必须** 在你的 `ACPI -> Add` 中被说明。
 
 :::
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this.
+这个部分会在加载的时候排除一些 ACPI 表，对于我们来说可以忽略。
 
 ### Patch
 
-::: tip Info
+::: tip 信息
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
+这个部分允许我们通过 OpenCore 以动态的方式修改 ACPI 的一部分（例如 DSDT、SSDT 等等）对于我们来说，我们需要以下这些：
 
-* OSI rename
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT, **this is not needed if you're using SSDT-GPIO**
+* OSI 重命名
+  * 当使用 SSDT- XOSI 时需要这个项目，因为我们需要重定向所有 OSI 请求到这个 SSDT，**如果你使用 SSDT-GPIO，则不需要**
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -74,31 +74,31 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 
 ### Quirks
 
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
+与 ACPI 有联系的设置，所有内容保持默认，因为我们没有用到这些偏好设置。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
-This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
+这个部分提供与 boot.efi 相关的 OpenRuntime 补丁设置，用于代替 AptioMemoryFix.efi。
 
 ### MmioWhitelist
 
-This section is allowing spaces to be pass-through to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+这个部分允许一些本来不被允许的空间直接通过 macOS，与 `DevirtualiseMmio` 搭配时很有用。
 
 ### Quirks
 
-::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+::: tip 信息
+关于 boot.efi 的补丁和修补硬件的设置，对于我们来说，保持默认值即可。
 :::
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复 UEFI 运行时服务，例如日期、时间、NVRAM（非易失性随机访问存储器）、电源控制等等。
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要用于从 CR0 寄存器移除写入保护。
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
+  * 修复 SetVirtualAddresses 请求至虚拟地址，技嘉主板需要此项目以解决较早出现的内核错误。
   
 :::
 
@@ -108,38 +108,38 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ### Add
 
-Sets device properties from a map.
+从一张表设置设备属性。
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+这个部分通过 WhateberGreen 的 [Framebuffer Patching Guide（框架缓冲存储器补丁指南）](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)进行配置，用于设置重要的核芯显卡属性。
 
-When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
+当你在设置核芯显卡时，下面的表格应该可以帮助你找到正确的值来设置。这是对于部分值的解释：
 
 * **AAPL,ig-platform-id**
-  * This is used internally for setting up the iGPU
-* **Type**
-  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
+  * 这个属性用于内部设置核芯显卡
+* **类型**
+  * 说明这个属性是否向笔记本电脑推荐（即拥有内置显示器的）或向英特尔 NUC 推荐（即独立的可接线的“盒子”）
 
-Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
+一般情况下，请在设置你的核芯显卡属性时跟随这些步骤。如果有不一样的地方，跟随表格下方的配置注解：
 
-1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
+1. 在初始配置你的 config.plist 时，只设置 AAPL,ig-platform-id——通常已经足够了。
+2. 如果你在启动（macOS）后没有得到图形加速（7MB 内存和半透明的程序坞背景），那么你可能需要尝试不同的 `AAPL,ig-platform-id` 值，添加预留图形内存布丁，甚至是添加一个 `device-id` 属性。
 
-| AAPL,ig-platform-id | Type | Comment |
+| AAPL,ig-platform-id | 类型 | 注释 |
 | ------------------- | ---- | ------- |
-| **06002616** | Laptop | Recommended value for Broadwell laptops |
-| **02001616** | NUC | Recommended value for Broadwell NUCs|
+| **06002616** | Laptop | Broadwell 笔记本电脑的推荐值 |
+| **02001616** | NUC | Broadwell NUC 的推荐值 |
 
-##### Configuration Notes
+##### 配置注解
 
-* For HD5600 you need `device-id` faked to `16260000`:
+* 对于 HD5600 你需要添加 `device-id` 并伪装为 `16260000`：
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | data | 26160000
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 96MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* 在有些情况下，你无法在你的 UEFI 固件中设置动态显存技术中的预留部分为 96MB 或更高，那么你可能会遇到内核错误。通常它们将预留部分设置为 32MB，在那种情况下，这些值需要添加到你的核芯显卡属性
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -153,16 +153,16 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 为应用 AppleALC 音频注入，你需要对“你的主板上用的是哪个音频解码器”和“选择与其匹配的 AppleALC 的布局”进行你自己的研究。[AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 你可以直接删除这项属性，因为我们现在暂时用不到它。
 
-For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
+对于我们来说，我们会使用启动参数 `alcid=xxx` 来替代以达到同样目标。 `alcid` 会覆盖所有其他存在的布局 ID。关于此项目的更多信息收录于 [OpenCore 安装后指南](https://dortania.github.io/OpenCore-Post-Install/)
 
 :::
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this
+从表中删除设备属性，对于我们来说可以忽略。
 
 ## Kernel
 
@@ -170,42 +170,42 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+这里是具体说明哪个内核扩展将会被加载、以怎样的顺序加载及每个内核扩展所支持的架构的地方。一般情况下我们推荐保持由 ProperTree 完成的内容。然而 32 位 CPU 请看下面：
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
-The main thing you need to keep in mind is:
+你需要始终记得的主要事情是：
 
-* Load order
-  * Remember that any plugins should load *after* its dependencies
-  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+* 加载顺序
+  * 记住，所有的插件要在它的依赖*之后*加载。
+  * 这也表明一些像 Lilu 一样的内核扩展**必须** 在 VirtualSMC、AppleALC、WhateverGreen 等等之前加载。
 
-A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+一个简短的提示，[ProperTree](https://github.com/corpnewt/ProperTree) 的用户可以执行 **Cmd/Ctrl + Shift + R** 以按照正确的顺序添加他们的所有内核扩展，而不用手动填写每个内核扩展。
 
 * **Arch**
-  * Architectures supported by this kext
-  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
+  * 此内核扩展所支持的架构
+  * 当前支持的值有 `Any`、 `i386`（32 位）和 `x86_64`（64 位）
 * **BundlePath**
-  * Name of the kext
-  * ex: `Lilu.kext`
+  * 内核扩展的名称
+  * 例如：`Lilu.kext`
 * **Enabled**
-  * Self-explanatory, either enables or disables the kext
+  * 已经自己解释了，要么启用，要么禁用内核扩展
 * **ExecutablePath**
-  * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
-  * ex: `Contents/MacOS/Lilu`
+  * 隐藏在内核扩展中的实际的可执行文件的路径，你可以通过右键单击并选择 `Show Package Contents`（`显示包内容`）来查看你的内核扩展的可执行文件路径。一般情况下，它们都是 `Contents/MacOS/Kext`，但有些也会在 `Plugin` 有内核扩展。注意，只有 plist 的内核扩展不需要填写此项。
+  * 例如：`Contents/MacOS/Lilu`
 * **MinKernel**
-  * Lowest kernel version your kext will be injected into, see below table for possible values
-  * ex. `12.00.00` for OS X 10.8
+  * 你的内核扩展被注入的最低内核版本，查看下方的表格以获得更多可选的值
+  * 例如：`12.00.00` for OS X 10.8
 * **MaxKernel**
-  * Highest kernel version your kext will be injected into, see below table for possible values
-  * ex. `11.99.99` for OS X 10.7
+  * 你的内核扩展被注入的最高内核版本，查看下方的表格以获得更多可选的值
+  * 例如：`11.99.99` for OS X 10.7
 * **PlistPath**
-  * Path to the `info.plist` hidden within the kext
-  * ex: `Contents/Info.plist`
+  * 隐藏在内核扩展中的 `info.plist` 的路径
+  * 例如：`Contents/Info.plist`
   
-::: details Kernel Support Table
+::: details 内核支持表格
 
-| OS X Version | MinKernel | MaxKernel |
+| macOS/OS X 版本 | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
 | 10.4 | 8.0.0 | 8.99.99 |
 | 10.5 | 9.0.0 | 9.99.99 |
@@ -225,99 +225,99 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+需要用于伪装不支持的 CPU，例如奔腾和赛扬
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+* **CpuidMask**：留空
+* **CpuidData**：留空
 
 ### Force
 
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+用于从系统卷中加载内核扩展，仅适用于缓存中没有某些内核扩展的旧操作系统（例如 OS X 10.6 中的 IONetworkingFamily）。
 
-For us, we can ignore.
+对于我们来说可以忽略。
 
 ### Block
 
-Blocks certain kexts from loading. Not relevant for us.
+在加载的时候排除一些内核扩展。与我们无关。
 
 ### Patch
 
-Patches both the kernel and kexts.
+同时为内核和内核扩展应用补丁。
 
 ### Quirks
 
-::: tip Info
+::: tip 信息
 
-Settings relating to the kernel, for us we'll be enabling the following:
+设置与内核有关，对于我们来说打开以下的偏好设置即可：
 
-| Quirk | Enabled | Comment |
+| Quirk | Enabled | 注释 |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
-| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
-| LapicKernelPanic | NO | HP Machines will require this quirk |
+| AppleCpuPmCfgLock | NO | 如果要运行 10.10 或更低版本，或者无法在 BIOS 里关闭 `CFG-Lock`，则需要打开 |
+| AppleXcpmCfgLock | YES | 如果 `CFG-Lock` 已经在 BIOS 中关闭，则不需要打开 |
+| DisableIOMapper | YES | 如果 `VT-D` 已经在 BIOS 中关闭，则不需要打开 |
+| LapicKernelPanic | NO | 惠普设备需要这个偏好设置 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
 | XhciPortLimit | YES | |
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **AppleCpuPmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Ivy Bridge and older
-    * Note: Broadwell and older require this when running 10.10 or older
+  * 只在 CFG-Lock 无法在 BIOS 中关闭时需要
+  * 只能在 Ivy Bridge 或更旧的 CPU 上使用
+    * 注意：Broadwell 或更旧的 CPU 当运行 10.10 或更旧的操作系统时需要此项
 * **AppleXcpmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Haswell and newer
-    * Note: Ivy Bridge-E is also included as it's XCPM capable
+  * 只在 CFG-Lock 无法在 BIOS 中关闭时需要
+  * 只能在 Haswell 或更旧的 CPU 上使用
+    * 注意：Ivy Bridge-E 也包括在内，因为它支持 XCPM
 * **CustomSMBIOSGuid**: NO
-  * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
-  * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
+  * 在 UpdateSMBIOSMode 设置为 `Custom` 时使用 GUID 补丁。通常戴尔的笔记本电脑会需要
+  * 在 UpdateSMBIOSMode 设置为 Custom 模式时打开此项也可以让 SMBIOS 不要注入为非 Apple 操作系统，然而我们不认可这种方式，因为它会破坏 Bootcamp 的兼容性。在你自己承担风险时使用
 * **DisableIoMapper**: YES
-  * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+  * 如果在 BIOS 中无法关闭 VT-D 或其他的操作系统需要它，则使用此项绕过 VT-D，更好地代替了 `dart=0`，因为 SIP（系统完整性保护）可以在 macOS 10.15 Catalina 中保持开启。
 * **DisableLinkeditJettison**: YES
-  * Allows Lilu and others to have more reliable performance without `keepsyms=1`
+  * 允许 Lilu 和其他内核扩展在不使用 `keepsyms=1` 时获得更可靠的性能
 * **DisableRtcChecksum**: NO
-  * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
+  * 在写入最初校验和（0x58-0x59）时阻止 AppleRTC，进行 BIOS 重置或在重启/关机后自动进入安全模式的用户需要此项。
 * **ExtendBTFeatureFlags** NO
-  * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
+  * 对于在非 Apple 或非奋威网卡上出现持续性问题有帮助
 * **LapicKernelPanic**: NO
-  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+  * 使 AP 核心被 LAPIC（本地高级可编程中断控制器）中断时不发生内核错误，一般用于惠普的设备。Clover 中与其有相同效果的是 `Kernel LAPIC`
 * **LegacyCommpage**: NO
-  * Resolves SSSE3 requirement for 64 Bit CPUs in macOS, mainly relevant for 64-Bit Pentium 4 CPUs(ie. Prescott)
+  * 为 64 位处理器解决在 macOS 中对 SSSE3 的依赖，主要用于 64 位奔腾 4 CPU（例如：Prescott）
 * **PanicNoKextDump**: YES
-  * Allows for reading kernel panics logs when kernel panics occur
+  * 允许在内核错误来临时读取内核错误日志
 * **PowerTimeoutKernelPanic**: YES
-  * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+  * 帮助修复 Catalina 中电源改变后由 Apple 驱动程序引起的内核错误，尤其是数字音频。
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
+  * 这其实是 15 个接口限制的补丁，不要依赖于它，因为不能保证它是修复 USB 的解决方案。请在可能的时候 [定位 USB](https://dortania.github.io/OpenCore-Post-Install/usb/)。
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+原因就是 UsbInjectAll 在 macOS 中内建的工具没有适当的电流调节。用一个只有 plist 的内核扩展来描述你的接口更为简洁，并且不会浪费运行时的内存等等。
 
 :::
 
 ### Scheme
 
-Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip however for those planning to boot legacy OSes you can see below:
+设置与经典启动（Legacy booting）有关（例如 10.4-10.6），大多数情况下你可以跳过，然而对于一些使用经典启动的操作系统，你可以查看下方：
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **FuzzyMatch**: True
-  * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
+  * 用于忽略内核在缓存时的校验和，以代替选择最新的可用缓存。可以帮助在很多运行 10.6 的设备上提高引导性能。
 * **KernelArch**: x86_64
-  * Set the kernel's arch type, you can choose between `Auto`, `i386` (32-bit), and `x86_64` (64-bit).
-  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Auto` and let macOS decide based on your SMBIOS. See below table for supported values:
-    * 10.4-10.5 — `x86_64`, `i386` or `i386-user32`
-      * `i386-user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
-      * `x86_64` will still have a 32-bit kernelspace however will ensure 64-bit userspace in 10.4/5
-    * 10.6 — `i386`, `i386-user32`, or `x86_64`
-    * 10.7 — `i386` or `x86_64`
+  * 设置内核的架构类型，你可以在 `Auto`, `i386`（32 位）和 `x86_64`（64 位）中选择。
+  * 如果你要引导需要 32 位内核的旧操作系统（例如 10.4 和 10.5），我们推荐将其设置为 `Auto` 并让 macOS 基于你的 SMBIOS 进行抉择。查看下面的表格以获得所有支持的值：
+    * 10.4-10.5 — `x86_64`、`i386` 或 `i386-user32`
+      * `i386-user32` 指向 32 位用户控件，所以 32 位 CPU 必须使用这个值（或是缺少 SSSE3 的 CPU）
+      * `x86_64` 将会仍然包含一个 32 位的内核空间，然而将会在 10.4/10.5 中确保用户空间是 64 位的
+    * 10.6 — `i386`、`i386-user32` 或 `x86_64`
+    * 10.7 — `i386` 或 `x86_64`
     * 10.8 or newer — `x86_64`
 
 * **KernelCache**: Auto
-  * Set kernel cache type, mainly useful for debugging and so we recommend `Auto` for best support
+  * 设置内核缓存类型，主要对调试有用，所以我们推荐设置为 `Auto` 以获得最好的支持
 
 :::
 

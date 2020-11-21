@@ -39,7 +39,7 @@
 | 需要的 SSDT | 说明 |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 允许使用 Haswell 或更高版本的 CPU 的原生电源管理。查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
 | **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建根端，让 VoodooI2C 可以连接，如果 VoodooI2C 运行出现问题可以尝试使用 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 来代替。注意，英特尔 NUC 不需要此 SSDT。 |
 | **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。注意，英特尔 NUC 不需要此 SSDT。 |
 
@@ -327,15 +327,15 @@
 
 ### Boot
 
-Settings for boot screen (Leave everything as default).
+引导屏幕的设置（保持所有设置项默认）。
 
 ### Debug
 
-::: tip Info
+::: tip 信息
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+对调试 OpenCore 引导问题很有帮助（我们将会改变*除了* `DisplayDelay` 的所有设置项）：
 
-| Quirk | Enabled |
+| 偏好设置 | 启用 |
 | :--- | :--- |
 | AppleDebug | YES |
 | ApplePanic | YES |
@@ -344,80 +344,80 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **AppleDebug**: YES
-  * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+  * 打开 boot.efi 日志记录，在调试时很有用。注意，只支持 10.15.4 和更高的版本
 * **ApplePanic**: YES
-  * Attempts to log kernel panics to disk
+  * 尝试写入内核错误日志到磁盘
 * **DisableWatchDog**: YES
-  * Disables the UEFI watchdog, can help with early boot issues
+  * 关闭 UEFI 侦察，可以对解决早期引导问题有所帮助
 * **DisplayLevel**: `2147483650`
-  * Shows even more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要 OpenCore 的 Debug（调试）版本
 * **SerialInit**: NO
-  * Needed for setting up serial output with OpenCore
+  * 在设置用 OpenCore 进行序列号输出的时候需要此项
 * **SysReport**: NO
-  * Helpful for debugging such as dumping ACPI tables
-  * Note that this is limited to DEBUG versions of OpenCore
+  * 在调试时（例如导出 ACPI 表）时有用
+  * 注意，此项只适用于 Debug（调试）版本的 OpenCore
 * **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要 OpenCore 的 Debug（调试）版本
 
-These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
+这些值都是基于从 [OpenCore debugging](../troubleshooting/debug.md) 中计算出来的结果
 
 :::
 
 ### Security
 
-::: tip Info
+::: tip 信息
 
-Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+“安全”已经自己解释了有什么作用，但是**也不能跳过**。我们需要改变以下项目：
 
-| Quirk | Enabled | Comment |
+| 偏好设置 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| SecureBootModel | Default | 此属性区分大小写，如果你不需要安全启动，设置为 `Disabled`（例如你需要 Nvidia 的 Web Driver 时） |
+| Vault | Optional | 不能忽略掉此属性，如果你没有把它设置为 Optional，你会后悔的，注意，这是一个区分大小写的属性。 |
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **AllowNvramReset**: YES
-  * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
+  * 同时允许 NVRAM 在引导菜单中和按下 `Cmd+Opt+P+R` 时重置
 * **AllowSetDefault**: YES
-  * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+  * 允许使用 `CTRL+Enter` 和 `CTRL+Index` 在引导菜单中设置默认启动项
 * **ApECID**: 0
-  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
+  * 用于获得自己的安全启动识别码，目前这个偏好设置不可靠，因为在 macOS 安装器中它还存在漏洞，所以我们强烈建议你保持默认值。
 * **AuthRestart**: NO
-  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+  * 打开文件保险箱 2（FileVault 2）的重启认证，则重启时不再需要密码。需要考虑其带来的安全风险以启用
 * **BootProtect**: Bootstrap
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+  * 允许使用 EFI/OC/Bootstrap 中的  Bootstrap.efi 来替代 BOOTx64.efi，在想要同时使用 rEFInd 或者避免 BOOTx64.efi 被 Windows 覆盖的情况下很有用。合理使用这项偏好设置的更多信息请查看[使用 Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
 * **DmgLoading**: Signed
-  * Ensures only signed DMGs load
+  * 保证只有已签名的 DMG 被加载
 * **ExposeSensitiveData**: `6`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要 OpenCore 的 Debug（调试）版本
 * **Vault**: `Optional`
-  * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
-  * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
+  * 我们基本不会使用文件保险箱，所以我们可以忽略，**而且如果此项设置为 Secure，你将无法启动**
+  * 不能忽略掉此属性，如果你没有把它设置为 `Optional`，你会后悔的，注意，这是一个区分大小写的属性
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+  * `0` 允许你看到所有可以启动的分区，请参阅[安全](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) 部分以获得更多信息。**如果此项设置为默认，则无法从 USB 分区启动**
 * **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
-  * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
+  * 在 macOS 中启用 Apple 的安全启动功能，请参阅[安全](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) 部分以获得更多信息
+  * 注意：在已经安装的系统上升级 OpenCore 可能会导致早起的启动失败。请查看此处以解决这个问题：[Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
+用于运行 OpenCore 调试工具（例如 Shell）。ProperTree 的快照功能将为你添加此项。
 
 ### Entries
 
-Used for specifying irregular boot paths that can't be found naturally with OpenCore.
+用于说明无法被 OpenCore 自动识别的非正常启动路径。
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+此部分不会在此处被说明，请参阅 [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) 中的 8.6 以获得更多信息
 
 ## NVRAM
 
@@ -427,69 +427,71 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 
-Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+用于设置 OpenCore 的 UI 缩放，默认值即可工作。查看更多深层的信息部分以获得更多信息
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
-Booter Path, mainly used for UI Scaling
+引导器的设置路径，主要用于设置 UI 缩放
 
-* **UIScale**:
-  * `01`: Standard resolution
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
+* **UIScale**：
+  * `01`：基本分辨率
+  * `02`：高分辨率（HiDPI）（通常在使文件保险箱正常运行于较小的屏幕上时需要）
 
-* **DefaultBackgroundColor**: Background color used by boot.ef
-  * `00000000`: Syrah Black
-  * `BFBFBF00`: Light Gray
+* **DefaultBackgroundColor**：boot.efi 使用的背景色
+  * `00000000`: 西拉黑（Syrah Black）
+  * `BFBFBF00`: 浅灰
 
 :::
 
 ::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 
-OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
+OpenCore 的 NVRAM GUID，主要和 RTCMemoryFixup 的用户有关
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **rtc-blacklist**: <>
-  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
-  * Most users can ignore this section
+  * 配合 RTCMemoryFixup 使用，查看此处以了解更多信息：[修复 RTC 写入问题](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * 大部分用户可以忽略这一部分
 
 :::
 
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
-System Integrity Protection bitmask
+系统完整性保护（SIP）的位掩码（bitmask）
 
-* **General Purpose boot-args**:
+* **用途通用的启动参数（boot-args）**:
 
-| boot-args | Description |
+| 启动参数 | 说明 |
 | :--- | :--- |
-| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
-| **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
-| **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
+| **-v** | 此选项打开啰嗦（verbose）模式，可以滚动以显示所有后台的文本信息，因为在启动时，这些代替了 Apple 标志和进度条。它对很多黑苹果用户是非常宝贵的，因为它为你提供了所有关于启动进度的内部视图，可以帮助你辨认问题，例如有问题的内核扩展等等。 |
+| **debug=0x100** | 此选项关闭 macOS 的引导侦察，可以帮助在发生内核错误时组织重启。那样，你就可以*有希望地*收集一些有用的信息，然后跟随这些痕迹解决问题。 |
+| **keepsyms=1** | 这是一个常常和 debug=0x100 一起使用的参数，告诉操作系统在遇到内核错误时，同时输出符号。那些符号可以给出一些有用的深层信息，以追查错误的根源。 |
+| **alcid=1** | 用于为 AppleALC 设置布局 ID，查看 [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) 以查出哪个布局适用于你的系统详情。更多的信息包含在了 [OpenCore 安装后指南](https://dortania.github.io/OpenCore-Post-Install/) |
 
-* **GPU-Specific boot-args**:
+* **适用于 GPU 的启动参数**:
 
-| boot-args | Description |
+| 启动参数 | 说明 |
 | :--- | :--- |
-| **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **-wegnoegpu** | 用于屏蔽所有除了英特尔核芯显卡外的 GPU，对于想要运行独立显卡不支持的高版本 macOS 时很有用。 |
 
 * **csr-active-config**: `00000000`
-  * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
-  * csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
+  * 对系统完整性保护（SIP）的设置。通常建议在恢复分区中使用 `csrutil` 更改此项。
+  * csr-active-config 默认设置为 `00000000`，即打开系统完整性保护。你可以选择一个不同的值，但是我们推荐为了最佳的安全性而保持启用。更多信息可以在我们的故障排除页面查看：[关闭系统完整性保护](../troubleshooting/extended/post-issues.md#disabling-sip)
 
 * **run-efi-updater**: `No`
-  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+  * 此项用于阻止因 Apple 的固件升级包安装而打断启动；此项非常重要，因为这些固件升级（对 Mac 有用）不会正常运行。
 
 * **prev-lang:kbd**: <>
-  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
-  * American: `en-US:0`(`656e2d55533a30` in HEX)
-  * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
-  * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
+  * 当使用非拉丁键盘时需要，格式为 `lang-COUNTRY:keyboard`，尽管你可以具体说明，但依然推荐留空（**示例配置中的默认值为俄语**）：
+  > 译者注：如果你较为习惯使用中文，请设置 `prev-lang:kbd` 的值为 `zh-Hans:0` 或 `zh-Hans:252`。
+  * 美式英语：`en-US:0`（HEX（16 进制）为 `656e2d55533a30`）
+  * 完整列表可以在此处查看：[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+  > 译者注：中文对应的值无法在此列表中找到。
+  * 建议：`prev-lang:kbd` 可以被转换为 String（字符串）类型，所以你可以直接用 `en-US:0` 替代，不需要转为 HEX（16 进制）
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -499,19 +501,19 @@ System Integrity Protection bitmask
 
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+强行重写 NVRAM 变量，注意，`Add` **不会覆盖** NVRAM 中已存在的值，所以像 `boot-args` 之类的值将会被留下。
 
 * **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
+  * 允许 NVRAM 存储为 nvram.plist，没有自带 NVRAM 的操作系统需要此项
 
 * **LegacyOverwrite**: NO
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
+  * 允许从 nvram.plist 覆盖固件变量，仅没有自带 NVRAM 的操作系统需要此项
 
 * **LegacySchema**:
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+  * 用于分配 NVRAM 变量，和设置为 YES 的 LegacyEnable 一起使用
 
 * **WriteFlash**: YES
-  * Enables writing to flash memory for all added variables.
+  * 启用向闪存写入所有添加的变量。
 
 ## PlatformInfo
 

@@ -100,6 +100,7 @@
 * **SetupVirtualMap**: YES
   * 修复 SetVirtualAddresses 请求至虚拟地址，技嘉主板需要此项目以解决较早出现的内核错误。
   
+
 :::
 
 ## DeviceProperties
@@ -203,6 +204,7 @@
   * 隐藏在内核扩展中的 `info.plist` 的路径
   * 例如：`Contents/Info.plist`
   
+
 ::: details 内核支持表格
 
 | macOS/OS X 版本 | MinKernel | MaxKernel |
@@ -483,14 +485,16 @@ OpenCore 的 NVRAM GUID，主要和 RTCMemoryFixup 的用户有关
   * csr-active-config 默认设置为 `00000000`，即打开系统完整性保护。你可以选择一个不同的值，但是我们推荐为了最佳的安全性而保持启用。更多信息可以在我们的故障排除页面查看：[关闭系统完整性保护](../troubleshooting/extended/post-issues.md#disabling-sip)
 
 * **run-efi-updater**: `No`
-  * 此项用于阻止因 Apple 的固件升级包安装而打断启动；此项非常重要，因为这些固件升级（对 Mac 有用）不会正常运行。
-
+  
+* 此项用于阻止因 Apple 的固件升级包安装而打断启动；此项非常重要，因为这些固件升级（对 Mac 有用）不会正常运行。
+  
 * **prev-lang:kbd**: <>
   * 当使用非拉丁键盘时需要，格式为 `lang-COUNTRY:keyboard`，尽管你可以具体说明，但依然推荐留空（**示例配置中的默认值为俄语**）：
   > 译者注：如果你较为习惯使用中文，请设置 `prev-lang:kbd` 的值为 `zh-Hans:0` 或 `zh-Hans:252`。
   * 美式英语：`en-US:0`（HEX（16 进制）为 `656e2d55533a30`）
   * 完整列表可以在此处查看：[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
   > 译者注：中文对应的值无法在此列表中找到。
+  
   * 建议：`prev-lang:kbd` 可以被转换为 String（字符串）类型，所以你可以直接用 `en-US:0` 替代，不需要转为 HEX（16 进制）
 
 | Key | Type | Value |
@@ -607,125 +611,126 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 **ConnectDrivers**: YES
 
-* Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
+* 强制使用 .efi 驱动，设置为 NO 将会自动连接添加的 UEFI 驱动。这样可以略微加快引导速度，但是并非所有的驱动都会自行将其连接。例如一些文件系统驱动可能不会加载。
 
 ### Drivers
 
-Add your .efi drivers here.
+添加你的 .efi 驱动到这里。
 
-Only drivers present here should be:
+现在应当只有这些驱动：
 
 * HfsPlus.efi
 * OpenRuntime.efi
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+设置关于 APFS 驱动，保留所有默认值。
 
 ### Audio
 
-Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
+与 AudioDxe 的设置有关，对于我们来说可以忽略（保留默认值）。这些设置与 macOS 中的音频支持无关。
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
+* 更多关于使用 AudioDxe 和 Audio 部分的信息，请看 OpenCore 安装后指南页面：[添加图形界面（GUI）和 启动声音](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+有关于 boot.efi 中用于文件保险箱和热键的键盘放行支持，保留所有默认值，因为我们不需要用到这些偏好设置。查看这里以获得更多信息：[安全与文件保险箱](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
-Relating to OpenCore's visual output,  leave everything here as default as we have no use for these quirks.
+有关于 OpenCore 的可视化输出，保留所有默认值，因为我们不需要用到这些偏好设置。
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+主要有关于虚拟机、经典 Mac 和文件保险箱用户。查看这里以获得更多信息： [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
-::: tip Info
-Relating to quirks with the UEFI environment, for us we'll be changing the following:
+::: tip 信息
+有关于 UEFI 源的偏好设置，对于我们，需要改变以下设置：
 
-| Quirk | Enabled | Comment |
+| 偏好设置 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | IgnoreInvalidFlexRatio | YES | |
 | ReleaseUsbOwnership | YES | |
-| UnblockFsConnect | NO | Needed mainly by HP motherboards |
+| UnblockFsConnect | NO | 主要用于惠普主板 |
 
 :::
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **DeduplicateBootOrder**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
+  * 需要从 `OC_VENDOR_VARIABLE_GUID` 到 `EFI_GLOBAL_VARIABLE_GUID` 的预修复引导变量的备选方案。用于修复引导选项。
 
 * **IgnoreInvalidFlexRatio**: YES
-  * Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
+  * 当 MSR_FLEX_RATIO (0x194) 在 BIOS 中不能被关闭时用于修复，所有基于早期 Skylake 的系统都需要此项
 * **ReleaseUsbOwnership**: YES
-  * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Most laptops have garbage firmwares so we'll need this as well
+  * 从固件驱动释放 USB 控制器，在当你的固件不支持 EHCI/XHCI 转换时需要。很多的笔记本电脑都使用劣质固件，所以我们最好启用此项l
 * **RequestBootVarRouting**: YES
-  * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+  * 将 AptioMemoryFix 从 `EFI_GLOBAL_VARIABLE_GUID` 重定向到 `OC_VENDOR_VARIABLE_GUID`。在固件尝试删除引导项目时需要，并且推荐为了修正更新安装过程、启动磁盘等等，而在所有系统上使用。
 
 * **UnblockFsConnect**: NO
-  * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+  * 一些固件封锁了被控制为使用驱动打开的分区，导致文件系统协议无法安装。主要与惠普系统没有列出驱动器相关
 
 :::
 
 ### ReservedMemory
 
-Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
+用于从操作系统中去除某些内存区域以供使用。主要有关于 Sandy Bridge 核芯显卡和内存有缺陷的系统。使用此偏好设置的相关内容未包含在此指南中
 
 ## Cleaning up
 
-And now you're ready to save and place it into your EFI under EFI/OC.
+现在你可以准备保存并将其放置到你的 EFI 中的 EFI/OC 目录了。
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html) first and if your questions are still unanswered we have plenty of resources at your disposal:
+如果出现引导问题，请确保先阅读[故障排除部分](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html)，然后如果你还有无法解决的问题，我们有许多资源为你提供：
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
 **Sanity check**:
 
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+感谢 Ramus 的努力，我们也有很好的工具帮助你检查可能缺失了一些部分的配置文件：
 
 * [**Sanity Checker**](https://opencore.slowgeek.com)
+* [**Sanity Checker**](https://opencore-sanity-checker.thrrip.space)（优化中国大陆访问速度）
 
-Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
+注意，此工具并非由 Dortania 创建或与 Dortania 有关联，此网站的任何问题应当发送到这里：[Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
-### Config reminders
+### 配置提示
 
-**HP Users**:
+**惠普用户**:
 
 * Kernel -> Quirks -> LapicKernelPanic -> True
-  * You will get a kernel panic on LAPIC otherwise
+  * 否则你会因为 LAPIC（本地高级可编程中断控制器）而遇到内核错误
 * UEFI -> Quirks -> UnblockFsConnect -> True
 
-## Intel BIOS settings
+## 英特尔 BIOS 设置
 
-* Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
+* 注意：这些选项中的大多数可能不会包含在你的固件中，我们推荐尽可能匹配最接近的选项，但是如果很多这些选项在你的 BIOS 中不可用，也不要太担心
 
 ### Disable
 
-* Fast Boot
-* Secure Boot
-* Serial/COM Port
-* Parallel Port
-* VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
-* Intel SGX
-* Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
-  * For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well
+* Fast Boot（快速启动）
+* Secure Boot（安全启动）
+* Serial/COM Port（串口）
+* Parallel Port（并行端口）
+* VT-d（英特尔支持直接 I/O 访问的虚拟化技术）（如果你设置 `DisableIoMapper` 为 YES，则可以打开）
+* CSM（兼容性支持模块）
+* Thunderbolt（雷雳接口）（仅对于初始安装，因为雷雳接口如果不正确设置，会导致错误）
+* Intel SGX（英特尔软件保护扩展）
+* Intel Platform Trust（英特尔平台信任技术）
+* CFG Lock（MSR 0xE2 写入保护）（**此项必须关闭，如果你找不到此选项，则打开在 Kernel -> Quirks 下的 `AppleXcpmCfgLock`。你的 Hacintosh 不能在 CFG-Lock 打开的时候启动**）
+  * 对于 10.10 和更旧的操作系统，你最好将 AppleCpuPmCfgLock 打开
 
 ### Enable
 
-* VT-x
-* Above 4G decoding
-* Hyper-Threading
-* Execute Disable Bit
-* EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
-* SATA Mode: AHCI
+* VT-x（英特尔虚拟化技术）
+* Above 4G decoding（芯片组 64 位兼容性硬件物理寻址）
+* Hyper-Threading（超线程技术）
+* Execute Disable Bit（禁用执行位操作）
+* EHCI/XHCI Hand-off（EHCI/XHCI 转换）
+* OS type: Windows 8.1/10 UEFI Mode（操作系统类型：Windows 8.1/10 UEFI 模式）
+* DVMT Pre-Allocated（动态分配共享显存技术预留部分）(iGPU Memory)（核芯显卡显存）：64MB
+* SATA Mode（SATA 模式）：AHCI
 
-## Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+## 现在所有内容都已经完成，请转到[安装页面](../installation/installation-process.md)

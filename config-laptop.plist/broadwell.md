@@ -519,25 +519,25 @@ OpenCore 的 NVRAM GUID，主要和 RTCMemoryFixup 的用户有关
 
 ![PlatformInfo](../images/config/config-laptop.plist/broadwell/smbios.png)
 
-::: tip Info
+::: tip 信息
 
-For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
+对于设置 SMBIOS 信息，我们将会使用 CorpNewt 的 [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) 应用程序。
 
-For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical breakdown is as follows:
+对于此 Broadwell CPU 示例，我们将会选择 MacBookPro12,1 SMBIOS。典型的解决方案是这些：
 
-| SMBIOS | CPU Type | GPU Type | Display Size |
+| SMBIOS | CPU 类型 | GPU 类型 | 屏幕尺寸 |
 | :--- | :--- | :--- | :--- |
-| MacBook8,1 | Dual Core 7w(Low End) | iGPU: HD 5300 | 12" |
-| MacBookAir7,1 | Dual Core 15w | iGPU: HD 6000 | 11" |
-| MacBookAir7,2 | Dual Core 15w | iGPU: HD 6000 | 13" |
-| MacBookPro12,1 | Dual Core 28w(High End) | iGPU: Iris 6100 | 13" |
-| MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
-| MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,5 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
-| iMac16,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A |
+| MacBook8,1 | 双核 7瓦（低端） | 核芯显卡：HD 5300 | 12" |
+| MacBookAir7,1 | 双核 15w | 核芯显卡：HD 6000 | 11" |
+| MacBookAir7,2 | 双核 15w | 核芯显卡：HD 6000 | 13" |
+| MacBookPro12,1 | 双核 28w（高端） | 核芯显卡：Iris 6100 | 13" |
+| MacBookPro11,2 | 四核 45w | 核芯显卡：Iris Pro 5200 | 15" |
+| MacBookPro11,3 | 四核 45w | 核芯显卡：Iris Pro 5200 + 独立显卡：GT750M | 15" |
+| MacBookPro11,4 | 四核 45w | 核芯显卡：Iris Pro 5200 | 15" |
+| MacBookPro11,5 | 四核 45w | 核芯显卡：Iris Pro 5200 + 独立显卡：R9 M370X | 15" |
+| iMac16,1 | NUC 系统 | HD 6000/Iris Pro 6200 |  N/A |
 
-Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
+运行 GenSMBIOS，选择 1 以下载 Mac 序列号（MacSerial），选择 3 以挑选合适的 SMBIOS。我们将会得到像下面这样的输出：
 
 ```sh
   #######################################################
@@ -550,54 +550,54 @@ Board Serial: C02408101J9G2Y7A8
 SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 ```
 
-The `Type` part gets copied to Generic -> SystemProductName.
+`Type` 部分需要拷贝到 Generic -> SystemProductName 部分。
 
-The `Serial` part gets copied to Generic -> SystemSerialNumber.
+`Serial` 部分需要拷贝到 Generic -> SystemSerialNumber 部分。
 
-The `Board Serial` part gets copied to Generic -> MLB.
+`Board Serial` 部分需要拷贝到 Generic -> MLB 部分。
 
-The `SmUUID` part gets copied to Generic -> SystemUUID.
+`SmUUID` 部分需要拷贝到 Generic -> SystemUUID 部分。
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/) page on how to find your real MAC Address)
+我们需要把 Generic -> ROM 设置为一个 Apple ROM 值（从一台真实的 Mac 导出），或你的网卡 MAC 地址，或者任何随机的 MAC 地址（需要是 6 段随机字节，在此指南中我们将使用 `11223300 0000`。在安装完成后你可以跟随 [修复 Apple 服务（iServices）](https://dortania.github.io/OpenCore-Post-Install/) 页面来知道如何找到你的真实 MAC 地址）
 
-##### Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"
+##### 记住，你需要的是一个无效的序列号，或者有效但是没有在使用中的序列号，你需要得到返回的信息是：“无效的序列号（"Invalid Serial"） 或者 “购买日期未验证”（"Purchase Date not Validated"）
 
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+[Apple 查看保障状态页面（Apple Check Coverage page）](https://checkcoverage.apple.com)
 
 **Automatic**: YES
 
-* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* 生成基于 Generic 部分的 PlatformInfo 以代替 DataHub、NVRAM 和 SMBIOS 部分。
 
 :::
 
 ### Generic
 
-::: details More in-depth Info
+::: details 更多深层的信息
 
 * **AdviseWindows**: NO
-  * Used for when the EFI partition isn't first on the Windows drive
+  * 用于 EFI 分区不是 Windows 所在硬盘的首个分区时
 
 * **SystemMemoryStatus**: Auto
-  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
+  * 设置内存是否被包含在了 SMBIOS 信息中， 仅作为装点使用，所以我们推荐设置为 `Auto`
   
 * **ProcessorType**: `0`
-  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+  * 设置为 `0` 以自动检测类型，但是如果你想覆盖此值也可以。查看 [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) 以获得更多可选的值
 
 * **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+  * 为 Acidanthera 交换供应商字段，在很多情况下使用 Apple 作为供应商并不安全
 
 * **UpdateDataHub**: YES
-  * Update Data Hub fields
+  * 更新数据收集器（Data Hub）字段
 
 * **UpdateNVRAM**: YES
-  * Update NVRAM fields
+  * 更新 NVRAM 字段
 
 * **UpdateSMBIOS**: YES
-  * Updates SMBIOS fields
+  * 更新 SMBIOS 字段
 
 * **UpdateSMBIOSMode**: Create
-  * Replace the tables with newly allocated EfiReservedMemoryType, use `Custom` on Dell laptops requiring `CustomSMBIOSGuid` quirk
-  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
+  * 以较新的已分配的 EfiReservedMemoryType 替换表，在戴尔笔记本电脑上使用 `Custom` 需要 `CustomSMBIOSGuid` 偏好设置
+  * 设置为 `Custom` 且加入启用的 `CustomSMBIOSGuid` 属性也可以阻止 SMBIOS 注入为非 Apple 操作系统，，然而我们不认可这种方式，因为它会破坏 Bootcamp 的兼容性。在你自己承担风险时使用
 
 :::
 

@@ -74,23 +74,23 @@ module.exports = {
             },
             {
                 text: 'ACPI 快速入门',
-                link: 'https://thrrip.github.io/Getting-Started-With-ACPI/'
+                link: 'https://dortania.github.io/Getting-Started-With-ACPI/'
             },
             {
                 text: 'OpenCore 安装后指南',
-                link: 'https://thrrip.github.io/OpenCore-Post-Install/'
+                link: 'https://dortania.github.io/OpenCore-Post-Install/'
             },
             {
                 text: 'GPU 买家指南',
-                link: 'https://thrrip.github.io/GPU-Buyers-Guide/'
+                link: 'https://dortania.github.io/GPU-Buyers-Guide/'
             },
             {
                 text: '无线网卡买家指南',
-                link: 'https://thrrip.github.io/Wireless-Buyers-Guide/'
+                link: 'https://dortania.github.io/Wireless-Buyers-Guide/'
             },
             {
                 text: 'Hackintosh 硬件避坑指南',
-                link: 'https://thrrip.github.io/Anti-Hackintosh-Buyers-Guide/'
+                link: 'https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/'
             },
             ]
         },

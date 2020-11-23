@@ -100,7 +100,7 @@ module.exports = {
             collapsable: false,
             sidebarDepth: 1,
             children: [
-                '先决条件',
+                'prerequisites',
                 {
                     title: '硬件限制',
                     collapsable: true,

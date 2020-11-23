@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /dortania-logo-clear.png
-heroText: Dortania 的 OpenCore 安装指引
+heroText: Dortania 的 OpenCore 安装指南
 actionText: 快速入门→
 actionLink: prerequisites.md
 
@@ -14,7 +14,7 @@ meta:
 
 OpenCore 就是我们所说的“引导加载程序”——这是一些很复杂的，用于为 macOS 准备系统的程序——特别是为 macOS 注入新的数据，比如 SMBIOS、ACPI 表和 内核扩展。OpenCore 和其他引导加载程序（例如 Clover）的不同在于，它是为了安全和质量设计的，允许我们使用很多能在真实的 Mac 上使用的安全功能，例如系统完整性保护和文件保险箱。如果想要更深入地了解，可以访问：[Why OpenCore over Clover and others](why-oc.md)。
 
-本指南主要注重于一下两个方面：
+本指南主要注重于以下两个方面：
 
 * 在您的 X86 架构的 PC 上安装 macOS
 * 告诉您怎样使您的黑苹果（Hacintosh）正常运行

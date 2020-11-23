@@ -4,13 +4,13 @@
 
 主要的需要检查的硬件部分有：
 
-* [CPU](#cpu-support)
-* [GPU](#gpu-support)
-* [主板](#motherboard-support)
-* [存储](#storage-support)
-* [有线网络](#wired-networking)
-* [无线网络](#wireless-networking)
-* [杂项](#miscellaneous)
+* [CPU](#cpu-支持)
+* [GPU](#gpu-支持)
+* [主板](#主板支持)
+* [存储](#存储支持)
+* [有线网络](#有线网络)
+* [无线网络](#无线网络)
+* [杂项](#杂项)
 
 对于此话题的更多详细的指南，请查看这些：
 

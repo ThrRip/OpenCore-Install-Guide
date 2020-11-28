@@ -1,24 +1,24 @@
-# Terminology
+# 专业术语
 
-Term | Description
+术语 | 说明
 --- | ---
-**macOS**        | Apple's own UNIX based OS used for Mac machines and "What makes a Mac a Mac".  
-**Windows**      | Microsoft's proprietary OS that is used and supported on a wide range of devices (stay with this OS if you don't want headaches)  
-**Linux**        | Family of open source Unix-like operating systems based on the Linux kernel, an operating system kernel first released on September 17, 1991, by Linus Torvalds. Linux is typically packaged in a Linux distribution. Note that while macOS and Linux may be UNIX-based, they're vastly different.
-**Distros**      | Short for Distributions. Linux distros are how Linux is distributed. However, when it comes to macOS, distros are mixed macOS installers with a bunch of tools that are not from Apple. **Do not use macOS Distros.**  
-**Hackintosh**   | The process of installing macOS onto a PC, note that **Hackintosh IS NOT the OS**, it can also refer to the machine that was "hacked" to get macOS running on it. EG: *I installed macOS on this Windows machine, therefore I have a Hackintosh. But I did NOT install "Hackintosh".*  
-**Bootloader**   | Piece of software that loads an OS, usually made by the OS creators. OpenCore is technically not a bootloader per se (see boot manager explanation down below). Apple's Boot.efi would be the actual boot loader in a Mac or Hackintosh.
-**Boot Manager** | Piece of software that manages bootloaders – we have many of these: Clover, systemd-boot, OpenCore, rEFInd, rEFIt... These are generally seen as prepping the system for the actual boot loader.
+**macOS**        | Apple 自己的基于 UNIX 的操作系统，用于 Mac 电脑，是“让 Mac 成为 Mac 的操作系统”（"What makes a Mac a Mac"）。  
+**Windows**      | Microsoft（微软）的专有操作系统，用在了很多各种各样的设备上（如果你不想头痛，保持在此系统）  
+**Linux**        | 基于 Linux 内核，像 Unix 的开源操作系统家族，首个操作系统内核由 Linus Torvalds 发布于 1991 年 11 月 17 日。Linux 通常被打包进 Linux 发行版。注意，虽然 macOS 和 Linux 可能都是基于 UNIX 的，但它们有很大的不同。
+**Distros（发行版）**      | 英文“Distros”是 Distributions 的缩写形式。Linux 发行版是 Linux 的分发方式。然而，当 macOS 具有发行版时，发行版就成了 macOS 安装程序和一些不是来自 Apple 的应用程序的混合。**请勿使用 macOS 发行版。**  
+**Hackintosh**   | 将 macOS 安装到普通 PC 上的过程，注意，**Hackintosh 不是操作系统**，它也可以指代被经过修改而让 macOS 可以运行于其上的设备。例如：*I installed macOS on this Windows machine, therefore I have a Hackintosh. But I did NOT install "Hackintosh".（我在一台 Windows 设备上安装了 macOS，所以我进行了 macOS。但是我不是安装了“Hacintosh”。）*  
+**Bootloader（引导加载程序）**   | 加载操作系统的一些软件，通常由操作系统开发者创建。从技术上讲，OpenCore 本身并不是引导加载程序（查看下方对引导管理器的解释）。Apple 的 Boot.efi 其实就是在 Hackintosh 或 Mac 中的引导加载程序。
+**引导管理器** | 管理引导加载程序的一些软件——我们有很多：Clover、systemd-boot、OpenCore、rEFInd、rEFIt……这些通常被看作是为真正的引导加载程序准备操作系统的软件。
 ---
-Term | Description
+术语 | 说明
 --- | ---
-**OpenCore**   | The new hotness on the Hackintosh scene, made with security in mind by the [Acidanthera team](https://github.com/acidanthera), has faster booting and lighter weight than Clover. It is a lot more work to set up but also supports many things a lot more natively than Clover (like Hibernation, FileVault 2, Boot HotKeys...).
-**Clover**  | A bootloader now considered legacy with the release of OpenCore. This guide will not be covering uses of this software.
-**ACPI**  | The Advanced Configuration and Power Interface (ACPI) provides an open standard that operating systems can use to discover and configure computer hardware components, more of this will be discussed later in the guide
-**.AML** | The compiled file format of ACPI, and what your PC will execute. `.DAT` is another extension with the exact same use.
-**.DSL** | The source code for ACPI – this is what you edit and compile for your computer. **DO NOT** mix this file format up with `.ASL`.
-**Kexts**   | Also known as **K**ernel **Ext**ensions, are macOS's drivers. They're used to perform different tasks like device drivers or for a different purpose (in Hackintoshing) like patching the OS, injecting information or running tasks. Kexts are not the only part of a good Hackintosh, as they're commonly paired with ACPI patches and fixes.
-**BIOS**  | The Basic Input/Output System is firmware used to perform hardware initialization during the booting process (power-on startup), and to provide runtime services for operating systems and programs. The BIOS firmware comes preinstalled on a personal computer's system board, and it is the first software to run when powered on (source: Wikipedia). It's a legacy piece of software that was made back in the 70s and is still used to this day due to its maturity.
+**OpenCore**   | 在进行 Hackintosh 时的一个新的热门话题，由 [Acidanthera 团队](https://github.com/acidanthera)基于安全要求创建，有更快的引导速度，比 Clover 更轻量化。设置好它，需要做很多的工作，但是也支持比 Clover 更多的原生功能（例如休眠、文件保险箱 2、引导热键……）。
+**Clover**  | 认为 OpenCore 发布后对经典启动支持有问题的一个引导加载程序。本指南中不会包含此软件的使用。
+**ACPI**  | 高级配置与能源接口（The Advanced Configuration and Power Interface，即 ACPI）为操作系统提供了一个可以发现并配置计算机硬件的开放基础，更多信息将会在此指南的剩下部分提到
+**.AML** | ACPI 编译后的文件格式，你的 PC 将会执行它。`.DAT` 是另一个具有完全相同用途的扩展。
+**.DSL** | ACPI 的源代码——这是你需要为你的电脑编辑并编译的文件。**不要**将这个文件格式与`.ASL`混在一起。
+**Kexts（内核扩展）**   | 也称为  **K**ernel **Ext**ensions ，是 macOS 的驱动。它们用于执行不同的任务，例如用于达到不同目的的设备驱动（在 Hackintosh 中），例如修改操作系统、注入信息或执行任务。内核扩展不是优秀的 Hackintosh 的唯一部分，因为它们通常会被 ACPI 修改和修复。
+**BIOS**  | 是固件用于在启动过程（上电启动）中进行硬件初始化，并为操作系统和软件提供运行时服务的基本的输入/输出系统。BIOS 固件已经预安装于一台个人电脑的主板上，是上电后首先运行的软件。（来源：维基百科）它是从上世纪 70 年代就被制造出来，且沿用至今的一部分典型软件。
 **UEFI**  | The Unified Extensible Firmware Interface (UEFI) is a specification that defines a software interface between an operating system and platform firmware. UEFI replaces the legacy Basic Input/Output System (BIOS) firmware interface originally present in all IBM PC-compatible personal computers, with most UEFI firmware implementations providing support for legacy BIOS services. UEFI can support remote diagnostics and repair of computers, even with no operating system installed. (source: Wikipedia)
 **UEFI Drivers** | Like any other OS, UEFI has drivers and they're loaded by Clover or OpenCore. They're also meant to load devices or perform other tasks, like loading Apple's HFS drives with HfsPlus.efi, patching macOS's `boot.efi` and so on. You may find them as `Clover Drivers` or `OpenCore Drivers`, they're all UEFI drivers. (Note: only use drivers that are meant for that specific boot manager. More info can be found on the [Clover Conversion page](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)).
 ---

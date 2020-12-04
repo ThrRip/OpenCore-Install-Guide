@@ -1,82 +1,82 @@
-# Why OpenCore over Clover and others
+# 为什么 OpenCore 胜过 Clover 和其他引导加载程序
 
-* Supported version: 0.6.3
+* 支持的版本：0.6.3
 
-This section contains a brief rundown as to why the community has been transitioning over to OpenCore, and aims to dispel a few common myths in the community. Those who just want a macOS machine can skip this page.
+这个部分简要地概述了为什么社区正在向 OpenCore 过渡，而且目的是为了消除一些在社区中的错误观念。如果你只是想安装 macOS，可以跳过此页面。
 
-* [Why OpenCore over Clover and others](#why-opencore-over-clover-and-others)
-  * OpenCore features
-  * Software support
-  * Kext injection
-* [OpenCore's shortcomings](#opencores-shortcomings)
-* [Common Myths](#common-myths)
-  * Is OpenCore unstable as it's a beta?
-  * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
-  * Does OpenCore require a fresh install?
-  * Does OpenCore only support limited versions of macOS?
+* [为什么 OpenCore 胜过 Clover 和其他引导加载程序](#为什么-opencore-胜过-clover-和其他引导加载程序)
+  * OpenCore 的功能
+  * 软件支持
+  * 内核扩展注入
+* [OpenCore 的缺点](#opencore-的缺点)
+* [常见的错误观念](#常见的错误观念)
+  * 因为 OpenCore 还处在测试阶段，所以它不稳定吗？
+  * OpenCore 是否始终注入 SMBIOS 和 ACPI 数据到其他的操作系统内？
+  * 使用 OpenCore 需要重新安装操作系统吗？
+  * OpenCore 是否只支持限定版本的 macOS？
 
-## OpenCore features
+## OpenCore 的功能
 
-* More OS Support!
-  * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 11, Big Sur!
-* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
-* Better overall stability as patches can be much more precise:
-  * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
-  * AMD OSX patches not needing to update with every minor security update
-* Better overall security in many forms:
-  * No need to disable System Integrity Protection (SIP)
-  * Built-in FileVault 2 support
-  * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) allowing to create EFI snapshots preventing unwanted modifications
-  * True secure-boot support
-    * Both UEFI and Apple's variant
-* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk, just like a real Mac.
-* Supports boot hotkey via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
+* 更多的操作系统支持！
+  * OpenCore 现在直接支持更多版本的 OS X 和 macOS，而且不用经历使用 Clover 和 Chameleon 时需要的痛苦 Hackintosh。
+  * 这包括的操作系统里，包含很旧的 10.4 Tiger 而且甚至也包含最新的版本 11 Big Sur！
+* 就大体而言，使用 OpenCore 的系统比使用 Clover 的引导速度更快，因为它不执行一些没有必要的修复
+* 整体稳定性更好，因为补丁可以更精确：
+  * [macOS 10.15.4 更新](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
+  * AMD OSX 补丁不需要在每次小型的安全更新之后都进行更新
+* 在很多情况下，整体安全性更好：
+  * 不需要关闭系统完整性保护（SIP）
+  * 内建的文件保险箱 2 支持
+  * [保险库](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault)允许为避免不想要的自定义而创建 EFI 快照
+  * 真正的安全启动支持
+    * 来自 UEFI 的和来自 Apple 的变体都支持
+* 启动转换助理和启动设备的选择都被读取启动磁盘设置的 NVRAM 变量支持，就像一台真实的 Mac。
+* 通过 `boot.efi` 支持引导热键——在启动时按住 `Option` 或 `ESC` 以选择启动的设备，按住 `Cmd+R` 进入恢复模式或者 `Cmd+Opt+P+R` 以重置 NVRAM。
 
-## Software Support
+## 软件支持
 
-The biggest reason someone may want to switch from other boot loaders is actually software support:
+有人想从其他引导加载程序转换到 OpenCore 的最大原因实际上是软件支持：
 
-* Kexts no longer testing for Clover:
-  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore
-* Many firmware drivers being merged into OpenCore:
-  * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
-  * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
-  * [Firmware patches](https://github.com/acidanthera/AptioFixPkg)
-* [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore):
-  * Have AMD-based hardware? The kernel patches required to boot macOS no longer support Clover – they now only support OpenCore.
+* 内核扩展不再为 Clover 测试：
+  * 发现内核扩展的一个 Bug？很多开发者，包括 [Acidanthera](https://github.com/acidanthera) 组织（大部分你最喜欢的内核扩展的制作者）都不会提供支持，除非你使用的是 OpenCore
+* 很多固件驱动器都被合并到了 OpenCore 中：
+  * [APFS 支持](https://github.com/acidanthera/AppleSupportPkg)
+  * [文件保险箱支持](https://github.com/acidanthera/AppleSupportPkg)
+  * [固件补丁](https://github.com/acidanthera/AptioFixPkg)
+* [AMD OSX 补丁](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore):
+  * 拥有基于 AMD 的硬件？启动 macOS 所需的内核补丁不再支持 Clover——现在只支持 OpenCore。
 
-## Kext Injection
+## 内核扩展注入
 
-To better understand OpenCore's kext injection system, we should first look at how Clover works:
+为更好地理解 OpenCore 的内核扩展注入系统，我们需要先看一看 Clover 是怎样工作的：
 
-1. Patches SIP open
-2. Patches to enable XNU's zombie code for kext injection
-3. Patches race condition with kext injection
-4. Injects kexts
-5. Patches SIP back in
+1. 使用补丁将系统完整性保护开放
+2. 使用布丁启用 XNU 的僵尸代码以进行内核扩展注入
+3. 修复注入内核扩展需要的竞态条件
+4. 注入内核扩展
+5. 使用补丁还原系统完整性保护
 
-Things to note with Clover's method:
+Clover 的方式中需要注意的地方：
 
-* Calling XNU's zombie code that hasn't been used since 10.7, it's seriously impressive Apple hasn't removed this code yet
-  * OS updates commonly break this patch, like recently with 10.14.4 and 10.15
-* Disables SIP and attempts to re-enable it, don't think much needs to be said
-* Likely to break with macOS 11.0 (Big Sur)
-* Supports OS X all the way back to 10.5
+* 把 XNU 的僵尸代码看作是从 10.7 版本以来就未使用过的代码，但令人印象深刻的是 Apple 依然没有移除这些代码
+  * 操作系统更新经常破坏这个补丁，例如最近的 10.14.4 和 10.15
+* 关闭系统完整性保护然后尝试重新打开它，别以为还有什么需要说的
+* 几乎被 macOS 11.0 Big Sur 破坏
+* 支持早至 10.5 的所有 OS X
 
-Now let's take a look at OpenCore's method:
+现在来看看 OpenCore 的方式：
 
-1. Takes existing prelinked kernel and kexts ready to inject
-2. Rebuilds the cache in the EFI environment with the new kexts
-3. Adds this new cache in
+1. 将现有的预链接的内核和内核扩展准备好注入
+2. 在带有新内核扩展的情况下重建 EFI 源内部的缓存
+3. 加入新的缓存
 
-Things to note with OpenCore's method:
+OpenCore 的方式中需要注意的地方：
 
-* OS agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
-  * OpenCore also supports prelinked kernel (v1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections, meaning it also has proper support for all Intel versions of OS X/macOS
-* Far better stability as there is far less patching involved
+* 与操作系统无关的预链接内核格式自10.6（v2）以来一直保持不变，支持很难被打破。
+  * OpenCore 也支持预链接内核（v1，在 10.4 和 10.5 中被发现）、无缓存、Mac OS X Mach 内核扩展内存缓存（Mkext）和内核收集（KernelCollections），意味着它也适当地支持所有英特尔版本的 OS X 或 macOS
+* 稳定性更好，因为所涉及的补丁要少得多
 
-# OpenCore's shortcomings
+# OpenCore 的缺点
 
 The majority of Clover's functionality is actually supported in OpenCore in the form of some quirk, however when transitioning you should pay close attention to OpenCore's missing features as this may or may not affect yourself:
 
@@ -101,13 +101,13 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not patch PCIRoot UID value
 * Does not support macOS-only ACPI injection and patching
 
-# Common Myths
+# 常见的错误观念
 
-## Is OpenCore unstable as it's a beta
+## OpenCore 还处在测试阶段，所以它不稳定吗
 
-Short Answer: No
+简短回答：不
 
-Long Answer: No
+详细回答：不
 
 OpenCore's version number does not represent the quality of the project. Instead, it's more of a way to see the stepping stones of the project. Acidanthera still has much they'd like to do with the project including overall refinement and more feature support.
 
@@ -123,7 +123,7 @@ Current road map:
 
 So please do not see the version number as a hindrance, instead as something to look forward to.
 
-## Does OpenCore always inject SMBIOS and ACPI data into other OSes
+## OpenCore 是否始终注入 SMBIOS 和 ACPI 数据到其他的操作系统内
 
 By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
 
@@ -134,13 +134,13 @@ By default, OpenCore will assume that all OSes should be treated equally in rega
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
-## Does OpenCore require a fresh install
+## 使用 OpenCore 需要重新安装操作系统吗
 
 Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
 
 Special note for Clover users: please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
 
-## Does OpenCore only support limited versions of macOS
+## OpenCore 是否只支持限定版本的 macOS
 
 As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
 

@@ -601,7 +601,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 * **UpdateSMBIOSMode**: Create
   * 以较新的已分配的 EfiReservedMemoryType 替换表，在戴尔笔记本电脑上使用 `Custom` 需要 `CustomSMBIOSGuid` 偏好设置
-  * 设置为 `Custom` 且加入启用的 `CustomSMBIOSGuid` 属性也可以阻止 SMBIOS 注入为非 Apple 操作系统，，然而我们不认可这种方式，因为它会破坏 Bootcamp 的兼容性。在你自己承担风险时使用
+  * 设置为 `Custom` 且加入启用的 `CustomSMBIOSGuid` 属性也可以阻止 SMBIOS 注入为非 Apple 操作系统，然而我们不认可这种方式，因为它会破坏 Bootcamp 的兼容性。在你自己承担风险时使用
 
 :::
 

@@ -1,6 +1,6 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -51,7 +51,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
   * change PXSX to ANS1
   * change PXSX to ANS2
-* Airport/Wifi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
+* Airport/WiFi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
   * change PXSX to ARPT
 * Other purely cosmetic patches:
   * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)

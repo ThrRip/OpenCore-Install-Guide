@@ -378,6 +378,7 @@
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
+| BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
 | SecureBootModel | Default | 此属性区分大小写，如果你不需要安全启动，设置为 `Disabled`（例如你需要 Nvidia 的 Web Driver 时） |
 | Vault | Optional | 不能忽略掉此属性，如果你没有把它设置为 Optional，你会后悔的，注意，这是一个区分大小写的属性。 |
@@ -394,6 +395,8 @@
   * 用于获得自己的安全启动识别码，目前这个偏好设置不可靠，因为在 macOS 安装器中它还存在漏洞，所以我们强烈建议你保持默认值。
 * **AuthRestart**: NO
   * 打开文件保险箱 2（FileVault 2）的重启认证，则重启时不再需要密码。需要考虑其带来的安全风险以启用
+* **BlacklistAppleUpdate**: YES
+  * 用于阻止固件更新，用于附加等级的保护，因为 macOS Big Sur 不再使用 `run-efi-updater` 变量
 * **BootProtect**: Bootstrap
   * 允许使用 EFI/OC/Bootstrap 中的  Bootstrap.efi 来替代 BOOTx64.efi，在想要同时使用 rEFInd 或者避免 BOOTx64.efi 被 Windows 覆盖的情况下很有用。合理使用这项偏好设置的更多信息请查看[使用 Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
 * **DmgLoading**: Signed

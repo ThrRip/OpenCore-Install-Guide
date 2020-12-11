@@ -1,8 +1,8 @@
-# Ryzen and Threadripper(17h)
+# Ryzen and Threadripper(17h and 19h)
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.3 |
+| Supported OpenCore version | 0.6.4 |
 | Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
@@ -23,7 +23,7 @@ Now with all that, a quick reminder of the tools we need
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (Supports 10.13, 10.14, and 10.15)
+  * [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (Supports 10.13, 10.14, and 10.15)
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
@@ -240,7 +240,7 @@ This is where the AMD kernel patching magic happens. Please do note that `Kernel
 
 Kernel patches:
 
-* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (10.13, 10.14, and 10.15)
 
 To merge:
 
@@ -375,6 +375,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
+| BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
 | SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
@@ -391,8 +392,10 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BootProtect**: Bootstrap
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **BlacklistAppleUpdate**: YES
+  * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
+* **BootProtect**: None
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html)
 * **DmgLoading**: Signed
   * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`

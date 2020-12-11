@@ -1,6 +1,6 @@
 # Post-Install Issues
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Issues revolving around macOS once properly installed.
 
@@ -20,7 +20,7 @@ Issues revolving around macOS once properly installed.
 * [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
 * [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
-* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshot)
+* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshots)
 * [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
 
 ## Broken iMessage and Siri
@@ -98,9 +98,9 @@ Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
-Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.
+Follow guide listed here:
 
-* Note: This kext is known to create instability, if you receive random crashes and freezes please remove this kext.
+* [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
 
 ## Apps crashing on AMD
 

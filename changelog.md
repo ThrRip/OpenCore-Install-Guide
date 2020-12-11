@@ -1,11 +1,11 @@
-# OpenCore Install Guide Changelog
+# OpenCore 安装指南更新日志
 
 ==================
 
-#### 0.6.3
+#### 0.6.4
 
-* Add M1 series Apple Silicon SMBIOS
-* Rewrite Windows and Linux guide to use macrecovery.py
-* Update macrecovery.py links for Big Sur
-* Fix Ice Lake SetupVirtualMap setting
-* Fix macrecovery.py command for 10.15
+* 添加 M1 系列 Apple Silicon SMBIOS
+* 重写关于使用 macrecovery.py 的 Windows 和 Linux 指南
+* 为 Big Sur 更新 macrecovery.py 链接
+* 修复 Ice Lake SetupVirtualMap 设置项
+* 为 10.15 修复 macrecovery.py 指令

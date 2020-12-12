@@ -1,78 +1,78 @@
 
-# Making the installer in macOS
+# 在 macOS 中制作安装器
 
-* Supported version: 0.6.4
+* 支持的版本：0.6.4
 
-While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+虽然你不需要进行一次完全重新安装以使用 OpenCore，但是建议一些用户对他们的引导管理器升级进行完全的重新安排。
 
-To start we'll want to grab ourselves a copy of macOS. You can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with gibMacOS.
+我们将会以获得一份 macOS 副本为开始。如果你只是想制作一个 OpenCore 启动盘，你可以跳过这个部分并跳转到格式化 USB。对其他的人，你可以从 App Store 下载 macOS 或者使用 gibMacOS。
 
-## Downloading macOS: Modern OS
+## 下载 macOS：较新版本
 
-* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+* 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看 [Downloading macOS: Legacy OS](#下载-macos-经典版本)
 
-From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
+在一台安装了 macOS 的设备上，获取你想要安装的 macOS 版本，只需直接进入 App Store 并下载想要的操作系统发行版，然后继续查看 [**配置安装器**](#配置安装器)。
 
-For machines that need a specific OS release or can't download from the App Store, you can use the gibMacOS utility.
+如果需要明确的操作系统发行版，或者无法从 App Store 下载，你可以使用实用工具 gibMacOS。
 
-Now let's grab [gibMacOS](https://github.com/corpnewt/gibMacOS), then unzip it into a local directory.
+那么现在我们来获取 [gibMacOS](https://github.com/corpnewt/gibMacOS)，然后将它解压到一个本地的目录。
 
-Next run the `gibMacOS.command`:
+然后运行 `gibMacOS.command`：
 
 ![](../images/installer-guide/mac-install-md/gib.png)
 
-As you can see, we get a nice list of macOS installers. If you need beta versions of macOS, you can select `C. Change Catalog`. For this example we'll choose 1:
+就如你所看到的一样，我们获得了 macOS 安装器的一个优质列表。如果你需要测试版的 macOS，你可以选择 `C. Change Catalog`。在这个示例中我们将选择 1：
 
 ![](../images/installer-guide/mac-install-md/gib-process.png)
 
-* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
-  * For first time users, we recommend macOS 10.15, Catalina
-* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
+* **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11：Big Sur](../extras/big-sur/README.md)
+  * 对于第一次使用的用户，我们推荐 10.15 Catalina
+* **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅 [硬件限制](../macos-limits.md)
 
-This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
+这会需要一定的时间，因为我们正在下载总共 8GB+ 的 macOS 安装器，所以强烈推荐在你等待的时候阅读剩下的指南。
 
-Once finished, we have to either extract the installer or build it:
+一旦完成，我们必须解压安装器或者编译它：
 
-* [Extracting the installer](#extracting-the-installer)
+* [解压安装器](#解压安装器)
   * For macOS 11+
-* [Building the installer](#building-the-installer)
+* [编译安装器](#编译安装器)
   * For 10.15 and older
 
-### Extracting the installer
+### 解压安装器
 
-For macOS 11 and newer, Apple now packages up the installer into the InstallAssistant package. This will be located under `gibMacOS/macOS Downloads/`:
+对于 macOS 11 和更高版本，Apple 现在将安装器打包在了 InstallAssistant（安装助理）包中。它会位于 `gibMacOS/macOS Downloads/`：
 
 ![](../images/extras/big-sur/readme/final-download.png)
 
-Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
+运行 InstallAssistant.pkg 然后选择你要用于启动的驱动器，这将是 Install.app 被放置到的位置：
 
 ![](../images/extras/big-sur/readme/install-pkg.png)
 
-Once done, you should find it located in your Applications folder:
+一旦完成，你应该可以在你的应用程序目录中找到它：
 
 ![](../images/extras/big-sur/readme/done.png)
 
-From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
+这样就可以跳转至[配置安装器](#配置安装器)以完成你的工作了。
 
-### Building the installer
+### 编译安装器
 
-For macOS 10.15 and older, the installer will be downloaded in pieces and will need to be built. Here we'll want to run the `BuildmacOSInstallApp.command`:
+对于 macOS 10.15 和更低版本，安装器将会被作为多个部分下载，所以需要被编译。此处我们需要运行 `BuildmacOSInstallApp.command`：
 
 ![](../images/installer-guide/mac-install-md/gib-location.png)
 
-You will be prompted for the macOS installer files which were downloaded to `macOS Downloads` folder in the gibMacOS directory.
+程序将会提示您放入已经下载到 gibMacOS 目录中的 `macOS Downloads` 下的文件。
 
-From the Finder, drill down to the folder containing the downloaded files and either drag it to the command line or "Cmd+C" and paste it to the terminal.
+在访达中，进入下载了文件的目录然后把它拖放到命令行中，或者“Cmd+C”并将它粘贴至终端内。
 
-Once the task is completed, exit the utility. You will find the Install file in the directory.
+一旦任务完成，退出这个实用工具。你将会在目录中找到安装文件。
 
-Move the newly created image to the Applications folder – this will simplify the next section.
+将新创建的镜像移动到应用程序目录——这将简化下一个部分。
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)
 
-From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
+这样就可以跳转至[配置安装器](#配置安装器)以完成你的工作了。
 
-## Downloading macOS: Legacy OS
+## 下载 macOS：经典版本
 
 * This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
 
@@ -291,7 +291,7 @@ This likely means SIP needs to be disabled, however we recommend using [ASR Meth
 
 :::
 
-## Setting up the installer
+## 配置安装器
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 

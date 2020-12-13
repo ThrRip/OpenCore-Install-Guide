@@ -78,7 +78,7 @@ OpenCore 的方式中需要注意的地方：
 
 # OpenCore 的缺点
 
-The majority of Clover's functionality is actually supported in OpenCore in the form of some quirk, however when transitioning you should pay close attention to OpenCore's missing features as this may or may not affect yourself:
+实际上大部分的 Clover 功能在 OpenCore 的一些类型的设置项中都被支持，然而当需要过渡到 OpenCore 时你应该着重关注 OpenCore 没有的功能是否会影响到你自己：
 
 * Does not support booting MBR-based operating systems
   * Work around is to chain-load rEFInd once in OpenCore
@@ -125,14 +125,14 @@ So please do not see the version number as a hindrance, instead as something to 
 
 ## OpenCore 是否始终注入 SMBIOS 和 ACPI 数据到其他的操作系统内
 
-By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
+在默认情况下，OpenCore 将会假定所有操作系统在 ACPI 和 SMBIOS 信息方面都应该得到同等对待。这种想法的原因主要由以下三部分组成：
 
-* This allows for proper multiboot support, like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
-* Avoids poorly made DSDTs and encourages proper ACPI practices
-* Avoids edge cases where info is injected several times, commonly seen with Clover
-  * i.e. How would you handle SMBIOS and ACPI data injection once you booted boot.efi, but then get kicked out? The changes are already in memory and so trying to undo them can be quite dangerous. This is why Clover's method is frowned upon.
+* 这允许正确的多系统启动支持，比如 [启动转换助理（BootCamp）](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* 避免制作糟糕的 DSDT 并鼓励正确的 ACPI 规范
+* 避免一些信息被注入多次的边缘情况，常见于 Clover
+  * 例如：你要怎么在从 boot.efi 启动后处理 SMBIOS 和 ACPI 注入，然后又将它们移除？已经存储于在内存中的更改，尝试撤销是非常危险的。这也是 Clover 的方法不受欢迎的原因。
 
-However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
+然而，OpenCore 中有设置项允许通过补丁设置 macOS 从哪里读取 SMBIOS 信息，以将 SMBIOS 注入为仅限 macOS 的形式。`CustomSMIOSGuid` 设置项和设置为 `Custom` 的 `CustomSMBIOSMode` 在未来可能会无法使用，所以我们只推荐在其他操作系统中出现某些软件损坏的情况下使用此选项。为了最好的稳定性，请关闭这些设置项。
 
 ## 使用 OpenCore 需要重新安装操作系统吗
 

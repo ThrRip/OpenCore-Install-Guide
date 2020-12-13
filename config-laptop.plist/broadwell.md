@@ -74,13 +74,13 @@
 
 ### Quirks
 
-与 ACPI 有联系的设置，所有内容保持默认，因为我们没有用到这些偏好设置。
+与 ACPI 有联系的设置，所有内容保持默认，因为我们没有用到这些设置项。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
-这个部分提供与 boot.efi 相关的 OpenRuntime 补丁设置，用于代替 AptioMemoryFix.efi。
+这个部分提供与 boot.efi 相关的 OpenRuntime 补丁设置项，用于代替 AptioMemoryFix.efi。
 
 ### MmioWhitelist
 
@@ -250,14 +250,14 @@
 
 ::: tip 信息
 
-设置与内核有关，对于我们来说打开以下的偏好设置即可：
+设置与内核有关，对于我们来说打开以下的设置项即可：
 
 | Quirk | Enabled | 注释 |
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | NO | 如果要运行 10.10 或更低版本，或者无法在 BIOS 里关闭 `CFG-Lock`，则需要打开 |
 | AppleXcpmCfgLock | YES | 如果 `CFG-Lock` 已经在 BIOS 中关闭，则不需要打开 |
 | DisableIOMapper | YES | 如果 `VT-D` 已经在 BIOS 中关闭，则不需要打开 |
-| LapicKernelPanic | NO | 惠普设备需要这个偏好设置 |
+| LapicKernelPanic | NO | 惠普设备需要这个设置项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
 | XhciPortLimit | YES | |
@@ -337,7 +337,7 @@
 
 对调试 OpenCore 引导问题很有帮助（我们将会改变*除了* `DisplayDelay` 的所有设置项）：
 
-| 偏好设置 | 启用 |
+| 设置项 | 启用 |
 | :--- | :--- |
 | AppleDebug | YES |
 | ApplePanic | YES |
@@ -374,7 +374,7 @@
 
 “安全”已经自己解释了有什么作用，但是**也不能跳过**。我们需要改变以下项目：
 
-| 偏好设置 | 启用 | 注释 |
+| 设置项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
@@ -637,11 +637,11 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 ### Input
 
-有关于 boot.efi 中用于文件保险箱和热键的键盘放行支持，保留所有默认值，因为我们不需要用到这些偏好设置。查看这里以获得更多信息：[安全与文件保险箱](https://dortania.github.io/OpenCore-Post-Install/)
+有关于 boot.efi 中用于文件保险箱和热键的键盘放行支持，保留所有默认值，因为我们不需要用到这些设置项。查看这里以获得更多信息：[安全与文件保险箱](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
-有关于 OpenCore 的可视化输出，保留所有默认值，因为我们不需要用到这些偏好设置。
+有关于 OpenCore 的可视化输出，保留所有默认值，因为我们不需要用到这些设置项。
 
 ### ProtocolOverrides
 
@@ -650,9 +650,9 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 ### Quirks
 
 ::: tip 信息
-有关于 UEFI 源的偏好设置，对于我们，需要改变以下设置：
+有关于 UEFI 源的设置项，对于我们，需要改变以下设置：
 
-| 偏好设置 | 启用 | 注释 |
+| 设置项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | IgnoreInvalidFlexRatio | YES | |
 | ReleaseUsbOwnership | YES | |
@@ -679,7 +679,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 ### ReservedMemory
 
-用于从操作系统中去除某些内存区域以供使用。主要有关于 Sandy Bridge 核芯显卡和内存有缺陷的系统。使用此偏好设置的相关内容未包含在此指南中
+用于从操作系统中去除某些内存区域以供使用。主要有关于 Sandy Bridge 核芯显卡和内存有缺陷的系统。使用此设置项的相关内容未包含在此指南中
 
 ## 清理
 

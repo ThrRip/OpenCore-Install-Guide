@@ -229,7 +229,7 @@ GPU 支持很复杂，涉及到市面上几乎所有的 GPU，通常的分析是
 * **三星 PM981、PM991 and 镁光 2200S NVMe SSD**
   * 这些 SSD 不兼容即插即用（导致内核错误）所以需要 [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) 以修复这些内核问题。注意，这些驱动可能导致引导问题——即便配合 NVMeFix.kext。
   * 根据一些相关的注解，三星 970 EVO Plus NVMe SSD 也存在同样的问题，但是已经在一次固件更新中被修复了；在[这里](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/)得到更新（通过 Windows 下的 Samsung Magician 或可引导的 ISO）。
-  * 同时需要注意的是，为 HDD 加速而使用 [英特尔傲腾内存](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) 或者 [镁光 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) 的笔记本电脑在 macOS 中不受支持。一些用户曾报告在 Catalina 中成功运行——甚至是读写也完全支持，但是我们强烈推荐移除傲腾内存以排除潜在的启动问题。
+  * 同时需要注意的是，为 HDD 加速而使用 [英特尔傲腾内存](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html)或者[镁光 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) 的笔记本电脑在 macOS 中不受支持。一些用户曾报告在 Catalina 中成功运行——甚至是读写也完全支持，但是我们强烈推荐移除傲腾内存以排除潜在的启动问题。
 
 ## 有线网络
 
@@ -237,7 +237,7 @@ GPU 支持很复杂，涉及到市面上几乎所有的 GPU，通常的分析是
 
 * Intel 的 2.5GB 以太网 i225 网络
   * 在高端桌面 Comet Lake 主板上被发现
-  * 可行的变通办法：[来源](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) 和 [示例](../config.plist/comet-lake.md#deviceproperties)
+  * 可行的变通办法：[来源](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059)和[示例](../config.plist/comet-lake.md#deviceproperties)
 * Intel 的服务器网卡
   * 对于 [X520 和 X540 芯片组](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)的可行变通办法
 * Mellanox 和 Qlogic 服务器网卡
@@ -245,7 +245,7 @@ GPU 支持很复杂，涉及到市面上几乎所有的 GPU，通常的分析是
 ## 无线网络
 
 大部分笔记本电脑自带的 Wi-Fi 芯片都不被支持，因为它们通常由 Intel/Qualcomm 制造。如果你比较幸运，你可能会有一块 Atheros 芯片，但是对它的支持仅持续到了 High Sierra。
-最佳选项是获取一块博通（Broadcom）的无线网卡，查看 [无线网卡买家指南](https://dortania.github.io/Wireless-Buyers-Guide/) for recommendations.
+最佳选项是获取一块博通（Broadcom）的无线网卡，查看 [无线网卡买家指南](https://dortania.github.io/Wireless-Buyers-Guide/)以获得推荐的产品。
 
 ## 杂项
 

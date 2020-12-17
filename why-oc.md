@@ -80,26 +80,26 @@ OpenCore 的方式中需要注意的地方：
 
 实际上大部分的 Clover 功能在 OpenCore 的一些类型的设置项中都被支持，然而当需要过渡到 OpenCore 时你应该着重关注 OpenCore 没有的功能是否会影响到你自己：
 
-* Does not support booting MBR-based operating systems
-  * Work around is to chain-load rEFInd once in OpenCore
-* Does not support UEFI-based VBIOS patching
-  * This can be done in macOS however
-* Does not support automatic DeviceProperty injection for legacy GPUs
-  * ie. InjectIntel, InjectNvidia and InjectAti
-  * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
-* Does not support IRQ conflict patching
-  * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
-* Does not support P and C state generation for older CPUs
-* Does not support Target Bridge ACPI patching
-* Does not support Hardware UUID Injection
-* Does not support auto-detection for many Linux bootloader
-  * Can be resolved by adding an entry in `BlessOverride`
-* Does not support many of Clover's XCPM patches
-  * ie. Ivy Bridge XCPM patches
-* Does not support hiding specific drives
-* Does not support changing settings within OpenCore's menu
-* Does not patch PCIRoot UID value
-* Does not support macOS-only ACPI injection and patching
+* 不支持引导基于 MBR 的操作系统
+  * 解决方法是在 OpenCore 中链接加载 rEFInd 一次
+* 不支持基于 UEFI 的虚拟 BIOS（VBIOS）补丁
+  * 然而这可以在 macOS 中完成
+* 不支持为典型的 GPU 自动加载设备属性
+  * 例如：InjectIntel、InjectNvidia 和 InjectAti
+  * 但是这可以手动完成：[GPU 补丁](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* 不支持 IRQ 冲突修复
+  * 可以使用 [SSDTTime](https://github.com/corpnewt/SSDTTime) 解决
+* 不支持为较旧的 CPU 生成 P 和 C 状态
+* 不支持针对目标 ACPI 桥（Target Bridge ACPI）的修复
+* 不支持硬件 UUID 注入
+* 不支持自动检测大部分 Linux 引导加载程序Does not support auto-detection for many Linux bootloader
+  * 可以在 `BlessOverride` 中添加一个条目来解决
+* 不支持 Clover 的很多 XCPM 布丁
+  * 例如：Ivy Bridge XCPM 补丁
+* 不支持隐藏特定驱动器
+* 不支持在 OpenCore 菜单中更改设置
+* 不修复 PCIRoot UID 值
+* 不支持仅 macOS 的 ACPI 注入和修复
 
 # 常见的错误观念
 
@@ -109,19 +109,19 @@ OpenCore 的方式中需要注意的地方：
 
 详细回答：不
 
-OpenCore's version number does not represent the quality of the project. Instead, it's more of a way to see the stepping stones of the project. Acidanthera still has much they'd like to do with the project including overall refinement and more feature support.
+OpenCore 的版本号并不代表项目的质量。相反，这更像是一种看到项目的垫脚石的方式。Acidathera 仍然有很多他们想对这个项目所做的，包括整体的改进和更多的功能支持。
 
-For example, OpenCore goes through proper security audits to ensure it complies with UEFI Secure Boot, and is the only Hackintosh bootloader to undergo these rigorous reviews and have such support.
+例如，OpenCore 会经过适当的安全审核，以确保它符合 UEFI 安全启动的要求，并且是唯一一个经过这些严格审查并获得此类支持的 Hackintosh 引导加载程序。
 
-Version 0.6.1 was originally designed to be the official release of OpenCore as it would have proper UEFI/Apple Secure Boot, and would be the 1 year anniversary of OpenCore's release as a public tool. However, due to circumstances around macOS Big Sur and the rewriting of OpenCore's prelinker to support it, it was decided to push off 1.0.0 for another year.
+版本 0.6.1 最初设计为 OpenCore 的官方发行版，因为它适用于 UEFI/Apple 安全启动，并将是 OpenCore 作为公共工具发布的 1 周年纪念日。然而，由于 macOS Big Sur 的情况以及 OpenCore 为支持它而进行的预链接器重写，1.0.0 被决定再推迟一年。
 
-Current road map:
+当前的路线：
 
-* 2019: Year of Beta
-* 2020: Year of Secure Boot
-* 2021: Year of Refinement
+* 2019：Beta 版本
+* 2020：安全启动
+* 2021：优化
 
-So please do not see the version number as a hindrance, instead as something to look forward to.
+所以不要认为版本号是一项阻碍，相反，这是值得期待的。
 
 ## OpenCore 是否始终注入 SMBIOS 和 ACPI 数据到其他的操作系统内
 
@@ -136,17 +136,19 @@ So please do not see the version number as a hindrance, instead as something to 
 
 ## 使用 OpenCore 需要重新安装操作系统吗
 
-Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
+如果你有一个“纯净”的安装则不需要——指操作系统是否以任何方式被篡改，例如在系统盘中安装第三方内核扩展或 Apple 不支持的其他修改。当您的系统被您或第三方实用程序（如 Hackintool）严重篡改时，我们建议重新安装以避免任何潜在问题。
 
-Special note for Clover users: please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
+对于 Clover 用户的特别注意事项：使用 OpenCore 安装时，请重置您的 NVRAM。许多 Clover 变量可能与 OpenCore 和 macOS 冲突。
 
 ## OpenCore 是否只支持限定版本的 macOS
 
-As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
+从 OpenCore 0.6.2 开始，您可以启动所有 Intel 版本的 macOS，一直到 OS X 10.4！然而，正确的支持取决于您的硬件，所以请您自己验证：[硬件限制](macos-limits.md)
 
-::: details macOS Install Gallery
+::: details macOS 安装相册
 
-Acidanthera has tested many versions, and I myself have run many versions of OS X on my old HP DC 7900 (Core2 Quad Q8300). Here's just a small gallery of what I've tested:
+Acidanthera 测试了很多的版本，而且我也在我的老旧的 HP DC 7900（酷睿 2 四核 Q8300）上运行了很多版本的 OS X。这是我测试过的版本的相册：
+
+>  译者注：上方的“我”并非指译者。
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.4-Tiger.png)
 
@@ -172,32 +174,32 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 :::
 
-## Does OpenCore support older hardware
+## OpenCore 是否支持较旧的硬件
 
-As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
+从现在开始，只要操作系统本身支持，大多数英特尔的硬件都是受支持的。但是请参考[硬件限制页面](macos-limits.md)以获得更多关于哪些硬件在哪些版本的 OS X 和 macOS 的信息。
 
-Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
+目前，英特尔的 Yonah 系列和更新的 CPU 都和 OpenCore 一起正确地测试了。
 
-## Does OpenCore support Windows/Linux booting
+## OpenCore 是否支持 Windows/Linux 的引导
 
-OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
+OpenCore的工作方式与任何其他引导加载程序相同，因此它以同样的方式尊重其他操作系统。对于任何操作系统的具有不规则路径或名称的引导加载程序，只需将其添加到 BlessOverride 部分即可。
 
-## Legality of Hackintoshing
+## Hackintosh 的合法性
 
-Where hackintoshing sits is in a legal grey area, mainly that while this is not illegal we are in fact breaking the EULA. The reason this is not illegal:
+Hackintosh 所处的位置是一个法律灰色地带，这主要是因为虽然这不是非法的，但我们实际上违反了 EULA。这是不违法的原因：
 
-* We are downloading macOS from [Apple's servers directly](https://github.com/corpnewt/gibMacOS/blob/master/gibMacOS.command#L84)
-* We are doing this as a non-profit origination for teaching and personal use
-  * People who plan to use their Hackintosh for work or want to resell them should refer to the [Psystar case](https://en.wikipedia.org/wiki/Psystar_Corporation) and their regional laws
+* 我们将会从 [Apple 的服务器直接](https://github.com/corpnewt/gibMacOS/blob/master/gibMacOS.command#L84)下载 macOS
+* 我们这样做是为了用于非营利组织的教学和个人使用
+  * 打算将 Hackintosh 作为工作或者希望重新售卖它的人请参考 [Psystar 公司的情况](https://en.wikipedia.org/wiki/Psystar_Corporation)和 Apple 的当地法律
 
-While the EULA states that macOS should only be installed on real Macs([section 2B-i](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)) or virtual machines running on genuine Macs([section 2B-iii](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)), there is no enforceable law that outright bans this. However, sites that repackage and modify macOS installers do potentially risk the issue of [DMCA takedowns](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act) and such.
+而 EULA 规定 macOS 只能安装在真正的 Mac 上，（[2B-i 部分](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)）或者在正版 Mac 上运行的虚拟机（[2B-iii 部分](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)），但是没有可执行的法律完全禁止这一点。然而，重新打包和自定义 macOS 安装器确实存在[违反《数字千年版权法》](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act)等问题。
 
-* **Note**: We are not official legal advisors, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
+* **注意**：我们不是官方的法律顾问，所以如果您有任何顾虑，请您自己做适当的评估，并与您的律师讨论。
 
-## Does macOS support Nvidia GPUs
+## macOS 是否支持英伟达的 GPU
 
-Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
+由于以 Nvidia 在较新版本的支持为中心的问题，很多用户出于某种原因得出的结论是，macOS 从未支持 Nvidia GPU，而且现在也不支持。然而，Apple 在其最新的操作系统中仍然维护和支持带有 Nvidia GPU 的 Mac，就像 2013 年的 MacBook Pro 机型上安装了 Kelper 核心的 GPU。
 
-The main issue has to do with any newer Nvidia GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
+主要的问题与任何新的 Nvidia GPU 有关，因为 Apple 停止了为新的设备安装 Nvidia 的 GPU，因此他们从来没有得到 Apple 的官方操作系统支持。所以用户不得不以依赖 Nvidia 的第三方驱动程序为替代。由于 Apple 新推出的安全引导系统存在问题，他们无法再支持这些 WebDriver，因此 Nvidia 无法将其发布到新的平台上，将其限制在 macOS 10.13 High Sierra。
 
-For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
+对于更多在操作系统上的支持的信息，查看此处：[GPU 卖家指南](https://dortania.github.io/GPU-Buyers-Guide/)

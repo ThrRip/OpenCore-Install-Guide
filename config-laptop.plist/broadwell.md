@@ -132,7 +132,7 @@
 | **06002616** | Laptop | Broadwell 笔记本电脑的推荐值 |
 | **02001616** | NUC | Broadwell NUC 的推荐值 |
 
-##### 配置注解
+#### 配置注解
 
 * 对于 HD5600 你需要添加 `device-id` 并伪装为 `16260000`：
 
@@ -516,7 +516,7 @@ OpenCore 的 NVRAM GUID，主要和 RTCMemoryFixup 的用户有关
 * **LegacyOverwrite**: NO
   * 允许从 nvram.plist 覆盖固件变量，仅没有自带 NVRAM 的操作系统需要此项
 
-* **LegacySchema**:
+* **LegacySchema**
   * 用于分配 NVRAM 变量，和设置为 YES 的 LegacyEnable 一起使用
 
 * **WriteFlash**: YES
@@ -567,7 +567,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 我们需要把 Generic -> ROM 设置为一个 Apple ROM 值（从一台真实的 Mac 导出），或你的网卡 MAC 地址，或者任何随机的 MAC 地址（需要是 6 段随机字节，在此指南中我们将使用 `11223300 0000`。在安装完成后你可以跟随 [修复 Apple 服务（iServices）](https://dortania.github.io/OpenCore-Post-Install/) 页面来知道如何找到你的真实 MAC 地址）
 
-##### 记住，你需要的是一个无效的序列号，或者有效但是没有在使用中的序列号，你需要得到返回的信息是：“无效的序列号（"Invalid Serial"） 或者 “购买日期未验证”（"Purchase Date not Validated"）
+**记住，你需要的是一个无效的序列号，或者有效但是没有在使用中的序列号，你需要得到返回的信息是：“无效的序列号（"Invalid Serial"） 或者 “购买日期未验证”（"Purchase Date not Validated"）**
 
 [Apple 查看保障状态页面（Apple Check Coverage page）](https://checkcoverage.apple.com)
 
@@ -736,4 +736,4 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 * DVMT Pre-Allocated（动态分配共享显存技术预留部分）(iGPU Memory)（核芯显卡显存）：64MB
 * SATA Mode（SATA 模式）：AHCI
 
-## 现在所有内容都已经完成，请转到[安装页面](../installation/installation-process.md)
+# 现在所有内容都已经完成，请转到[安装页面](../installation/installation-process.md)

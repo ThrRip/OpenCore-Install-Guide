@@ -74,58 +74,60 @@
 
 ## 下载 macOS：经典版本
 
-* This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
+* 此方式允许你下载很多的旧版本 OS X，当前支持所有 OS X 的英特尔版本（10.4 至当前版本）
 
-::: details Grabbing legacy versions of macOS: Offline method(10.10-10.12 Supported)
+::: details 获取经典版本的 macOS：离线方式（支持 10.10-10.12）
 
-### Legacy macOS: Offline method
+### 经典版本 macOS：离线方式
 
-This method allows us to download full installers from Apple, however is limited to 10.10, Yosemite, so older OSes will need to be grabbed via the "Online Method" mentioned below.
+此方式允许我们从 Apple 下载完整的安装器，但是限制到了 10.10 Yosemite，所以更旧的操作系统需要通过下方提到的“在线方式”获取。
 
-To start, head to one of the following links:
+跳转到下方的其中一个链接以开始：
 
-* [How to upgrade to OS X Yosemite](https://support.apple.com/en-ca/HT210717)
-* [How to upgrade to OS X El Capitan](https://support.apple.com/en-us/HT206886)
-* [How to upgrade to macOS Sierra](https://support.apple.com/en-us/HT208202)
+* [How to upgrade to OS X Yosemite](https://support.apple.com/en-ca/HT210717)（如何升级到 OS X Yosemite）
+* [How to upgrade to OS X El Capitan](https://support.apple.com/en-us/HT206886)（如何升级到 OS X EI Capitan）
+* [How to upgrade to macOS Sierra](https://support.apple.com/en-us/HT208202)（如何升级到 macOS Sierra）
 
-On step 4, you'll see either `InstallOS.dmg` for Sierra or `InstallMacOSX.dmg` for El Capitan and older. Download your desired version and a .pkg file should be provided.
+> 译者注：上方链接页面暂时只有英文版本。如果您想获得中文文档，请点击[这里](https://support.apple.com/zh-cn/HT211683)。但是，中文版本的页面可能与英文版本有一些出入。
 
-Depending on what OS you're on, you can run this script and head to [Setting up the installer](#setting-up-the-installer) however if you receive this error:
+在第 4 步中，你将会看到 Sierra 的 `InstallOS.dmg` 或 EI Capitan 及更旧操作系统的 `InstallMacOSX.dmg`。下载你需要的版本，一个 .pkg 文件将会提供给你。
+
+取决于你在什么操作系统中，你可以运行脚本并跳转到[配置安装器](#配置安装器)，但如果你遇到了此错误：
 
 ![](../images/installer-guide/legacy-mac-install-md/unsupported.png)
 
-This means we'll need to manually extract the installer.
+这说明我们需要手动解压安装器。
 
-### Extracting the Installer
+### 解压安装器
 
-To start, grab the InstallMacOSX/InstallOS.dmg and mount it:
+获取 InstallMacOSX/InstallOS.dmg 并挂载以开始：
 
 ![](../images/installer-guide/legacy-mac-install-md/mount.png)
 
-Next, let's open up terminal window and make a folder on our desktop to break things. Run one at a time:
+下一步，我们来打开终端窗口，然后在我们的桌面创建一个文件夹来做准备。每次运行一行：
 
 ```sh
 cd ~/Desktop
 mkdir MacInstall && cd MacInstall
 ```
 
-Now we get to the fun part, extracting the installer(Note this may take a few minutes):
+现在我们到了好玩的部分了，解压安装器（记注，这可能需要花费一些时间）：
 
-* For El Capitan(10.11) and older:
+* 对于 EI Capitan（10.11）和更旧的操作系统：
 
 ```sh
 xar -xf /Volumes/Install\ OS\ X/InstallMacOSX.pkg
 ```
 
-* For Sierra(10.12):
+* 对于 Sierra（10.12）：
 
 ```sh
 xar -xf /Volumes/Install\ macOS/InstallOS.pkg
 ```
 
-Next, run the following(one at a time):
+接下来，运行下面的命令（一次一行）：
 
-* Yosemite:
+* Yosemite：
 
 ```sh
 cd InstallMacOSX.pkg
@@ -134,7 +136,7 @@ mv InstallESD.dmg Install\ OS\ X\ Yosemite.app/Contents/SharedSupport/
 mv Install\ OS\ X\ Yosemite.app /Applications
 ```
 
-* El Capitan:
+* El Capitan：
 
 ```sh
 cd InstallMacOSX.pkg
@@ -143,7 +145,7 @@ mv InstallESD.dmg Install\ OS\ X\ El\ Capitan.app/Contents/SharedSupport/
 mv Install\ OS\ X\ El\ Capitan.app /Applications
 ```
 
-* Sierra:
+* Sierra：
 
 ```sh
 cd InstallOS.pkg
@@ -152,84 +154,84 @@ mv InstallESD.dmg Install\ macOS\ Sierra.app/Contents/SharedSupport/
 mv Install\ macOS\ Sierra.app /Applications
 ```
 
-Once this is done, you can head to [Setting up the installer](#setting-up-the-installer)!
+一旦完成，你就可以跳转到[配置安装器](#配置安装器)了！
 
 :::
 
-::: details Grabbing legacy versions of macOS: Online method(10.7-10.15 Supported)
+::: details 获取经典版本的 macOS：在线方式（支持 10.7-10.15）
 
-### Legacy macOS: Online method
+### 经典版本 macOS：在线方式
 
-This method allows us to download legacy versions of macOS including 10.7 to current, however these are only recovery installers so require an internet connection inside the installer itself
+此方式允许我们从 Apple 下载经典版本的 macOS，包括 10.7 到当前版本，但是这些支持恢复模式的安装器，所以需要安装器内部有互联网连接
 
-To start, you'll want to use macrecovery.py instead. This tool is actually already bundled in OpenCorePkg:
+你将会使用 macrecovery.py 作为替代以开始。此工具实际上已经捆绑在了 OpenCorePkg 中：
 
 ![](../images/installer-guide/legacy-mac-install-md/macrecovery.png)
 
-Instructions for running are quite simple, choose from one of the below commands depending on which OS you want to download:
+对于运行的说明非常简单，选择下方的其中一个命令，具体取决于你想要下载哪一个操作系统：
 
-* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
+* 注意：0.6.4 和更旧的 macrecovery.py 的构建已损坏，你需要从[下载 master 分支的副本](https://github.com/acidanthera/OpenCorePkg/archive/master.zip)下载它并使用置于 `Utilities/macrecovery/` 目录下的那一个
 
 ```sh
-# Lion(10.7):
+# Lion（10.7）：
 python ./macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
 python ./macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
-# Mountain Lion(10.8):
+# Mountain Lion（10.8）：
 python ./macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
-# Mavericks(10.9):
+# Mavericks（10.9）：
 python ./macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
-# Yosemite(10.10):
+# Yosemite（10.10）：
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
-# El Capitan(10.11):
+# El Capitan（10.11）：
 python ./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
-# Sierra(10.12):
+# Sierra（10.12）：
 python ./macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
-# High Sierra(10.13)
+# High Sierra（10.13）
 python ./macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
 python ./macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
-# Mojave(10.14)
+# Mojave（10.14）
 python ./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
-# Catalina(10.15)
+# Catalina（10.15）
 python ./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
-# Latest version
-# ie. Big Sur(11)
+# 最新版本
+# 例如：Big Sur（11）
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-From here, run one of those commands in terminal and once finished you'll get an output similar to this:
+在终端中运行此处的一行命令，一旦完成，你将会得到类似下面的输出：
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-Once this is done, format your USB as FAT32 with GUID Partition Scheme:
+一旦这项工作完成，使用 GUID 分区表将你的 USB 格式化为 FAT32 格式：
 
 ![](../images/installer-guide/legacy-mac-install-md/fat32-erase.png)
 
-And finally, create folder on the root of this drive called `com.apple.recovery.boot` and place the newly downloaded BaseSystem/RecoveryImage files in:
+最后，在此驱动器的根目录创建一个名为 `com.apple.recovery.boot` 的文件夹，并且将新下载的 BaseSystem 或恢复模式镜像（RecoveryImage）文件放进去：
 
 ![](../images/installer-guide/legacy-mac-install-md/dmg-chunklist.png)
 
-From here, you can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+至此，你可以跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)了
 
 :::
 
-::: details Legacy macOS: Disk Images(10.4-10.6 Supported)
+::: details 获取经典版本的 macOS：磁盘镜像（支持 10.4-10.6）
 
-### Legacy macOS: Disk Images
+### 经典版本 macOS：磁盘镜像
 
-This method instead relies on hosted images either from Apple or Acidanthera, and restoring onto your drive.
+此方式依赖从 Apple 或 Acidanthera 的托管镜像，并将其恢复到您的驱动器。
 
-#### Acidanthera Images
+#### Acidanthera 的镜像
 
-The below installers were pulled from genuine Mac restore disks with their SMBIOS lock removed, contents of OS X itself have not been modified in any way.
+以下的安装器是从真正的 Mac 的还原磁盘中拉取出的，其 SMBIOS 锁已移除，OS X 本身的内容未以任何方式进行修改。
 
 * [OS X 10.4.10(8R4088)](https://mega.nz/folder/D3ASzLzA#7sjYXE2X09f6aGjol_C7dg)
 
@@ -237,59 +239,60 @@ The below installers were pulled from genuine Mac restore disks with their SMBIO
 
 * [OS X 10.6.7(10J4139)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug/file/ioQkTagI)
 
-#### Apple Images
+#### Apple 的镜像
 
-Note that these images require you to have an Apple Developer account to access.
+注意，这些镜像需要你有一个 Apple 开发者账号以访问。
 
-* [OS X 10.5.0 Golden Master(9a581)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_v10.5_leopard_9a581/leopard_9a581_userdvd.dmg)
+* [OS X 10.5.0 Golden Master（最终版本）(9a581)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_v10.5_leopard_9a581/leopard_9a581_userdvd.dmg)
 
-* [OS X 10.6.0 Golden Master(10a432)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_version_10.6_snow_leopard_build_10a432/mac_os_x_v10.6_build_10a432_user_dvd.dmg)
+* [OS X 10.6.0 Golden Master（最终版本）(10a432)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_version_10.6_snow_leopard_build_10a432/mac_os_x_v10.6_build_10a432_user_dvd.dmg)
 
-### Restoring the drive
+### 恢复驱动器
 
-Now comes the fun part, you'll first want to open the dmg you just downloaded and have it mounted. Now open Disk Utility and format your drive as macOS Extended(HFS+) with a GUID partition map:
+现在来到了有趣的部分，你需要首先打开你刚刚下载的 dmg 并挂载它。现在打开磁盘工具并将你的驱动器格式化为使用 GUID 分区表的 macOS 扩展（HFS+）格式：
 
-![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
+![格式化 USB](../images/installer-guide/mac-install-md/format-usb.png)
 
-Next we have 2 options to follow:
+接下来有 2 个可以跟随的选项：
 
-* [ASR Restore](#asr)(Apple Software Restore)
-  * Terminal based, works with SIP enabled
-* [Disk Utility Restore](#disk-utility)
-  * May require SIP disabled in newer OSes
+* [ASR 恢复](#asr)（Apple Software Restore，Apple 软件恢复）
+  * 基于终端，在系统完整性保护打开的情况下使用
+* [磁盘工具恢复](#磁盘工具)
+  * 在较新的系统中可能需要关闭系统完整性保护
   
 #### ASR
 
-Here you'll simply want to open terminal and run the following:
+在这里，您只需简单地打开终端并运行以下命令：
 
 ```sh
 sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyVolume -erase -noverify
 ```
 
-* **Note**: This may not align with your setup, please change accordingly:
-  * Change `/Volumes/Mac\ OS\ X\ Install\ DVD` to what your mounted Disk Image is called
-  * Change `/Volumes/MyVolume` to what your USB is called
+* **注意**：这可能与您的配置不一致，请对照更改：
+  * 将 `/Volumes/Mac\ OS\ X\ Install\ DVD` 更改为你所挂载的磁盘镜像的名称
+  * 将 `/Volumes/MyVolume` 更改为你的 USB 的名称
+  > 译者注：上方的“名称”指的是你所挂载的磁盘镜像或 USB 的卷标，并非你的磁盘镜像文件名或 USB 型号。
 
-This will take some time but once you're finished, you can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+这将会花费一定的时间，但你一旦完成，即可跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
   
-#### Disk Utility
+#### 磁盘工具
 
-Due to some pesky issues with Disk Utility, many restores can fail if SIP is enabled. If you have issues we recommend either using the [ASR Method](#asr) or disable SIP.
+由于磁盘工具的一些让人讨厌的问题，在系统完整性保护打开的情况下，很多的恢复都会失败。如果你遇到问题，我们推荐你使用 [ASR 方式](#asr)或者关闭系统完整性保护。
 
-To start, open Disk Utility and you should see both your USB drive and the Disk Image in the sidebar. From here, select restore
+打开磁盘工具以开始，你应该在侧边栏中同时看到你的 USB 驱动器和磁盘镜像。在这种情况下，选择恢复
 
 ![](../images/installer-guide/legacy-mac-install-md/pre-restore.png)
 ![](../images/installer-guide/legacy-mac-install-md/restore.png)
 
-This will take some time but once you're finished, you can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+这将会花费一定的时间，但你一旦完成，即可跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
 
-::: details Troubleshooting
+::: details 故障排除
 
-If you get an error such as this one during restore:
+如果你遇到了错误，比如在恢复时出现这种情况：
 
 ![](../images/installer-guide/legacy-mac-install-md/sip-fail.png)
 
-This likely means SIP needs to be disabled, however we recommend using [ASR Method](#asr) instead.
+这很可能表示系统完整性保护需要关闭，但是我们推荐以 [ASR 方式](#asr)来代替。
 
 :::
 
@@ -376,7 +379,7 @@ This will provide you with an EFI partition with either a **bootia32** or **boot
 
 :::
 
-## Setting up OpenCore's EFI environment
+## 配置 OpenCore 的 EFI 源
 
 Setting up OpenCore's EFI environment is simple – all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
 
@@ -386,4 +389,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all of this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
+## 现在所有事项都已完成，跳转到[配置 EFI](./opencore-efi.md) 以完成你的工作

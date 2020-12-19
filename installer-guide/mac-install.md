@@ -215,7 +215,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/legacy-mac-install-md/fat32-erase.png)
 
-最后，在此驱动器的根目录创建一个名为 `com.apple.recovery.boot` 的文件夹，并且将新下载的 BaseSystem 或恢复模式镜像（RecoveryImage）文件放进去：
+最后，在此驱动器的根目录创建一个名为 `com.apple.recovery.boot` 的文件夹，并且将新下载的 BaseSystem 或恢复模式映像（RecoveryImage）文件放进去：
 
 ![](../images/installer-guide/legacy-mac-install-md/dmg-chunklist.png)
 

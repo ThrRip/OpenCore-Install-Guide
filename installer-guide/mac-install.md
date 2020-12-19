@@ -11,7 +11,7 @@
 
 * 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看 [Downloading macOS: Legacy OS](#下载-macos-经典版本)
 
-在一台安装了 macOS 的设备上，获取你想要安装的 macOS 版本，只需直接进入 App Store 并下载想要的操作系统发行版，然后继续查看 [**配置安装器**](#配置安装器)。
+在一台安装了 macOS 的设备上，获取你想要安装的 macOS 版本，只需直接进入 App Store 并下载想要的操作系统发行版，然后继续查看 [**创建安装器**](#创建安装器)。
 
 如果需要明确的操作系统发行版，或者无法从 App Store 下载，你可以使用实用工具 gibMacOS。
 
@@ -29,16 +29,16 @@
   * 对于第一次使用的用户，我们推荐 10.15 Catalina
 * **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅 [硬件限制](../macos-limits.md)
 
-这会需要一定的时间，因为我们正在下载总共 8GB+ 的 macOS 安装器，所以强烈推荐在你等待的时候阅读剩下的指南。
+这会需要一定的时间，因为我们正在下载总共 8GB+ 的 macOS 安裝程序，所以强烈推荐在你等待的时候阅读剩下的指南。
 
-一旦完成，我们必须解压安装器或者编译它：
+一旦完成，我们必须提取安装程序或者构建它：
 
-* [解压安装器](#解压安装器)
+* [提取安装程序](#提取安装程序)
   * For macOS 11+
-* [编译安装器](#编译安装器)
+* [构建安装程序](#构建安装程序)
   * For 10.15 and older
 
-### 解压安装器
+### 提取安装程序
 
 对于 macOS 11 和更高版本，Apple 现在将安装器打包在了 InstallAssistant（安装助理）包中。它会位于 `gibMacOS/macOS Downloads/`：
 
@@ -52,9 +52,9 @@
 
 ![](../images/extras/big-sur/readme/done.png)
 
-这样就可以跳转至[配置安装器](#配置安装器)以完成你的工作了。
+这样就可以跳转至[创建安装器](#创建安装器)以完成你的工作了。
 
-### 编译安装器
+### 构建安装程序
 
 对于 macOS 10.15 和更低版本，安装器将会被作为多个部分下载，所以需要被编译。此处我们需要运行 `BuildmacOSInstallApp.command`：
 
@@ -70,7 +70,7 @@
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)
 
-这样就可以跳转至[配置安装器](#配置安装器)以完成你的工作了。
+这样就可以跳转至[创建安装器](#创建安装器)以完成你的工作了。
 
 ## 下载 macOS：经典版本
 
@@ -92,13 +92,13 @@
 
 在第 4 步中，你将会看到 Sierra 的 `InstallOS.dmg` 或 EI Capitan 及更旧操作系统的 `InstallMacOSX.dmg`。下载你需要的版本，一个 .pkg 文件将会提供给你。
 
-取决于你在什么操作系统中，你可以运行脚本并跳转到[配置安装器](#配置安装器)，但如果你遇到了此错误：
+取决于你在什么操作系统中，你可以运行脚本并跳转到[创建安装器](#创建安装器)，但如果你遇到了此错误：
 
 ![](../images/installer-guide/legacy-mac-install-md/unsupported.png)
 
-这说明我们需要手动解压安装器。
+这说明我们需要手动提取安装程序。
 
-### 解压安装器
+### 提取安装程序
 
 获取 InstallMacOSX/InstallOS.dmg 并挂载以开始：
 
@@ -154,7 +154,7 @@ mv InstallESD.dmg Install\ macOS\ Sierra.app/Contents/SharedSupport/
 mv Install\ macOS\ Sierra.app /Applications
 ```
 
-一旦完成，你就可以跳转到[配置安装器](#配置安装器)了！
+一旦完成，你就可以跳转到[创建安装器](#创建安装器)了！
 
 :::
 
@@ -211,7 +211,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-一旦这项工作完成，使用 GUID 分区表将你的 USB 格式化为 FAT32 格式：
+一旦这项工作完成，使用 GUID 分区表将你的 USB磁盘 格式化为 FAT32 格式：
 
 ![](../images/installer-guide/legacy-mac-install-md/fat32-erase.png)
 
@@ -223,13 +223,13 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 :::
 
-::: details 获取经典版本的 macOS：磁盘镜像（支持 10.4-10.6）
+::: details 获取经典版本的 macOS：磁盘映像（支持 10.4-10.6）
 
-### 经典版本 macOS：磁盘镜像
+### 经典版本 macOS：磁盘映像
 
-此方式依赖从 Apple 或 Acidanthera 的托管镜像，并将其恢复到您的驱动器。
+此方式依赖从 Apple 或 Acidanthera 的托管映像，并将其恢复到您的驱动器。
 
-#### Acidanthera 的镜像
+#### Acidanthera 的映像
 
 以下的安装器是从真正的 Mac 的还原磁盘中拉取出的，其 SMBIOS 锁已移除，OS X 本身的内容未以任何方式进行修改。
 
@@ -239,7 +239,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 * [OS X 10.6.7(10J4139)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug/file/ioQkTagI)
 
-#### Apple 的镜像
+#### Apple 的映像
 
 注意，这些镜像需要你有一个 Apple 开发者账号以访问。
 
@@ -279,7 +279,7 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
 
 由于磁盘工具的一些让人讨厌的问题，在系统完整性保护打开的情况下，很多的恢复都会失败。如果你遇到问题，我们推荐你使用 [ASR 方式](#asr)或者关闭系统完整性保护。
 
-打开磁盘工具以开始，你应该在侧边栏中同时看到你的 USB 驱动器和磁盘镜像。在这种情况下，选择恢复
+打开磁盘工具以开始，你应该在侧边栏中同时看到你的 USB 驱动器和磁盘映像。在这种情况下，选择恢复
 
 ![](../images/installer-guide/legacy-mac-install-md/pre-restore.png)
 ![](../images/installer-guide/legacy-mac-install-md/restore.png)

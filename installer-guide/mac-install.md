@@ -1,5 +1,5 @@
 
-# 在 macOS 中制作安装器
+# 在 macOS 中创建安装器
 
 * 支持的版本：0.6.4
 
@@ -9,13 +9,13 @@
 
 ## 下载 macOS：较新版本
 
-* 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看 [Downloading macOS: Legacy OS](#下载-macos-经典版本)
+* 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看[下载 macOS：经典版本](#下载-macos-经典版本)
 
 在一台安装了 macOS 的设备上，获取你想要安装的 macOS 版本，只需直接进入 App Store 并下载想要的操作系统发行版，然后继续查看 [**创建安装器**](#创建安装器)。
 
 如果需要明确的操作系统发行版，或者无法从 App Store 下载，你可以使用实用工具 gibMacOS。
 
-那么现在我们来获取 [gibMacOS](https://github.com/corpnewt/gibMacOS)，然后将它解压到一个本地的目录。
+那么现在我们来获取 [gibMacOS](https://github.com/corpnewt/gibMacOS)，然后将它提取到一个本地的目录。
 
 然后运行 `gibMacOS.command`：
 
@@ -27,16 +27,16 @@
 
 * **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11：Big Sur](../extras/big-sur/README.md)
   * 对于第一次使用的用户，我们推荐 10.15 Catalina
-* **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅 [硬件限制](../macos-limits.md)
+* **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅[硬件限制](../macos-limits.md)
 
 这会需要一定的时间，因为我们正在下载总共 8GB+ 的 macOS 安裝程序，所以强烈推荐在你等待的时候阅读剩下的指南。
 
 一旦完成，我们必须提取安装程序或者构建它：
 
 * [提取安装程序](#提取安装程序)
-  * For macOS 11+
+  * 对于 macOS 11+
 * [构建安装程序](#构建安装程序)
-  * For 10.15 and older
+  * 对于 10.15 和更低版本
 
 ### 提取安装程序
 
@@ -56,7 +56,7 @@
 
 ### 构建安装程序
 
-对于 macOS 10.15 和更低版本，安装器将会被作为多个部分下载，所以需要被编译。此处我们需要运行 `BuildmacOSInstallApp.command`：
+对于 macOS 10.15 和更低版本，安装器将会被作为多个部分下载，所以需要被构建。此处我们需要运行 `BuildmacOSInstallApp.command`：
 
 ![](../images/installer-guide/mac-install-md/gib-location.png)
 
@@ -66,7 +66,7 @@
 
 一旦任务完成，退出这个实用工具。你将会在目录中找到安装文件。
 
-将新创建的镜像移动到应用程序目录——这将简化下一个部分。
+将新构建的安装程序移动到应用程序目录——这将简化下一个部分。
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)
 
@@ -296,7 +296,7 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
 
 :::
 
-## 配置安装器
+## 创建安装器
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 

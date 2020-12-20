@@ -192,7 +192,7 @@ GPU 支持很复杂，涉及到市面上几乎所有的 GPU，通常的分析是
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | 需要在启动参数中添加 `agdpmod=pikera` |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.1 | ^^ | ^^ |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.1 | ^^ | 当前的驱动无法使用 |
 
 :::
 

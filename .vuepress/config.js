@@ -131,7 +131,7 @@ module.exports = {
             },
                 '/installer-guide/opencore-efi',
                 'ktext',
-            ['https://thrrip.github.io/Getting-Started-With-ACPI/', 'ACPI 快速上手'],
+            ['https://dortania.github.io/Getting-Started-With-ACPI/', 'ACPI 快速入门'],
                 '/config.plist/',
             ]
         },
@@ -287,7 +287,7 @@ module.exports = {
                 '/extras/kaslr-fix',
                 '/extras/spoof',
                 '/extras/big-sur/',
-                ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', '从 Clover 转换'],
+                ['https://github.com/ThrRip/OpenCore-Install-Guide/tree/master/clover-conversion', '从 Clover 过渡到 OpenCore'],
                 '/extras/smbios-support.md',
             ]
         },

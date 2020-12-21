@@ -347,7 +347,7 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
 
 :::
 
-## Legacy Setup
+## 旧版设置
 
 对于不支持 UEFI 启动的系统，查看下面的部分：
 
@@ -359,7 +359,7 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
   * 这可以在 OpenCorePkg 中的 `/Utilties/LegacyBoot/` 目录下找到
 * USB 安装器（在之前创建的）
 
-在你的 OpenCore 构建的目录中，打开 `Utilities/LegacyBoot`。你会找到一个名为 `BootInstall_ARCH.tool` 的文件。这是用来在你需要的驱动器上安装 DuetPkg 的工具。
+在你的 OpenCore 构建的文件夹中，打开 `Utilities/LegacyBoot`。你会找到一个名为 `BootInstall_ARCH.tool` 的文件。这是用来在你需要的驱动器上安装 DuetPkg 的工具。
 
 ![引导加载程序安装器的位置](../images/extras/legacy-md/download.png)
 
@@ -382,9 +382,9 @@ sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 
 :::
 
-## 配置 OpenCore 的 EFI 源
+## 设置OpenCore 的 EFI环境
 
-配置 OpenCore 的 EFI 源很简单——你需要做的就是挂载我们的 EFI 分区。EFI 分区会在我们使用 GUID 分区表格式化的时候就被创建好，但是默认情况下不会被挂载，这时我们的朋友 [MountEFI](https://github.com/corpnewt/MountEFI) 就要出场了：
+配置 OpenCore 的 EFI环境很简单——你需要做的就是挂载我们的 EFI 分区。EFI 分区会在我们使用 GUID 分区表格式化的时候就被创建好，但是默认情况下不会被挂载，这时我们的朋友 [MountEFI](https://github.com/corpnewt/MountEFI) 就要出场了：
 
 ![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
 
@@ -392,4 +392,4 @@ sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 
 ![空白的 EFI 分区](../images/installer-guide/mac-install-md/base-efi.png)
 
-## 现在所有事项都已完成，跳转到[配置 EFI](./opencore-efi.md) 以完成你的工作
+## 现在所有事项都已完成，跳转到[设置 EFI](./opencore-efi.md) 以完成你的工作

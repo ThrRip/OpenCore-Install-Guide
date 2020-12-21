@@ -25,7 +25,7 @@
 
 ![](../images/installer-guide/mac-install-md/gib-process.png)
 
-* **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11：Big Sur](../extras/big-sur/README.md)
+* **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
   * 对于第一次使用的用户，我们推荐 10.15 Catalina
 * **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅[硬件限制](../macos-limits.md)
 

@@ -347,7 +347,7 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
 
 :::
 
-## 旧版设置
+## 经典设置
 
 对于不支持 UEFI 启动的系统，查看下面的部分：
 

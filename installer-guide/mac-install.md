@@ -211,7 +211,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-一旦这项工作完成，使用 GUID 分区表将你的 USB磁盘 格式化为 FAT32 格式：
+一旦这项工作完成，使用 GUID 分区表将你的 USB 驱动器格式化为 FAT32 格式：
 
 ![](../images/installer-guide/legacy-mac-install-md/fat32-erase.png)
 
@@ -251,7 +251,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 现在来到了有趣的部分，你需要首先打开你刚刚下载的 dmg 并挂载它。现在打开磁盘工具并将你的驱动器格式化为使用 GUID 分区表的 macOS 扩展（HFS+）格式：
 
-![格式化 USB](../images/installer-guide/mac-install-md/format-usb.png)
+![格式化 USB 驱动器](../images/installer-guide/mac-install-md/format-usb.png)
 
 接下来有 2 个可以跟随的选项：
 
@@ -270,8 +270,7 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
 
 * **注意**：这可能与您的配置不一致，请对照更改：
   * 将 `/Volumes/Mac\ OS\ X\ Install\ DVD` 更改为你所挂载的磁盘镜像的名称
-  * 将 `/Volumes/MyVolume` 更改为你的 USB 的名称
-  > 译者注：上方的“名称”指的是你所挂载的磁盘镜像或 USB 的卷标，并非你的磁盘镜像文件名或 USB 型号。
+  * 将 `/Volumes/MyVolume` 更改为你的 USB 上宗卷的名称
 
 这将会花费一定的时间，但你一旦完成，即可跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
   
@@ -298,26 +297,30 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
 
 ## 创建安装器
 
-Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+现在我们将要格式化 USB 驱动器以准备 macOS 安装程序和 OpenCore。我们要使用 GUID 分区表和 macOS 扩展（HFS+）分区格式。这将会创建两个分区：主要的 `MyVolume` 和另一个用于让你的固件获取引导文件以启动的，名为 `EFI` 的分区。
 
-* Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* 注意：默认情况下，磁盘工具只会显示分区——按 Cmd/Win+2 以显示所有设备（或者你也可以点按“视图”按钮）
+* 注意 2：跟随“经典版本的 macOS：在线方式”部分的用户可以跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
 
-![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
+![格式化 USB 驱动器](../images/installer-guide/mac-install-md/format-usb.png)
 
-Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372). Note that the command is made for USB's formatted with the name `MyVolume`:
+然后运行 [Apple](https://support.apple.com/en-us/HT201372) 提供的 `createinstallmedia` 命令。注意，此命令是为已经格式化，并且名称为 `MyVolume` 的 USB 驱动器准备的：
+
+> 译者注：上方链接页面的简体中文版本请点击[这里](https://support.apple.com/zh-cn/HT201372)。
 
 ```sh
 sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so you may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first).
+这将会花费一些时间，所以你可能会需要获得一杯咖啡或者继续阅读指南（说句公道话，你真的不应该在没有阅读整篇指南前一步一步地跟随这份指南）。
 
-You can also replace the `createinstallmedia` path with that of where your installer's located (same idea with the drive name).
+你也可以将 `createinstallmedia` 中的路径替换为你的安装程序所在的路径（驱动器的名称也一样）。
 
-::: details Legacy createinstallmedia Commands
+::: details 经典版本的 createinstallmedia 命令
 
-Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
+从 Apple 自己的网站上拉取的：[How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
+
+> 译者注：上方链接页面的简体中文版本：[如何创建可引导的 macOS 安装器](https://support.apple.com/zh-cn/HT201372)
 
 ```sh
 # Catalina
@@ -346,47 +349,47 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
 
 ## Legacy Setup
 
-For systems not supporting UEFI boot, see below:
+对于不支持 UEFI 启动的系统，查看下面的部分：
 
-::: details Setting up Legacy Boot
+::: details 配置经典启动
 
-To start, you need the following:
+你需要跟随下面的说明来开始：
 
-* BootInstall_IA32.tool or BootInstall_X64.tool
-  * This can be found in OpenCorePkg under `/Utilties/LegacyBoot/`
-* Install USB(Created above)
+* BootInstall_IA32.tool 或者 BootInstall_X64.tool
+  * 这可以在 OpenCorePkg 中的 `/Utilties/LegacyBoot/` 目录下找到
+* USB 安装器（在之前创建的）
 
-Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'll find a file called `BootInstall_ARCH.tool`. What this does is install DuetPkg to your desired drive.
+在你的 OpenCore 构建的目录中，打开 `Utilities/LegacyBoot`。你会找到一个名为 `BootInstall_ARCH.tool` 的文件。这是用来在你需要的驱动器上安装 DuetPkg 的工具。
 
-![BootInstall Location](../images/extras/legacy-md/download.png)
+![引导加载程序安装器的位置](../images/extras/legacy-md/download.png)
 
-Now run this tool in terminal **with sudo**(This tool will likely fail otherwise):
+现在**配合 sudo**运行此命令（否则此工具很可能无法使用）：
 
 ```sh
-# Replace X64 with IA32 if you have a 32-Bit CPU
+# 如果你的 CPU 是 32 位的，请将 X64 替换为 IA32
 sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 ```
 
-![Disk Selection/writing new MBR](../images/extras/legacy-md/boot-disk.png)
+![磁盘选择/写入新的主引导记录](../images/extras/legacy-md/boot-disk.png)
 
-This will give you a list of available disks, choose yours and you will be prompted to write a new MBR. Choose yes`[y]` and you'll be finished.
+这将会给你一个可用磁盘的列表，选择你需要的，你将会被提示要写入一个新的主引导记录。按 `[y]` 以选择“确定”，然后你就完成了。
 
-![Finished Installer](../images/extras/legacy-md/boot-done.png)
+![完成安装器](../images/extras/legacy-md/boot-done.png)
 
-![Base EFI](../images/extras/legacy-md/efi-base.png)
+![基础 EFI](../images/extras/legacy-md/efi-base.png)
 
-This will provide you with an EFI partition with either a **bootia32** or **bootx64** file
+这将会为你提供一个带有 **bootia32** 或 **bootx64** 文件的 EFI 分区
 
 :::
 
 ## 配置 OpenCore 的 EFI 源
 
-Setting up OpenCore's EFI environment is simple – all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
+配置 OpenCore 的 EFI 源很简单——你需要做的就是挂载我们的 EFI 分区。EFI 分区会在我们使用 GUID 分区表格式化的时候就被创建好，但是默认情况下不会被挂载，这时我们的朋友 [MountEFI](https://github.com/corpnewt/MountEFI) 就要出场了：
 
 ![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
 
-You'll notice that once we open the EFI partition, it's empty. This is where the fun begins.
+你将会被提示我们第一次打开 EFI 分区时，它是空的。这也就是快乐开始的地方。
 
-![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
+![空白的 EFI 分区](../images/installer-guide/mac-install-md/base-efi.png)
 
 ## 现在所有事项都已完成，跳转到[配置 EFI](./opencore-efi.md) 以完成你的工作

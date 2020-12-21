@@ -382,7 +382,7 @@ sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 
 :::
 
-## 配置 OpenCore 的 EFI 环境
+## 設置 OpenCore 的 EFI 环境
 
 配置 OpenCore 的 EFI 环境很简单——你需要做的就是挂载我们的 EFI 分区。EFI 分区会在我们使用 GUID 分区表格式化的时候就被创建好，但是默认情况下不会被挂载，这时我们的朋友 [MountEFI](https://github.com/corpnewt/MountEFI) 就要出场了：
 

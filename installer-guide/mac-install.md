@@ -388,7 +388,7 @@ sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 
 ![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
 
-你将会被提示我们第一次打开 EFI 分区时，它是空的。这也就是快乐开始的地方。
+你将会注意到当我们打开 EFI 分区的时候，它是空的。这也就是快乐开始的地方。
 
 ![空白的 EFI 分区](../images/installer-guide/mac-install-md/base-efi.png)
 

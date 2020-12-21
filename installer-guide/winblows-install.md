@@ -1,4 +1,4 @@
-# 在 Windows 中制作安装器
+# 在 Windows 中创建安装器
 
 * 支持的版本：0.6.4
 
@@ -26,7 +26,7 @@ cd Paste_Folder_Path
 
 ![](../images/installer-guide/winblows-install-md/command-prompt.png)
 
-现在，取决于你想要哪个版本的 macOS，运行下方的其中一组命令（注意，这些脚本依赖于 [Python](https://www.python.org/downloads/) 支持，如果你没有准备好它，请先安装）：
+现在，取决于你想要哪个版本的 macOS，运行下方的其中一组命令（注意，这些脚本依赖于 [Python](https://www.python.org/downloads/) 支持，如果你还没有安装，那么请安装它）：
 
 ```sh
 # Lion（10.7）：
@@ -63,11 +63,11 @@ python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-* **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
-  * 对于第一次使用的用户，我们推荐 10.15 Catalina
-* **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅[硬件限制](../macos-limits.md)
+* **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些系统依旧有一些问题需要解决。更多信息，请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
+  * 对于第一次使用的用户，我们推荐 10.15, Catalina
+* **Nvidia 显卡注意事项**：记得确认你的硬件是否支持刚出现的操作系统，请参阅[硬件限制](../macos-limits.md)
 
-这将会花费一些时间，但是一旦你完成，你应该会得到 BaseSystem 或 RecoveryImage：
+这将会花费一些时间，不过一旦你完成，你可能会得到 BaseSystem 或 RecoveryImage文件：
 
 ![](../images/installer-guide/winblows-install-md/macrecovery-done.png)
 
@@ -75,30 +75,30 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 | :--- | :--- |
 |![](../images/installer-guide/winblows-install-md/basesystem-example.png) | ![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg) |
 
-现在我们的安装程序已经下载好了，我们需要继续格式化 USB。
+现在我们的安装程序已经下载好了，接下来我们需要格式化 USB。
 
 ## 创建安装器
 
-这里我们将会格式化我们的 USB 驱动器并将 macOS 添加到里面，你有 2 个选项：
+在这里我们将格式化我们的 USB 驱动器同时向 USB 驱动器添加 macOS ，你有 2 个选项：
 
-* [磁盘管理方式](#磁盘管理方式)
-  * 基于 GUI，最简单的方式
-  * 只有 UEFI 系统支持（例如：2012 年及以后的系统）
-* [diskpart 方式](#diskpart-方式)
+* [磁盘管理方法](#磁盘管理方法)
+  * 基于图形用户界面，最简单的方式
+  * 仅 UEFI 系统支持（例如：2012 年及以后的系统）
+* [diskpart 方法](#diskpart-方法)
   * 基于命令行，工作量稍大
   * 需要经典系统（例如：无 UEFI 支持，2012 年以前的系统）
 
-### 磁盘管理方式
+### 磁盘管理方法
 
-简单地启动磁盘管理，并将你的 USB 驱动器格式化为 FAT32 文件系统：
+只需要打开磁盘管理，并将你的 USB 驱动器格式化为 FAT32 文件系统：
 
-1. 右键单击任务栏上的开始菜单，并选择磁盘管理。
+1. 右键单击任务栏上的“开始”按钮然后选取“磁盘管理”。
 2. 你应该能看到你的所有分区和磁盘。在界面的下半部分，你会看到你的设备，找到你的 USB 设备。
 3. 你需要格式化 USB 驱动器以拥有一个 FAT32 分区。
 
-* 如果你的 USB 驱动器上有多个分区，为你的 USB 驱动器右键单击每个分区并单击删除卷（这将会删除数据，确保你有备份并且只删除了 USB 驱动器上的分区）
-  * 右键单击未分配的空间并创建一个新的简单卷。确保它是 FAT32 格式，并且至少有 1G 或 2G 的大小。将它命名为“EFI”。
-* 否则，右键单击 USB 驱动器上的分区并选择格式化，将其调整为 FAT32 文件系统。Otherwise, right click the partition on the USB and click Format and set it to FAT32.
+* 如果有多个分区在 USB 驱动器上，为你的 USB 驱动器右键单击每个分区并单击删除卷（这将会清除数据，确保你有备份并且只清除了 USB 驱动器上的分区）
+  * 右键单击未分配的空间并新建一个新的简单卷。确保它是 FAT32 文件系统，并且至少有 1GB 或 2GB 的大小。将它命名为“EFI”。
+* 否则，右键单击 USB 驱动器上的分区并选择格式化，将其调整为 FAT32 文件系统。
 
 ![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
 
@@ -114,9 +114,9 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/winblows-install-md/com-efi-done.png)
 
-### diskpart 方式
+### diskpart 方法
 
-::: details diskpart 方式
+::: details diskpart 方法
 
 按下 Windows + R 并输入 `diskpart`。
 

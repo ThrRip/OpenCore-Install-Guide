@@ -110,7 +110,7 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
 
-在这里我们可以同时看到 IA32（32 位 CPU）和 X64（64 位 CPU）文件夹，选择最适合你的硬件的那一个并打开它。然后找到 EFI 文件夹，将它放置于 USB 驱动器的根目录，与 com.apple.recovery.boot 在一起。完成后应该看起来像这样：
+在这里我们可以同时看到 IA32（32 位 CPU）和 X64（64 位 CPU）文件夹，选择最适合你的硬件的那一个并打开它。接下来找到 EFI 文件夹，将它放置于 USB 驱动器的根目录，与 com.apple.recovery.boot 在一起。完成后应该看起来像这样：
 
 ![](../images/installer-guide/winblows-install-md/com-efi-done.png)
 

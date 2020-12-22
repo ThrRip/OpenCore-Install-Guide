@@ -63,11 +63,11 @@ python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-* **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些系统依旧有一些问题需要解决。更多信息，请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
+* **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些问题依旧需要系统来解决。更多信息请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
   * 对于第一次使用的用户，我们推荐 10.15, Catalina
 * **Nvidia 显卡注意事项**：记得确认你的硬件是否支持刚出现的操作系统，请参阅[硬件限制](../macos-limits.md)
 
-这将会花费一些时间，不过一旦你完成，你可能会得到 BaseSystem 或 RecoveryImage文件：
+这将会花费一些时间，不过一旦你完成，你可能会得到 BaseSystem 或 RecoveryImage 文件：
 
 ![](../images/installer-guide/winblows-install-md/macrecovery-done.png)
 
@@ -81,23 +81,23 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 在这里我们将格式化我们的 USB 驱动器同时向 USB 驱动器添加 macOS ，你有 2 个选项：
 
-* [磁盘管理方法](#磁盘管理方法)
+* [使用“磁盘管理”的方法](#使用-磁盘管理-的方法)
   * 基于图形用户界面，最简单的方式
   * 仅 UEFI 系统支持（例如：2012 年及以后的系统）
-* [diskpart 方法](#diskpart-方法)
+* [使用“diskpart”的方法](#使用-diskpart-的方法)
   * 基于命令行，工作量稍大
   * 需要经典系统（例如：无 UEFI 支持，2012 年以前的系统）
 
-### 磁盘管理方法
+### 使用“磁盘管理”的方法
 
 只需要打开磁盘管理，并将你的 USB 驱动器格式化为 FAT32 文件系统：
 
-1. 右键单击任务栏上的“开始”按钮然后选取“磁盘管理”。
+1. 右键单击任务栏上的“开始”菜单按钮然后选择“磁盘管理”。
 2. 你应该能看到你的所有分区和磁盘。在界面的下半部分，你会看到你的设备，找到你的 USB 设备。
 3. 你需要格式化 USB 驱动器以拥有一个 FAT32 分区。
 
-* 如果有多个分区在 USB 驱动器上，为你的 USB 驱动器右键单击每个分区并单击删除卷（这将会清除数据，确保你有备份并且只清除了 USB 驱动器上的分区）
-  * 右键单击未分配的空间并新建一个新的简单卷。确保它是 FAT32 文件系统，并且至少有 1GB 或 2GB 的大小。将它命名为“EFI”。
+* 如果有多个分区在 USB 驱动器上，为你的 USB 驱动器右键单击每个分区并单击删除卷（这将会清除数据，确保你已经进行过备份并且只删除了 USB 驱动器上的分区）
+  * 右键单击未分配的空间并新建一个简单卷。确保它是 FAT32 文件系统，并且至少有 1GB 或 2GB 的大小。将它命名为“EFI”。
 * 否则，右键单击 USB 驱动器上的分区并选择格式化，将其调整为 FAT32 文件系统。
 
 ![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
@@ -114,9 +114,9 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 ![](../images/installer-guide/winblows-install-md/com-efi-done.png)
 
-### diskpart 方法
+### 使用“diskpart”的方法
 
-::: details diskpart 方法
+::: details 使用“diskpart”的方法
 
 按下 Windows + R 并输入 `diskpart`。
 

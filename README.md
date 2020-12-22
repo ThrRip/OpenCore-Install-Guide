@@ -25,4 +25,4 @@ OpenCore 就是我们所说的“引导加载程序”——它是一些很复�
 
 最后，遇到问题的人可以访问 [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) 和 [r/Hackintosh Discord](https://discord.gg/u8V7N5C) 以得到更多帮助。
 
-**本指引由 ThrRip 翻译 - 并非官方 OpenCore Install Guide**
+**本指南由 [ThrRip](https://github.com/ThrRip) 翻译，由 [ilikemacOS](https://github.com/ilikemacOS) 校对 - 并非官方 OpenCore Install Guide**

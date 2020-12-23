@@ -1,74 +1,74 @@
-# Adding The Base OpenCore Files
+# 添加 OpenCore 的基本文件
 
-* Supported version: 0.6.4
+* 支持的版本：0.6.4
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Note that they will be under either the IA32 or X64 folders, the former for 32-bit Firmwares and the latter for 64-bit Firmwares:
+你需要获取在 [OpenCorePkg 的发布](https://github.com/acidanthera/OpenCorePkg/releases/) 中获取 EFI 文件夹以配置 OpenCore 的目录结构。注意，它将会在 IA32 或 X64 目录下，分别用于前期的 32 位硬件和后期的 64 位硬件：
 
 ![](../images/installer-guide/opencore-efi-md/ia32-x64.png)
 
-Regarding DEBUG versus RELEASE version:
+关于 DEBUG vs RELEASE 版本：
 
-* **DEBUG**: Can greatly help with debugging boot issues, however can add some noticeable delay to boot times(ie. 3-5 seconds to get to the picker). Once installed you can easily transition to RELEASE
-* **RELEASE**: Much snappier boot times, however virtually no useful DEBUG info is provided in OpenCore making troubleshooting much more difficult.
+* **DEBUG**：可以很好地帮助调试启动问题，但是也会加入一些明显的启动延迟时间（例如：进入引导菜单之前的 3-5 秒）。安装后可以轻松的切换到 RELEASE 版本
+* **RELEASE**：更短的启动时间，但是实际上没有 OpenCore 提供的实用的 DEBUG 信息，所以进行故障排除会变得更难。
 
-And once downloaded, place the EFI folder(from OpenCorePkg) on the root of your EFI partition:
+并且，当你下载好以后，将 EFI 文件夹（来自 OpenCorePkg）放置到你的 EFI 分区的根目录下：
 
 ![](../images/installer-guide/opencore-efi-md/efi-moved.png)
 
-**Note**:
+**注意**：
 
-* **Windows users:** you'll want to place the EFI folder on the root of the USB drive you made earlier
-* **Linux users:** This is the `OPENCORE` partition we created earlier
-  * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
+* **Windows 用户：**您需要将 EFI 文件夹放在您之前制作的 USB 驱动器的根目录下
+* **Linux 用户：**这就是我们之前创建的 `OPENCORE` 分区
+  * 注意，方法 1 只创建了 1 个分区，但是方法 2 创建了 2 个分区
 
-Now lets open up our EFI folder and see what's inside:
+现在打开我们的 EFI 文件夹然后看看里面有些什么：
 
-![base EFI folder](../images/installer-guide/opencore-efi-md/base-efi.png)
+![基本的 EFI 文件夹](../images/installer-guide/opencore-efi-md/base-efi.png)
 
-Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
+现在你要注意到是，`Drivers` 和 `Tools` 文件夹中有一些文件，我们大多数情况下不需要这些：
 
-* **Remove from Drivers:**
+* **从 Drivers 文件夹删除：**
   * AudioDxe.efi
-    * Unrelated to Audio support in macOS
+    * 与 macOS 中的音频支持没有关系
   * CrScreenshotDxe.efi
-    * Used for taking screenshots in UEFI, not needed by us
+    * 用于在 UEFI 中创建截图，我们不需要
   * OpenUsbKbDxe.efi
-    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+    * 用于在**经典系统上运行 DuetPkg** 的 OpenCore 引导菜单，[不推荐，并且在 Ivy Bridge 和更新的平台上甚至是有害的](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
   * UsbMouseDxe.efi
-    * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
+    * 和 OpenUsbKbDxe 一样，应当只有使用 DuetPkg 的经典系统才需要
   * NvmExpressDxe.efi
-    * Used for Haswell and older when no NVMe driver is built into the firmware
+    * 用于 NVMe 驱动没有内建于固件中的 Haswell 和更旧的平台
   * XhciDxe.efi
-    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
-    * Only needed if you're using a USB 3.0 expansion card in an older machine
+    * 用于 XHCI 驱动没有内建于固件中的 Sandy Bridge 和更旧的平台
+    * 只有当你在一台较旧的设备上使用一个 USB 3.0 扩展卡时才需要
   * HiiDatabase.efi
-    * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
-    * Not required for booting
+    * 用于在 Sandy Bridge 和更旧的平台上修复例如 OpenShell.efi 的图形界面支持
+    * 启动时不需要
   * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
+    * 这是 OpenCore 的可选图形界面，我们将会在[安装后指南](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html)中认真讨论如何设置它，所以现在先删除它
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * Pretty obvious when you need this, USB keyboard and mouse users don't need it
-    * Reminder: PS2 ≠ USB
+    * 明显能知道你什么时候需要它，USB 键鼠的用户不需要它
+    * 记住：PS2 ≠ USB
 
-* **Remove everything from Tools:**
-  * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
+* **从 Tools 文件夹删除所有文件：**
+  * 很多人都会把它们全部保留，但我建议只保留 OpenShell.efi 用于故障排除
 
-A cleaned up EFI:
+一份清理后的 EFI：
 
-![Clean EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
+![整洁的 EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
 
-Now you can place **your** necessary firmware drivers(.efi) into the _Drivers_ folder and Kexts/ACPI into their respective folders. See [Gathering Files](../ktext.md) for more info on which files you should be using.
+现在你可以放置**你的**必需的固件驱动到（.efi）_Drivers_ 文件夹中，还有内核扩展/ACPI 也放置到它们各自的文件夹中。查看[收集文件](../ktext.md)以获得关于你需要使用哪些文件的更多信息。
 
-* Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
+* 请注意，Clover 的 UEFI 驱动不支持 OpenCore！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[从 Clover 的固件驱动转换到 OpenCore 的固件驱动](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
 
-Here's what a populated EFI ***can*** look like (yours will be different):
+这是一份添加好文件的 EFI ***可能***的样子（你的也许不一样）：
 
-![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
+![添加了文件的 EFI 文件夹](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
-**Reminder**:
+**记住**：
 
-* SSDTs and custom DSDTs(`.aml`) go in ACPI folder
-* Kexts(`.kext`) go in Kexts folder
-* Firmware drivers(`.efi`) go in the Drivers folder
+* SSDT 和自定义的 DSDT（`.aml`）放入 ACPI 文件夹
+* 内核扩展（`.kext`）放入 Kexts 文件夹 
+* 固件驱动（`.efi`）放入 Drivers 文件夹
 
-# Now with all this done, head to [Gathering Files](../ktext.md) to get the needed kexts and firmware drivers
+# 现在所有事项都已完成，跳转到[收集文件](../ktext.md)以获得需要的内核扩展和固件驱动

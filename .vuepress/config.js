@@ -81,7 +81,7 @@ module.exports = {
                 link: 'https://dortania.github.io/OpenCore-Post-Install/'
             },
             {
-                text: 'GPU 买家指南',
+                text: '显卡买家指南',
                 link: 'https://dortania.github.io/GPU-Buyers-Guide/'
             },
             {
@@ -229,7 +229,7 @@ module.exports = {
             children: [
                 ['https://dortania.github.io/OpenCore-Post-Install/', '安装后指南'],
                 {
-                    title: 'Universal',
+                    title: '通用',
                     collapsable: true,
                     sidebarDepth: 1,
                     children: [

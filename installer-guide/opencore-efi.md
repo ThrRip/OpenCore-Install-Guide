@@ -2,7 +2,7 @@
 
 * 支持的版本：0.6.4
 
-你需要获取在 [OpenCorePkg 的发布](https://github.com/acidanthera/OpenCorePkg/releases/) 中获取 EFI 文件夹以配置 OpenCore 的目录结构。注意，它将会在 IA32 或 X64 目录下，分别用于前期的 32 位硬件和后期的 64 位硬件：
+你需要获取在 [OpenCorePkg 的发布](https://github.com/acidanthera/OpenCorePkg/releases/)中获取 EFI 文件夹以配置 OpenCore 的目录结构。注意，它将会在 IA32 或 X64 目录下，分别用于前期的 32 位硬件和后期的 64 位硬件：
 
 ![](../images/installer-guide/opencore-efi-md/ia32-x64.png)
 

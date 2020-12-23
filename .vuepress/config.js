@@ -64,7 +64,7 @@ module.exports = {
         repo: 'https://github.com/ThrRip/OpenCore-Install-Guide',
         editLinks: true,
         editLinkText: '帮助我们改进此页面！',
-        logo: 'homepage.png',
+        logo: '/homepage.png',
         nav: [{
             text: 'Dortania 指南系列 - 由 ThrRip 翻译',
             ariaLabel: '语言菜单',

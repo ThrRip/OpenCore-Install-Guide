@@ -61,7 +61,7 @@
 
 * 请注意， OpenCore 不支持 Clover 的 UEFI 驱动！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[将 Clover 的固件驱动转换到 OpenCore 的固件驱动](https://github.com/ThrRip/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
 
-这是一份添加好文件的 EFI ***可能***的样式（你的会不一样）：
+这是一份添加好文件的 EFI ***可能*** 的样式（你的会不一样）：
 
 ![添加了文件的 EFI 文件夹](../images/installer-guide/opencore-efi-md/populated-efi.png)
 

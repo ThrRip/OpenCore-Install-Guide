@@ -65,10 +65,10 @@
 
 ![添加了文件的 EFI 文件夹](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
-**记住**：
+**提醒**：
 
 * SSDT 和自定义的 DSDT（`.aml`）放入 ACPI 文件夹
 * 内核扩展（`.kext`）放入 Kexts 文件夹 
 * 固件驱动（`.efi`）放入 Drivers 文件夹
 
-# 现在所有事项都已完成，跳转到[收集文件](../ktext.md)以获得需要的内核扩展和固件驱动
+# 现在所有事项都已完成，跳转到[收集文件](../ktext.md)以获取必需的内核扩展和固件驱动

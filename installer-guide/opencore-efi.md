@@ -51,17 +51,17 @@
     * 提醒：PS2 ≠ USB
 
 * **从 Tools 文件夹删除所有文件：**
-  * 很多人都会把它们全部保留，但我建议只保留 OpenShell.efi 用于故障排除
+  * 很多人都会把它们列举出来，但我推荐保留 OpenShell.efi 用于故障排除
 
 一份清理后的 EFI：
 
 ![整洁的 EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
 
-现在你可以放置**你的**必需的固件驱动到（.efi）_Drivers_ 文件夹中，还有内核扩展/ACPI 也放置到它们各自的文件夹中。查看[收集文件](../ktext.md)以获得关于你需要使用哪些文件的更多信息。
+现在你可以放置**你的**必需的固件驱动（.efi）到_Drivers_ 文件夹中，还有内核扩展/ACPI 也放置到它们各自的文件夹中。查看[收集文件](../ktext.md)以获得关于你需要使用哪些文件的更多信息。
 
-* 请注意，Clover 的 UEFI 驱动不支持 OpenCore！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[从 Clover 的固件驱动转换到 OpenCore 的固件驱动](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
+* 请注意， OpenCore 不支持 Clover 的 UEFI 驱！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[Clove 固件驱动程序转换](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
 
-这是一份添加好文件的 EFI ***可能***的样子（你的也许不一样）：
+这是一份添加好文件的 EFI 可能的样子（你的会不一样）：
 
 ![添加了文件的 EFI 文件夹](../images/installer-guide/opencore-efi-md/populated-efi.png)
 

@@ -11,7 +11,7 @@
 * **DEBUG**：可以很好地帮助调试启动问题，不过会增加一些明显的延迟启动时间（例如：进入引导菜单之前的 3-5 秒）。一旦安装好，你可以轻松的切换到 RELEASE 版本
 * **RELEASE**：启动时间更快，但是事实上 OpenCore 没有提供有用的 DEBUG 信息，所以进行故障排除会变得更加困难。
 
-一旦你下载好以后，将 EFI 文件夹（来自 OpenCorePkg）放置到你的 EFI 分区的根目录下：
+一旦你下载好，将 EFI 文件夹（来自 OpenCorePkg）放置到你的 EFI 分区的根目录下：
 
 ![](../images/installer-guide/opencore-efi-md/efi-moved.png)
 
@@ -25,7 +25,7 @@
 
 ![基本的 EFI 文件夹](../images/installer-guide/opencore-efi-md/base-efi.png)
 
-现在你会注意，它在`Drivers` 和 `Tools` 文件夹中有一些文件，我们大多数情况下不需要这些：
+现在你会注意到，它在`Drivers` 和 `Tools` 文件夹中有一些文件，我们大多数情况下不需要这些：
 
 * **从 Drivers 文件夹删除：**
   * AudioDxe.efi

@@ -47,8 +47,8 @@
   * OpenCanopy.efi
     * 这是 OpenCore 的可选图形界面，我们将在[安装后指南](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html)中讨论如何设置它，所以现在先删除它
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * 十分明显能知道你什么时候需要它，USB 键鼠的用户不需要它
-    * 记住：PS2 ≠ USB
+    * 十分明显你知道什么时候需要它，USB 键盘和鼠标用户不需要它
+    * 提醒：PS2 ≠ USB
 
 * **从 Tools 文件夹删除所有文件：**
   * 很多人都会把它们全部保留，但我建议只保留 OpenShell.efi 用于故障排除

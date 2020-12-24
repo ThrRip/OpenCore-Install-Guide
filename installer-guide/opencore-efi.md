@@ -8,7 +8,7 @@
 
 关于 DEBUG 与 RELEASE 版本：
 
-* **DEBUG**：可以很好地帮助调试启动问题，不过会增加一些明显的延迟启动时间（例如：进入引导菜单之前的 3-5 秒）。一旦安装好，你可以轻松的切换到 RELEASE 版本
+* **DEBUG**：可以很好地帮助调试启动问题，不过会增加一些明显的延迟启动时间（例如：进入引导菜单之前的 3-5 秒）。安装好系统以后，你可以轻松的切换到 RELEASE 版本
 * **RELEASE**：启动时间更快，但是事实上 OpenCore 没有提供有用的 DEBUG 信息，所以进行故障排除会变得更加困难。
 
 一旦你下载好，将 EFI 文件夹（来自 OpenCorePkg）放置到你的 EFI 分区的根目录下：
@@ -25,7 +25,7 @@
 
 ![基本的 EFI 文件夹](../images/installer-guide/opencore-efi-md/base-efi.png)
 
-现在你会注意到，它在`Drivers` 和 `Tools` 文件夹中有一些文件，我们大多数情况下不需要这些：
+现在你会注意到，在 `Drivers` 和 `Tools` 文件夹中有一些文件，我们大多数情况下不需要这些：
 
 * **从 Drivers 文件夹删除：**
   * AudioDxe.efi
@@ -37,17 +37,17 @@
   * UsbMouseDxe.efi
     * 和 OpenUsbKbDxe 一样，应当只有使用 DuetPkg 的经典系统才需要
   * NvmExpressDxe.efi
-    * 当 NVMe 驱动程序没有内建在固件中时，用于 Haswell 和更旧的平台
+    * 用于 NVMe 驱动没有内建于固件中的 Haswell 和更旧的平台
   * XhciDxe.efi
-    * 当 XHCI 驱动程序没有内建在固件中时，用于 Sandy Bridge 和更旧的平台
-    * 仅在你在一台较旧的设备上使用一个 USB 3.0 扩展卡情况下才需要
+    * 用于 XHCI 驱动没有内建于固件中的 Sandy Bridge 和更旧的平台
+    * 仅当你在一台较旧的设备上使用一个 USB 3.0 扩展卡时才需要
   * HiiDatabase.efi
-    * 用于修复图形界面支持，用于Sandy Bridge 和更旧的平台上，例如 OpenShell.efi
-    * 启动时不需要
+    * 用于在 Sandy Bridge 和更旧的平台上修复 OpenShell.efi 等的图形界面支持
+    * 启动系统时不需要
   * OpenCanopy.efi
     * 这是 OpenCore 的可选图形界面，我们将在[安装后指南](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html)中讨论如何设置它，所以现在先删除它
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * 十分明显你知道什么时候需要它，USB 键盘和鼠标用户不需要它
+    * 很明显，你知道什么时候需要它，USB 键盘和鼠标的用户不需要它
     * 提醒：PS2 ≠ USB
 
 * **从 Tools 文件夹删除所有文件：**
@@ -57,11 +57,11 @@
 
 ![整洁的 EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
 
-现在你可以放置**你的**必需的固件驱动（.efi）到_Drivers_ 文件夹中，还有内核扩展/ACPI 也放置到它们各自的文件夹中。查看[收集文件](../ktext.md)以获得关于你需要使用哪些文件的更多信息。
+现在你可以放置**你的**必需的固件驱动（.efi）到 _Drivers_ 文件夹中，还有内核扩展/ACPI 也放置到它们各自的文件夹中。查看[收集文件](../ktext.md)以获得关于你需要使用哪些文件的更多信息。
 
-* 请注意， OpenCore 不支持 Clover 的 UEFI 驱！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[Clove 固件驱动程序转换](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
+* 请注意， OpenCore 不支持 Clover 的 UEFI 驱动！（EmuVariableUEFI、AptioMemoryFix、OsxAptioFixDrv 等等）。请查看[将 Clover 的固件驱动转换到 OpenCore 的固件驱动](https://github.com/ThrRip/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md)以获得更多关于被支持的驱动以及合并到 OpenCore 的驱动的信息。
 
-这是一份添加好文件的 EFI 可能的样子（你的会不一样）：
+这是一份添加好文件的 EFI ***可能***的样式（你的会不一样）：
 
 ![添加了文件的 EFI 文件夹](../images/installer-guide/opencore-efi-md/populated-efi.png)
 

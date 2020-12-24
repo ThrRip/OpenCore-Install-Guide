@@ -64,7 +64,7 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 * **注意**：取决于操作系统，你会得到 BaseSystem 或 RecoveryImage 文件。他们都有同样的作用，所以当我们提到 BaseSystem 时，相同的内容也适用于 RecoveryImage
 
-* **macOS 11 Big Sur 注意事项**：因为这个操作系统太新了，依然有一些确定的问题需要系统来解决。对于更多的信息，参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
+* **macOS 11 Big Sur 注意事项**：由于这个操作系统是全新的，某些问题依旧需要系统来解决。更多信息请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
   * 对于第一次使用的用户，我们推荐 10.15 Catalina
 * **Nvidia 显卡注意事项**：记得确认你的硬件是否支持较新的操作系统，请参阅[硬件限制](../macos-limits.md)
 

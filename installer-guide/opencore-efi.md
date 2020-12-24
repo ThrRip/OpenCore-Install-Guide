@@ -45,9 +45,9 @@
     * 用于修复图形界面支持，用于Sandy Bridge 和更旧的平台上，例如 OpenShell.efi
     * 启动时不需要
   * OpenCanopy.efi
-    * 这是 OpenCore 的可选图形界面，我们将会在[安装后指南](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html)中认真讨论如何设置它，所以现在先删除它
+    * 这是 OpenCore 的可选图形界面，我们将在[安装后指南](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html)中讨论如何设置它，所以现在先删除它
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * 明显能知道你什么时候需要它，USB 键鼠的用户不需要它
+    * 十分明显能知道你什么时候需要它，USB 键鼠的用户不需要它
     * 记住：PS2 ≠ USB
 
 * **从 Tools 文件夹删除所有文件：**

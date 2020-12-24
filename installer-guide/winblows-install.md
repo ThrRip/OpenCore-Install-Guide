@@ -63,7 +63,7 @@ python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-* **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些问题依旧需要系统来解决。更多信息请参阅此处：[OpenCore 和 macOS 11， Big Sur](../extras/big-sur/README.md)
+* **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些问题依旧需要系统来解决。更多信息请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)
   * 对于第一次使用的用户，我们推荐 10.15, Catalina
 * **Nvidia 显卡注意事项**：记得确认你的硬件是否支持刚出现的操作系统，请参阅[硬件限制](../macos-limits.md)
 

@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.4 |
+| Supported OpenCore version | 0.6.5 |
 | Initial macOS Support | OS X 10.6.7, Snow Leopard |
 | Note 1 | Sandy Bridge's iGPU is only officially supported up-to macOS 10.13 |
 | Note 2 | Most Sandy bridge boards do not support UEFI |
@@ -41,7 +41,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -685,9 +685,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 :::
 
 ::: details More in-depth Info
-
-* **DeduplicateBootOrder**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems

@@ -1,6 +1,6 @@
 # Converting from Clover to OpenCore
 
-* Supported version: 0.6.4
+* Supported version: 0.6.5
 
 So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.
 
@@ -68,6 +68,8 @@ In you config.plist:
 * `Misc -> Security -> AllowNvramReset -> True`
 
 And on your initial boot of OpenCore, select `Reset NVRAM` boot option. This will wipe everything and reboot the system when finished.
+
+* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
 
 ## Optional: Avoiding SMBIOS injection into other OSes
 

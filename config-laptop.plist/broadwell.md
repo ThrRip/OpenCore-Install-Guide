@@ -2,7 +2,7 @@
 
 | 支持 | 版本 |
 | :--- | :--- |
-| 支持的 OpenCore 版本 | 0.6.3 |
+| 支持的 OpenCore 版本 | 0.6.4 |
 | 初始 macOS 支持版本 | OS X 10.10, Yosemite |
 
 ## 起点
@@ -661,9 +661,6 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 :::
 
 ::: details 更多深层的信息
-
-* **DeduplicateBootOrder**: YES
-  * 需要从 `OC_VENDOR_VARIABLE_GUID` 到 `EFI_GLOBAL_VARIABLE_GUID` 的预修复引导变量的备选方案。用于修复引导选项。
 
 * **IgnoreInvalidFlexRatio**: YES
   * 当 MSR_FLEX_RATIO (0x194) 在 BIOS 中不能被关闭时用于修复，所有基于早期 Skylake 的系统都需要此项

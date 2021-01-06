@@ -7,7 +7,7 @@ actionLink: prerequisites.md
 
 meta:
 - name: description
-  content: 当前支持版本 0.6.4
+  content: 当前支持版本 0.6.5
 ---
 
 # 什么是 OpenCore？此指南适合谁？

@@ -61,6 +61,9 @@ python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 # 最新版本
 # 例如：Big Sur（11）
 python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+
+# 注意，Apple 暂时从恢复模式目录中删除了 Big Sur
+# 希望 Apple 能在收假后解决这个问题
 ```
 
 * **macOS 11, Big Sur 注意事项**：由于这个操作系统是全新的，某些问题依旧需要系统来解决。更多信息请参阅此处：[OpenCore 和 macOS 11: Big Sur](../extras/big-sur/README.md)

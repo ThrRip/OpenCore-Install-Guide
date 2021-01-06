@@ -1,6 +1,6 @@
 # Kernel Issues
 
-* Supported version: 0.6.4
+* Supported version: 0.6.5
 
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 
@@ -54,10 +54,11 @@ The main culprits to watch for in the Booter section are:
 * **SetupVirtualMap**
   * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
     * Mainly Z390 and older require this quirk enabled
-    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
+    * However, certain firmwares(mainly 2020+) do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series(B460, H470, Z490, etc)
       * AMD's B550 and A520(Latest BIOS on X570 are also included now)
+        * Many B450 and X470 boards with late 2020 BIOS updates are also included
       * AMD's TRx40
       * VMs like QEMU
       * X299 2020+ BIOS updates(This applies to other X299 boards on the latest BIOS that released either in late 2019 or 2020+)
@@ -384,7 +385,9 @@ The main places to check:
 * **RTC Missing**:
   * Commonly found on Intel's 300+ series(ie. Z370, Z490), caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
   * X99 and X299 have broken RTC devices, so will need to be fixed with SSDT-RTC0-RANGE. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating said file
-  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
+  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it
+    * Known affected models: `HP 15-DA0014dx`, `HP 250 G6`
+    * For users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with. See getting started with ACPI for more details, as well as below image example:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 

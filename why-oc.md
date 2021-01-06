@@ -140,6 +140,8 @@ OpenCore 的版本号并不代表项目的质量。相反，这更像是一种�
 
 对于 Clover 用户的特别注意事项：使用 OpenCore 安装时，请重置您的 NVRAM。许多 Clover 变量可能与 OpenCore 和 macOS 冲突。
 
+* 注意：已经发现 Thinkpad 笔记本电脑在 OpenCore 中进行 NVRAM 重置后会变砖，在这些机器上我们推荐通过升级 BIOS 来重置 NVRAM。
+
 ## OpenCore 是否只支持限定版本的 macOS
 
 从 OpenCore 0.6.2 开始，您可以启动所有 Intel 版本的 macOS，一直到 OS X 10.4！然而，正确的支持取决于您的硬件，所以请您自己验证：[硬件限制](macos-limits.md)

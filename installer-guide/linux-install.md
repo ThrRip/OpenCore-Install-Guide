@@ -56,6 +56,9 @@ python ./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 # 最新版本
 # 例如：Big Sur（11）
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+
+# 注意，Apple 暂时从恢复模式目录中删除了 Big Sur
+# 希望 Apple 能在收假后解决这个问题
 ```
 
 在这里，在终端中运行其中一组命令，完成时你将会得到类似这样的输出：

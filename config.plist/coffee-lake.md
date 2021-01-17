@@ -1,28 +1,30 @@
 # Desktop Coffee Lake
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.5 |
-| Initial macOS Support | macOS 10.13, High Sierra |
+| 支持的 OpenCore 版本 | 0.6.5 |
+| 初始 macOS 支持 | macOS 10.13, High Sierra |
 
-## Starting Point
+## 开始之前
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+制作一个config. plist 可能看起来很难， 然而并不是这样的，它只是需要一些时间，本指南将告诉你如何配置这一切。这也意味着，如果您有问题，请查看配置设置以确保它们正确。使用 OpenCore 需要注意的主要方面：
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **必须定义所有属性**, 没有默认值的 OpenCore 将无法生效，因此 **除非明确告诉节点，否则不要删除节点**. 如果指南未提及该选项，请保留其默认值。
+* **Sample.plist 不能直接使用**, 你需要将其更改为适合自己的之后，再将其配置到系统中
+* **不要使用任何快速配置工具**, 这些第三方的快速配置工具很少能尊重open core的配置，甚至有一些还会添加clover的属性值和无用的属性值。!
 
-Now with all that, a quick reminder of the tools we need
+了解这些之后，我们需要一些辅助工具：
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用列表编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成我们的smbios数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 请参阅上一节有关如何获取: [config.plist 安装程序](../config.plist/README.md)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+**在设置 OpenCore 之前，请先阅读本指南，并确保按照此指南正确设置。请注意，图像并不总是最新的，所以请阅读它们下面的文本，如果文本中未提及的内容，请保留为默认值。
+
+#**
 
 ## ACPI
 
@@ -30,79 +32,79 @@ Now with all that, a quick reminder of the tools we need
 
 ### Add
 
-::: tip Info
+::: Tips 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+在这里，您将为您的系统添加SSDTs, 这些对于 **启动 macOS** 是至关重要的，并且他们还具有许多的用途，比如 [USB 映射](https://dortania.github.io/OpenCore-Post-Install/usb/), [禁用不受支持的 GPUs](../extras/spoof.md)等诸如此类的功能， 对于我们的系统**他是需要可以启动的**。 指南在这里可以找到: [**开始使用 ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+对我们来说，我们需要几个 SSDT 来恢复 Clover 提供的功能:
 
-| Required_SSDTs | Description |
+| SSDTs名称 | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
-| **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. See [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 允许 Haswell 和更新的设备使用本机的 CPU 电源管理，请参阅 [开始使用 ACPI 指南](https://dortania.github.io/Getting-Started-With-ACPI/) 了解更多详情。 |
+| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | 修复了嵌入式控制器和 USB 电源，请参阅 [开始使用 ACPI 指南](https://dortania.github.io/Getting-Started-With-ACPI/) 了解更多详情。 |
+| **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | 这是 [300 系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), 这些板可防止系统启动 macOS。另一种选择是 [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) f当 Awac Ssdt 由于缺少旧版 Rtc 时钟而不兼容时， 请检查您是否需要它， 以及使用哪个时钟， 请参阅 [开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) 页面。 |
+| **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | 因此，真正的 300 系列主板（非 Z370）不会在 ACPI 中声明 FW 芯片为 MMIO，因此 XNU 忽略 UEFI 内存映射声明的 MMIO 区域。此 SSDT 带回了 NVRAM 支持。请查看 [开始使用ACPI指南](https://dortania.github.io/Getting-Started-With-ACPI/) 了解更多详情。 |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+请注意， **不应该** 添加生成的 `DSDT.aml` 在这里, 它已经在你的固件中。 因此，如果存在。请从`config.plist`中删除您添加到在EFI/OC/ACPI中的文件。
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+对于那些想要更深入了解或者更加深入的编辑您的Dsdt,以及如何使用并编译它们，请参阅 [**开始使用 ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **页面。** 已经编译好的SSDT具有一个 **.aml** 扩展名(后缀格式) 将其放入文件夹 `EFI/OC/ACPI` **文件夹** 下，并且必须要在 `ACPI -> Add` 中指定。
 
 :::
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this.
+这会阻止某些 ACPI 表加载，因为我们可以忽略这一点。
 
 ### Patch
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+本节允许我们通过 OpenCore 动态修改 ACPI 的部分（DSDT、SSDT 等）。对我们来说，我们的修补程序由我们的 SSDT 处理。这是一个更干净的解决方案， 因为这将使我们能够启动 Windows 和其他操作系统与 OpenCore
 
 ### Quirks
 
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
+与 ACPI 相关的设置，请将此处的所有内容保留为默认值，因为这里的Quirks对于我们没有作用。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/hedt-booter.png)
 
-This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
+本节专门介绍与 boot. efi 修补有关与 Openruntime 相关的quirks， 这是 AptiomemoryFix. efi 的替代品
 
 ### MmioWhitelist
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
+本节允许设备传递到通常被忽略的 macOS，对于我们来说，我们可以忽略本节。
 
 ### Quirks
 
-::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+::: Tips 信息
+与 boot.efi 修补和固件修复相关的设置，对于我们来说，我们需要更改以下内容：
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | DevirtualiseMmio | YES | |
 | EnableWriteUnprotector | NO | |
-| ProtectUefiServices | YES | Needed on Z390 system |
+| ProtectUefiServices | YES | Z390 系列需要 |
 | RebuildAppleMemoryMap | YES | |
 | SyncRuntimePermissions | YES | |
 :::
 
-::: details More in-depth Info
+::: 更加深入的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复 UEFI 运行时服务，如日期、时间、NVRAM、电源控制等
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+  * 减少被盗的内存占用，扩展 `slide=N` 值的选项，非常有助于修复Z390上的内存分配问题。在冰湖和Z390咖啡湖上也需要 `ProtectUefiServices` 
 * **EnableWriteUnprotector**: NO
-  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
-  * However, due to issues with OEMs not using the latest EDKII builds you may find that the above combo will result in early boot failures. This is due to missing the `MEMORY_ATTRIBUTE_TABLE` and such we recommend disabling RebuildAppleMemoryMap and enabling EnableWriteUnprotector. More info on this is covered in the [troubleshooting section](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+  * 这个 quirk 和 RebuildAppleMemoryMap 通常冲突，建议在较新的平台上启用后者并禁用此条目。
+  * 然而，由于oem不使用最新EDKII构建的问题，您可能会发现上述组合将导致早期引导失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE` 因此我们建议禁用 RebuildAppleMemoryMap，启用EnableWriteUnprotector。 更多的信息在 [疑难解答部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)中有介绍。
 * **ProtectUefiServices**: NO
-  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
-  * If on Z390, **enable this quirk**
+  * 保护 UEFI 服务不被固件覆盖，主要与虚拟机、Icelake 和 Z390 系列相关'
+  * 如果在 Z390 上，请 **启用这个 quirk**
 * **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+  * 生成与 macOS 兼容的内存映射， 可能会中断某些笔记本电脑 OEM 固件， 所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * 复 SetVirtual 地址对虚拟地址的呼叫， 不应该需要在 Skylake 和更新。某些固件（如千兆字节）可能仍然需要它，如果没有这个，内核会死机
 * **SyncRuntimePermissions**: YES
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for RebuildAppleMemoryMap users
+  * 修复了与 MAT 表的对齐，并且需要使用 MAT 表启动 Windows 和 Linux，也建议用于 macOS。主要与重建苹果记忆地图用户相关
 
 :::
 
@@ -112,27 +114,26 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 ### Add
 
-Sets device properties from a map.
+从地图中设置设备属性。
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties. **If you have a `-F` series CPU, you can ignore this section as you do not have an iGPU.**
+这个部分是通过 WhateverGreen设置的 [Framebuffer修补指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) 用于设置 iGPU 的属性. **如果你有一个 `-F` 后缀的 CPU, 不用看这一部分，因为您没有IGPU(集成显卡).**
 
-`AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
-
+`AAPL,ig-platform-id` 是 macOS 用于确定 iGPU 驱动程序如何与我们的系统交互，两个值之间选择如下：
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| 07009B3E | Used when the Desktop iGPU is used to drive a display |
-| 00009B3E | Alternative to 07009B3E if it doesn't work |
-| 0300913E | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| 07009B3E | 当桌面 iGPU 用于驱动显示器时使用 |
+| 00009B3E | 如果 07009B3E 不工作，可替代 |
+| 0300913E | 当桌面 iGPU 仅用于计算任务且不驱动显示器时使用 |
 
-* **Note**: With macOS 10.15.5 and newer, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
+* **注意**: 在macOS 10.15.5和更新版本中，使用`07009B3E`,黑屏似乎有很多问题，如果你得到类似的问题，尝试切换到`00009B3E`
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
+我们还增加了两个属性: `framebuffer-patch-enable` 和 `framebuffer-stolenmem`。 第一个可以用过 WhateverGreen.kext 进行补丁， 第二个则将最小窃取内存设置为19MB。这通常是不必要的，因为这可以在BIOS中配置(推荐64MB)，但在不可用时是必需的。
 
-* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
+* **注意**: Headless framebuffers(dGPU（独立显卡）是显示出来的) 不需要 `framebuffer-patch-enable` 和 `framebuffer-stolenmem`
 
-For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/) page
+如果用户在详细介绍了B360, B365, H310, H370, Z390后出现黑屏问题，请参见 [BusID iGPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/) 页面
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -140,7 +141,7 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
 
-(This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
+(这是一个桌面UHD 630没有dGPU（独立显卡），没有BIOS选项的iGPU内存的例子)
 
 :::
 
@@ -148,16 +149,16 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用 AppleALC 音频注入， 您需要自己研究主板的编解码器，并匹配其AppleALC的布局. [AppleALC 支持的编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 您可以直接删除此属性， 因为它目前对我们来说不是必须使用的
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用`alcid=xxx`参数来引导系统， `alcid` 将覆盖存在的所有其它的布局id。有关此问题的更多信息，请参数 [安装后 页面](https://dortania.github.io/OpenCore-Post-Install/)
 
 :::
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this
+从地图中删除设备属性，对于我们，我们可以忽略这一点
 
 ## Kernel
 

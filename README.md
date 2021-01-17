@@ -19,10 +19,10 @@ OpenCore 就是我们所说的“引导加载程序”——它是一些很复�
 * 在您的 X86 架构的 PC 上安装 macOS
 * 告诉您怎样使您的黑苹果（Hackintosh）正常运行
 
-即便如此，你可能仍然需要查阅、学习，甚至使用百度和 Google，这并不是一个一键安装的软件包。
+就因为如此，你可能仍然需要查阅、学习，甚至使用百度和 Google，这并不是一个一键安装的软件包。
 
 请记住，OpenCore 现在依然较新而且还在测试阶段。与此同时，可以逐渐证明它在很多——几乎所有方面都比 Clover 好，OpenCore 依然在经常更新，所以很多配置经常改变（例如新的选项取代了旧的选项）。
 
 最后，遇到问题的人可以访问 [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) 和 [r/Hackintosh Discord](https://discord.gg/u8V7N5C) 以得到更多帮助。
 
-**本指南由 [ThrRip](https://github.com/ThrRip) 翻译，由 [ilikemacOS](https://github.com/ilikemacOS) 校对 ，由 [sumingyd](https://github.com/sumingyd) 部分翻译，- 并非官方 OpenCore安装指南**
+**本指南由 [ThrRip](https://github.com/ThrRip) 翻译，由 [ilikemacOS](https://github.com/ilikemacOS)、[sumingyd](https://github.com/sumingyd) 进行部分翻译和校对 - 并非官方 OpenCore安装指南**

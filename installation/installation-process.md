@@ -1,59 +1,59 @@
-# Installation Process
+# 安装过程
 
-Now that you've finished setting up OpenCore, you're finally able to boot, main things to keep in mind:
+现在，您已完成 OpenCore 的设置，您终于能够启动，但是有一些主要的事情需要记住：
 
-* Enable BIOS settings optimal for macOS
-* Read up on the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) and look at [Multiboot](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#prerequisites) specific quirks
-  * Mainly relevant for those running a single drive for multiple OSes
-* And a copy of the [General Troubleshooting](../troubleshooting/troubleshooting.md) page
-* Read up on the [macOS Boot Process](../troubleshooting/boot.md)
-  * Can help first time installers better understand where they may be getting stuck
-* And a ton of patience
+* 对于macOS启用最佳的 BIOS 设置 
+* 阅读 [多引导指南](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) ，看一看 [Multiboot](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#prerequisites) 特定的 quirks
+  * 主要和多个系统装在一个硬盘上的人相关
+* 和 [一般故障处理](../troubleshooting/troubleshooting.md) 页面
+* 阅读 [macOS 启动过程](../troubleshooting/boot.md)
+  * 可以帮助第一次安装的人更好地理解他们可能被卡住的地方
+* 还有极大的耐心
 
-## Double checking your work
+## 仔细检查您的工作
 
-One last thing we should go over before booting is how your EFI is setup:
+在启动之前，我们应关注的最后一件事是您的 EFI 是如何设置的：
 
-Good EFI          |  Bad EFI
+好的 EFI          |  坏的 EFI
 :-------------------------:|:-------------------------:
 ![](../images/installation/install-md/good-efi.png)  |  ![](../images/installation/install-md/bad-efi.png)
-EFI folder found on EFI partition | EFI folder missing
-ACPI Files are compiled(.aml) | ACPI Files are not compiled(.dsl)
-DSDT is not included |* DSDT is included
-Removed unneeded Drivers(.efi) | Leaves default Drivers
-Removed unneeded Tools(.efi) | Leaves default Tools
-All files in the Kexts folder end in .kext | Includes source code and folders
-config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
-Only uses kexts that are needed | Downloaded every kext listed
+在 EFI 分区上找的到 EFI 文件夹 | 没有 EFI 文件夹
+编译好的 ACPI 文件（.aml） | 未编译的 ACPI 文件（.dsl）
+不包括 DSDT |* 包括 DSDT
+已删除不必要的驱动程序（.efi） | 使用默认的驱动程序
+已删除不必要的工具（.efi） | 保留默认工具
+Kexts 文件夹中的所有文件都以 .kext 结束 | 包括源代码和文件夹
+在 EFI/OC 下找的到config.plist | 既不重命名也不将 .plist 放置在正确的位置
+仅使用所需的kexts| 下载了列出的每个kext
 
-And a reminder that slowgeek site is your friend:
+提醒一下， 配置检查网站是一个非常好用的在线工具：
 
-* [**Sanity Checker**](https://opencore.slowgeek.com)
+* [**配置检查器**](https://opencore.slowgeek.com)
 
-## Booting the OpenCore USB
+## 启动OpenCore USB
 
-So you're now ready to finally put the USB stick into your computer and boot off of it. Remember that most laptops and some desktops will still default to the internal drive with Windows, and you'll need to manually select OpenCore in the BIOS boot options. You'll need to check in the user manual or use a bit of google to find out what Fn key accesses the BIOS and boot menu(ie. Esc, F2, F10 or F12)
+所以现在你终于准备好把u盘插入电脑并从它开机了。请记住，大多数笔记本电脑和一些台式机仍然会默认使用Windows的内部驱动器，您需要在BIOS启动选项中手动选择OpenCore。你需要检查用户手册或使用一点谷歌来找出什么Fn键访问BIOS和启动菜单(如。Esc、F2、F10或F12)
 
-Once you boot the USB, you'll likely be greeted to the following boot options:
+一旦你启动USB，你可能会看到以下启动选项:
 
 1. Windows
 2. macOS Base System (External) / Install macOS Catalina (External)
 3. OpenShell.efi
 4. Reset NVRAM
 
-For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
+对我们来说， **选项 2.** 是我们想要的。根据安装程序的制作方式，如果在 Linux 或 Windows 中创建，它可以显示为**"macOS Base System (External)"** 如果在 macOS 中创建，则显示为 **"Install macOS Catalina (External)"**
 
-## macOS Installer
+## macOS 安装程序
 
-So you've finally got the installer booted, got through the verbose and hit the installer! Now that you've gotten this far,  the main things to keep in mind:
+所以，您终于启动了安装程序，完成了冗长的操作并进入安装程序!现在你已经走到这一步了，主要的事情要记住:
 
-* Drives you wish to install macOS on **must** be both of GUID partition Scheme **and** APFS
-  * High Sierra on HDD and all Sierra users will need to use macOS Journaled(HFS+)
-* The drive **must** also have a 200MB partition
-  * By default, macOS will setup freshly formatted drives with 200MB
-  * See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) for more info on partitioning a Windows Drive
+* 要安装macOS的驱动器必须同时具有 **GUID分区方案**和**APFS**
+  * 机械硬盘（HDD）上的High Sierra 和所有的 Sierra 用户需要使用 macOS 日志(HFS+)
+* 这个驱动器也 **必须** 拥有一个 200MB 的分区
+  * 默认情况下，macOS将安装200MB的新格式化驱动器
+  * 参见 [多引导指南](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) 获得有关Windows驱动器分区的更多信息
 
-Once you start the installation, you will want to wait until the system restarts. You will once again want to boot into OpenCore, but rather than selecting your USB installer/recovery - you will want to select the macOS installer on the hard drive to continue installation. You should get an apple logo, and after a few minutes you should get a timer at the bottom saying "x minutes remaining". This may be a good time to get a drink or snack as this will take a while. It may restart a couple more times, but if all goes well, it should finally plop you at the "Setup your Mac screen"
+一旦开始安装，您将需要等待直到系统重新启动。您将再次想要引导到OpenCore，但不是选择您的USB安装程序/恢复-您将想要选择macOS安装程序在硬盘上继续安装。你应该得到一个苹果标志，几分钟后你应该在底部得到一个计时器，上面写着“还有x分钟”。这可能是喝点饮料或吃点零食的好时机，因为这需要一段时间。它可能会重启几次，但如果一切顺利，它最终会弹出“设置你的Mac屏幕”。
 
-You're in! 🎉
-You will want to go through the Post-Installation pages to finish setting up your system.
+完成! 🎉
+您需要浏览安装后页面来完成系统的设置。

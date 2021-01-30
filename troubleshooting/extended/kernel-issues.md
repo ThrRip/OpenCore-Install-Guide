@@ -1,12 +1,12 @@
 # 内核错误
 
-* 支持的 OC 版本： 0.6.5
+* 支持的版本：0.6.5
 
-在首次启动启动 U 盘的**macOS 安装程序**到**出现安装器界面**时候会出现的部分问题
+在初次启动**macOS 安装程序**到**出现安装器界面**时候会出现的部分问题
 
 * [卡在 [EB|#LOG:EXITBS:START]](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
 * [卡在 EndRandomSeed](#%E5%8D%A1%E5%9C%A8-endrandomseed)
-* [在 OpenCore 中选择 macOS 分区 后卡住](#%E5%9C%A8-opencore-%E4%B8%AD%E9%80%89%E6%8B%A9-macos-%E5%88%86%E5%8C%BA%E5%90%8E%E5%8D%A1%E4%BD%8F)
+* [在 OpenCore 中选择 macOS 分区后卡住](#%E5%9C%A8-opencore-%E4%B8%AD%E9%80%89%E6%8B%A9-macos-%E5%88%86%E5%8C%BA%E5%90%8E%E5%8D%A1%E4%BD%8F)
 * [内核崩溃：Invalid frame pointer](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83invalid-frame-pointer)
 * [卡在 [EB|LD:OFS] Err(0xE)](#%E5%90%AF%E5%8A%A8-preboot-%E5%88%86%E5%8C%BA%E6%97%B6%E5%8D%A1%E5%9C%A8-ebldofs-err0xe)
 * [卡在 OCB: LoadImage failed - Security Violation](#%E5%8D%A1%E5%9C%A8-ocb-loadimage-failed-security-violation)
@@ -17,19 +17,19 @@
 * [Couldn't allocate runtime area 错误](#couldnt-allocate-runtime-area-%E9%94%99%E8%AF%AF)
 * [卡在 RTC..., PCI ConfigurationBegins, Previous Shutdown..., HPET, HID: Legacy...](#卡在-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
 * [B550 主板卡在 ACPI Table loading](#b550-%E4%B8%BB%E6%9D%BF%E5%8D%A1%E5%9C%A8-acpi-table-loading)
-* [“Waiting for root device” 和 禁行符号](#waiting-for-root-device-%E5%92%8C%E7%A6%81%E6%AD%A2%E7%AC%A6%E5%8F%B7)
+* [“Waiting for root device”和禁行符号](#waiting-for-root-device-%E5%92%8C%E7%A6%81%E6%AD%A2%E7%AC%A6%E5%8F%B7)
 * [X99 主板在 IOPCIFamily 发生内核崩溃](#kernel-panic-with-iopcifamily-on-x99)
 * [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#%E5%8D%A1%E5%9C%A8-ioconsoleusers-gioscreenlockgiolockstate-3-%E6%88%96%E9%99%84%E8%BF%91)
 * [笔记本花屏问题](#笔记本花屏问题)
-* [Navi 显卡（如：AMD 5700xt）在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+* [采用 Navi 核心的显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [内核崩溃：Cannot perform kext summary](#内核崩溃-cannot-perform-kext-summary)
 * [内核崩溃：AppleIntelMCEReporter](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelmcereporter)
 * [内核崩溃：AppleIntelCPUPowerManagement](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelcpupowermanagement)
-* [笔记本键盘正常但触控板无反应](#笔记本键盘正常但触控板无反应)
+* [笔记本电脑的键盘正常但触控板无法工作](#笔记本的键盘正常但触控板无法工作)
 * [内核崩溃：Invalid frame pointer](#内核崩溃-invalid-frame-pointer)
 * [kextd stall[0]: AppleACPICPU](#%E5%8D%A1%E5%9C%A8-kextd-stall0-appleacpicpu)
 * [内核崩溃：AppleIntelI210Ethernet](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleinteli210ethernet)
-* [Icelake 笔记本上的内核崩溃："Wrong CD Clock Frequency"](#icelake-%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%B8%8A%E7%9A%84%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83wrong-cd-clock-frequency)
+* [Icelake 笔记本上的内核崩溃“Wrong CD Clock Frequency”](#icelake-%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%B8%8A%E7%9A%84%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83wrong-cd-clock-frequency)
 * [卡在 Forcing CS_RUNTIME for entitlement in Big Sur](#%E5%AE%89%E8%A3%85-macos-big-sur-%E6%97%B6%E5%8D%A1%E5%9C%A8-forcing-cs_runtime-for-entitlement)
 * [卡在 ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
 
@@ -39,8 +39,8 @@
 
 * [Booter 配置问题](#booter-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
 * [Kernel 配置问题](#kernel-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
-* [UEFI 配置问题](#uefi-issues)
-* [虚拟机问题](#virtual-machine-issues)
+* [UEFI 配置问题](#uefi-配置问题)
+* [虚拟机问题](#虚拟机问题)
 
 ### Booter 配置问题
 
@@ -48,11 +48,11 @@
 
 * **DevirtualiseMmio**
   * 某些特定的 MMIO 区域仍然需要正常工作，因此您需要在 `Booter -> MmioWhitelist` 中排除这些区域，或者直接禁用这个 Quirk。 详情请参考: [如何使用 DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
-  * 对于 TRx40 用户，请启用这个 Quirk
-  * 对于 X99 用户，因为一些固件会使其失效，所以请禁用这个 Quirk
+  * 对于 TRx40 用户，请启用这个设置项
+  * 对于 X99 用户，因为一些固件会使其失效，所以请禁用这个设置项
 
 * **SetupVirtualMap**
-  * 在大多数固件都需要启用这个 Quirk，如果禁用它很容易会导致内核崩溃, 除了以下情况：
+  * 在大多数固件上都需要启用这个设置项，如果禁用它很容易会导致内核崩溃, 除了以下情况：
     * 主要是 Z390 以及更早的主板需要启用这个开关
     * 然而，某些固件（主要出现在 2020 年后的新产品）与该 Quirk 不兼容，启用这个 Quirk 反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
       * Intel Ice Lake 架构笔记本
@@ -106,9 +106,9 @@ OCABC: MAT support is 1
 * **AppleXcpmExtraMsrs**
   * 可能需要，主要用于奔腾、HEDT 和其他不被 macOS 原生支持的老旧架构.
 
-#### 旧版 Intel 用户
+#### 经典 Intel 用户
 
-对于 macOS Big Sur, 许多固件在确定 CPU 核心数上存在问题，这会导致早期启动错误和内核崩溃。从串口输出中，你可以看到崩溃信息：
+对于 macOS Big Sur, 许多固件在确定 CPU 核心数量上存在问题，这会导致早期启动错误和内核崩溃。从串口输出中，你可以看到崩溃信息：
 
 ```bash
 max_cpus_from_firmware not yet initialized
@@ -119,9 +119,9 @@ max_cpus_from_firmware not yet initialized
 * 启用位于 Booter -> Quirks 的 `AvoidRuntimeDefrag`
   * 对大多数主板固件都有效
 
-但在一些特别的机器如 HP Compaq DC 7900 上，即使启用了这个 Quirk，它们的固件依然会导致内核崩溃。所以我们要强制指定 CPU 核心数。只有在 `AvoidRuntimeDefrag` 失效时才应该使用以下补丁：
+但在一些特别的机器如 HP Compaq DC 7900 上，即使启用了这个设置项，它们的固件依然会导致内核崩溃。所以我们要强制指定 CPU 核心数量。只有在 `AvoidRuntimeDefrag` 失效时才应该使用以下补丁：
 
-::: details Legacy CPU Core patch
+::: details 经典 CPU 核心数量补丁
 
 添加以下补丁（将 B8 04 00 00 00 C3 中的 **04** 更换为你硬件支持的 CPU 线程数
 目）
@@ -143,7 +143,7 @@ max_cpus_from_firmware not yet initialized
 
 :::
 
-### UEFI Issues
+### UEFI 问题
 
 * **ProvideConsoleGop**
   * 这个 Quirk 用于过渡到下一个界面。这起初是 AptioMemoryFix 的一部分，但现在已经合并到 OpenCore，位于 `config.plist -> UEFI-> Output`
@@ -306,7 +306,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 
 ## 卡在 `OCABC: Memory pool allocation failure - Not Found`
 
-这通常是因为没有正确设置 BIOS 设定:
+这通常是由错误的 BIOS 设定导致的:
 
 * 请启用 `Above4GDecoding`
 * 禁用 `CSM` 兼容性模块(某些主板上也可以选择启用 `Windows8.1/10 WHQL` 模式)
@@ -479,26 +479,26 @@ boot-args 中添加 `npci=0x2000`
   * 但在一些笔记本上可能需要被启用
 * 强制 PCIe 3.0 连接速度
 * 如果有核显，检查是否使用了正确的 `ig-platform-id` 和 `device-id`
-  * 桌面端 UHD 630 可能需要使用 `00009B3E` 来代替
+  * 桌面端 UHD630 可能需要使用 `00009B3E` 来代替
 * 使用不同的 [WhateverGreen 补丁](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
   * 如 `-igfxmlr` 启动参数。 这可能适用于显示为 "Divide by Zero" 的错误
-* 当启动 macOS 10.15.4 或更新版本，Coffee Lake 的核显可能还需要 `igfxonln=1`
+* 当启动 macOS 10.15.4 或更新版本，Coffee Lake 的核芯显卡可能还需要 `igfxonln=1`
 
 ## 笔记本花屏问题
 
 请在 UEFI 设定启用 CSM。该选项可能会出现在 "Boot legacy ROMs" 或其他的启动设置
 
-## Navi 显卡在出现 `IOConsoleUsers: gIOScreenLock...` 后黑屏
+## 采用 Navi 核心的显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏
 
 * 添加 `agdpmod=pikera` 到 boot-args，并关闭 BIOS 中的 `Serial/COM Port`（位于 SuperIO）
 * 切换不同的显示输出
 * 尝试 `MacPro7,1` SMBIOS 并且使用 boot-arg `agdpmod=ignore`
 
-对于 MSI Navi 使用者, 你需要添加如下补丁: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
+对于微星 Navi 核心显卡用户, 你需要添加如下补丁: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
 
 向 `Kernel -> Patch` 添加以下内容：
 
-::: details MSI Navi 补丁
+::: details 微星 Navi 核心显卡补丁
 
 ```bash
 Base:
@@ -556,7 +556,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 :::
 
-## macOS 在登陆界面冻结
+## macOS 在登录界面冻结
 
 这通常是 TSC 导致的问题, 对大多数机器来说添加 [CpuTscSync](https://github.com/acidanthera/CpuTscSync) 即可  
 
@@ -566,7 +566,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 :-------------------------:|:-------------------------:
 ![case 1](../../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![case 2](../../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
-## 笔记本键盘正常但触控板无反应
+## 笔记本电脑的键盘正常但触控板无法工作
 
 检查 `config.plist -> Kernel -> Add` 请确保 VoodooInput 在 VoodooPS2 和 VoodooI2C 的前面
 
@@ -599,7 +599,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 * `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
   * 一些 OEM 会用这个来代替
   
-对于这些具有奇怪 PciRoot 的主板，您首先需要完全安装好 macOS，然后使用 [gfxutil](https://github.com/acidanthera/gfxutil/releases) 来找出正确的路径:
+对于这些具有奇怪的 PciRoot 的主板，您首先需要完全安装好 macOS，然后使用 [gfxutil](https://github.com/acidanthera/gfxutil/releases) 来找出正确的路径:
 
 ```bash
 /path/to/gfxutil | grep -i "8086:15f3"
@@ -613,7 +613,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 最后的 `PciRoot(0x0)/Pci(0x1F,0x6)` 就是您需要添加到 config.plist 的设备路径，同时为其添加属性 `device-id` 值为 `F2150000`（data 类型）
 
-## IceLake 笔记本上的内核崩溃："Wrong CD Clock Frequency"
+## Icelake 笔记本上的内核崩溃“Wrong CD Clock Frequency”
 
 ![cdc](../../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
 

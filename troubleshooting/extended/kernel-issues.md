@@ -2,7 +2,7 @@
 
 * 支持的版本：0.6.5
 
-在初次启动**macOS 安装程序**到**出现安装器界面**时候会出现的部分问题
+在初次启动 **macOS 安装程序** 到 **出现安装器界面** 时会出现的部分问题
 
 * [卡在 [EB|#LOG:EXITBS:START]](#卡在-eblogexitbsstart)
 * [卡在 EndRandomSeed](#卡在-endrandomseed)
@@ -21,14 +21,14 @@
 * [X99 主板在 IOPCIFamily 发生内核崩溃](#x99-主板在-iopcifamily-发生内核崩溃)
 * [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#卡在-ioconsoleusers-gioscreenlockgiolockstate-3-或附近)
 * [笔记本花屏问题](#笔记本花屏问题)
-* [采用 Navi 核心的显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+* [采用 Navi 核心的 AMD 显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#采用-navi-核心的-amd-显卡在出现-ioconsoleusers-gioscreenlock-之后黑屏)
 * [内核崩溃：Cannot perform kext summary](#内核崩溃-cannot-perform-kext-summary)
 * [内核崩溃：AppleIntelMCEReporter](#内核崩溃-appleintelmcereporter)
 * [内核崩溃：AppleIntelCPUPowerManagement](#内核崩溃-appleintelcpupowermanagement)
-* [笔记本电脑的键盘正常但触控板无法工作](#笔记本的键盘正常但触控板无法工作)
+* [笔记本电脑的键盘工作正常，但触控板无法工作](#笔记本电脑的键盘工作正常但触控板无法工作)
 
 * [kextd stall[0]: AppleACPICPU](#卡在-kextd-stall0-appleacpicpu)
-* [内核崩溃：AppleIntelI210Ethernet](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleinteli210ethernet)
+* [内核崩溃：AppleIntelI210Ethernet](#内核崩溃-appleinteli210ethernet)
 * [Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”](#icelake-笔记本上的内核崩溃wrong-cd-clock-frequency)
 * [安装 macOS Big Sur 时卡在 Forcing CS_RUNTIME for entitlement](#安装-macos-big-sur-时卡在-forcing-cs_runtime-for-entitlement)
 * [卡在 ramrod(^^^^^^^^^^^^^)](#卡在-ramrod)
@@ -54,7 +54,7 @@
 * **SetupVirtualMap**
   * 在大多数固件上都需要启用这个设置项，如果禁用它很容易会导致内核崩溃, 除了以下情况：
     * 主要是 Z390 以及更早的主板需要启用这个开关
-    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
+    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此设置项：
       * Intel Ice Lake 架构笔记本
       * Intel Comet Lake 架构主板（B460、H470、Z490 等）
       * AMD 的 B550 和 A520（更新了最新版本的 BIOS 的 X570 主板也包括在内）
@@ -333,7 +333,7 @@ ProperTree 快照添加 (Cmd/Ctrl+R) 来修复
 
 如果您想查询完整的 SMBIOS 列表和 macOS 系统支持详情，请访问：[Choosing the right SMBIOS](../../extras/smbios-support.md)
 
-::: details macOS 10.15, Catalina 支持的 SMBIOS
+::: details macOS 10.15 Catalina 支持的 SMBIOS
 
 * iMac13,x+
 * iMacPro1,1
@@ -345,7 +345,7 @@ ProperTree 快照添加 (Cmd/Ctrl+R) 来修复
 
 :::
 
-::: details macOS 11, Big Sur 支持的 SMBIOS
+::: details macOS 11 Big Sur 支持的 SMBIOS
 
 * iMac14,4+
 * iMacPro1,1
@@ -363,64 +363,62 @@ ProperTree 快照添加 (Cmd/Ctrl+R) 来修复
 
 ## 卡在 `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
-这一部分是 PCI 设备初始化和配置的过程，也是大多数启动问题会出现的时候。其他可能的位置：
+这是 PCI 设备在初始化和配置的过程，也是大多数启动问题会出现的时候。其他可能的卡住位置：
 
 * `apfs_module_start...`,
 * `Waiting for Root device`,
 * `Waiting on...IOResources...`,
 * `previous shutdown cause...`
 
-检查以下内容:
+请检查以下内容:
 
 * **缺少 EC 补丁**:
   * 确保 `EFI/OC/ACPI` 里有 `SSDT-EC.aml` 并检查 config.plist 的 `ACPI -> Add` 中**是否被启用**
-  * 如果您找不到这个补丁，可以从这里获取： [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+  * 如果您找不到这个补丁，可以从这里获取：[ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/)
 * **IRQ 冲突**:
-  * 在老旧的笔记本电脑和机器上最常见，可以运行 SSDTTime 的 FixHPET 选项，并将生成的 SSDT-HPET.aml 和 ACPI 重命名补丁添加到您的配置中（如果缺少 ACPI 重命名补丁，SSDT 将无法工作）
+  * 在老旧的笔记本电脑和机器上最常见，可以运行 SSDTTime 的 FixHPET 选项，并将生成的 `SSDT-HPET.aml` 和 ACPI 重命名补丁添加到您的配置中（如果缺少 ACPI 重命名补丁，SSDT 将无法工作）
 * **PCI 分配问题**:
   * 更新您的 BIOS 固件并确保它是最新版本。一些 OEM 的固件的 PCI 分配存在问题，特别是 AMD
   * 请启用 BIOS 设定中的 `Above4GDecoding`。如果找不到可用的选项，则在
 boot-args 中添加 `npci=0x2000`
     * 一些 X99 和 X299 主板（如：GA-X299-UD4）可能需要同时添加 `npci=0x200` 启动参数和启用 `Above4G Decoding`
     * AMD CPU 请注意: **不要在启用 `Above4G Decoding` 的同时添加 `npci=0x2000` 到 boot-args，它们会互相冲突**
-  * 一些重要的 BIOS 设定: 禁用 `CSM`, 启用 `Windows 8.1/10 UEFI` 模式
+  * 一些重要的 BIOS 设定: 禁用 CSM、启用 Windows 8.1/10 UEFI 模式
 * **NVMe 或 SATA 问题**:
   * 有时候使用糟糕的 SATA 控制器或不受支持的 NVMe 驱动器会让你卡在这里。部分已知解决办法：
-    * 不要使用 `Samsung PM981` 或 `Mircon 2200S NVMe SSD`
-    * 更新 `Samsung 970 Evo Plus` 的固件至最新版本（旧固件存在不稳定和失速的问题，更多信息 [请查阅此处](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
-    * BIOS 设定中禁用 SATA 热插拔（在基于 AMD CPU 的机器上更容易导致问题)
-    * 确保 NVMe 驱动器在 BIOS 中是设置为工作在 NVMe 模式（一些 BIOS 会错误地将 NVMe 驱动器设置为 SATA 模式）
+    * 请不要使用 `Samsung PM981` 或 `Mircon 2200S NVMe SSD`
+    * 请将 `Samsung 970 Evo Plus` 的固件更新至最新版本（旧版本的固件存在不稳定和失速的问题，详情[请查阅此处](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
+    * 请在 BIOS 设定中禁用 SATA 热插拔（在基于 AMD CPU 的机器上更容易导致问题)
+    * 确保您的 NVMe 驱动器在 BIOS 设定中被设置为工作在 NVMe 模式（一些 BIOS 会错误地将 NVMe 驱动器设置为 SATA 模式）
 * **NVRAM 写入失败**:
   * 常见于 HEDT 和 300 系主板，以下为解决办法：
     * 300 系消费级 Intel 主板：添加 `SSDT-PMC.aml`，查阅 [ACPI入门](https://dortania.github.io/Getting-Started-With-ACPI/) 来获取 SSDT-PMC.aml
     * HEDT（如： X99）： See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **缺失 RTC 时钟**:
-  * Intel 300 系以后的主板(如： Z370, Z490) 默认禁用 RTC 时钟。查阅 [ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/) 来获取 SSDT-AWAC.aml
+  * Intel 300 系以后的主板（如： Z370, Z490）默认禁用 RTC 时钟。查阅 [ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/) 来获取 `SSDT-AWAC.aml`
   * X99 和 X299 主板的 RTC 设备基本都是损坏的, 您需要 SSDT-RTC0-RANGE 来修复它。 查询 [ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/) 来获取相关文件
   * HP 的一些的固件甚至禁用了 RTC ，也没有办法来重新启用它
-    * 已知受影响的机型：`HP 15-DA0014dx`, `HP 250 G6`
+    * 已知受影响的机型：HP 15-DA0014dx、HP 250 G6
     * 对于拥有这些机器的用户来说，您将需要创建一个仿冒的 RTC 时钟供 macOS 使用。更多详情请查看 ACPI 入门，或者查看下面的图片
 
-一个被禁用的而且无法被启用的 RTC 时钟的例子（注意到这里没有用于重新启用它的值 `STAS`）：
+图例：被禁用而且无法被重新启用的 RTC 时钟（注意到这里没有用于重新启用它的值 `STAS`）：
 
 ![rtc](../../images/troubleshooting/troubleshooting-md/rtc.png)
 
-## B550 主板卡在 ACPI table loading
+## B550 主板卡在 `ACPI table loading`
 
 ![ctlna](../../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
 
-当您使用 B550 或 A520 主板在启动时卡在 ACPI table loading，请添加以下 SSDT：
+如果使用 B550 或 A520 主板在启动 macOS 时会卡在 `ACPI table loading`，请使用 [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) 来修复这个问题
 
-* [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
+确保 SSDT 被正确添加到 `EFI/OC/ACPI` 和 `config.plist -> ACPI -> Add` 下（ProperTree 的 `快照添加` 可以帮助您正确填写 config.plist）
 
-请记确保添加此 SSDT 到 `EFI/OC/ACPI` **和**您的 `config.plist -> ACPI -> Add` 下（ProperTree 的 `快照添加` 可以帮助您填写 config）
-
-## "Waiting for Root Device" 和禁止符号
+## `Waiting for Root Device` 和禁止符号
 
 * 其他名称: 停止符号、花屏、禁行
 
-这主要是 USB 或 SATA 错误，有许多方法来修复这个问题：
+这主要是 USB 或 SATA 相关的问题，有许多方法来修复这些问题：
 
 ### USB 问题
 
@@ -463,7 +461,7 @@ boot-args 中添加 `npci=0x2000`
 * [从 Catalina 提取并修改后的 AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
   * 适用于安装 macOS Big Sur 11 的用户，这实际上是把 Catalina 能正常使用的 kext 向后移植到了 Big Sur。无需和 `SATA-unsupported.kext` 一起使用
 
-要注意的是，您只有在安装 macOS 后才会遇到这些问题。SATA 问题不会影响启动 macOS 安装器
+要注意的是，您只有在安装 macOS 到硬盘后才会遇到这些问题。SATA 问题不会对启动 macOS 安装器造成影响
 
 ## X99 主板在 IOPCIFamily 发生内核崩溃
 
@@ -473,7 +471,7 @@ boot-args 中添加 `npci=0x2000`
   * `AppleCpuPmCfgLock`
   * `AppleXcpmCfgLock`
   * `AppleXcpmExtraMsrs`
-* 请确保您的引导拥有以下 SSDT:
+* 请确保您的引导拥有以下 SSDT：
   * SSDT-UNC（如果没有，从 [ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/) 获取一个）
 
 ## 卡在 `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...` 或附近
@@ -492,9 +490,9 @@ boot-args 中添加 `npci=0x2000`
 
 ## 笔记本花屏问题
 
-请在 UEFI 设定启用 CSM。该选项可能会出现在 "Boot legacy ROMs" 或其他的启动设置
+请在 UEFI 设定启用 CSM。该选项可能会出现在 "Boot legacy ROMs" 或其他的启动设置下
 
-## 采用 Navi 核心的显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏
+## 采用 Navi 核心的 AMD 显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏
 
 * 添加 `agdpmod=pikera` 到 boot-args，并关闭 BIOS 中的 `Serial/COM Port`（位于 SuperIO）
 * 切换不同的显示输出
@@ -572,15 +570,17 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 :-------------------------:|:-------------------------:
 ![case 1](../../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![case 2](../../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
-## 笔记本电脑的键盘正常但触控板无法工作
+## 笔记本电脑的键盘工作正常，但触控板无法工作
 
 检查 `config.plist -> Kernel -> Add` 请确保 VoodooInput 在 VoodooPS2 和 VoodooI2C 的前面
 
 ::: details VoodooI2C 故障诊断
 
-检查 kexts 的加载顺序 - 让他们符合以下顺序：[获取需要的文件](../../ktext.md)
+需要的文件可在此页面获取：[获取需要的文件](../../ktext.md)
 
-1. VoodooGPIO、 VoodooInput 和 VoodooI2CServices 这三者之间可以是任意顺序 (位于 VoodooI2C.kext/Contents/PlugIns)
+检查内核扩展的加载顺序，让他们符合以下顺序：
+
+1. VoodooGPIO、VoodooInput 和 VoodooI2CServices 这三者之间可以是任意顺序（这些内核扩展位于 `VoodooI2C.kext/Contents/PlugIns`）
 2. VoodooI2C.kext
 3. 卫星驱动（Satellites Kext，如 VoodooI2CHID）
 

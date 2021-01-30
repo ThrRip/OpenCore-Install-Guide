@@ -4,43 +4,43 @@
 
 在首次启动启动 U 盘的**macOS 安装程序**到**出现安装器界面**时候会出现的部分问题
 
-* [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
-* [卡在 EndRandomSeed](#stuck-on-endrandomseed)
-* [在 OpenCore 中选择 macOS 分区 后卡住](#在-OpenCore-中选择-macOS-分区后卡住)
-* [内核崩溃：Invalid frame pointer](#kernel-panic-on-invalid-frame-pointer)
-* [卡在 [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
-* [卡在 OCB: LoadImage failed - Security Violation](#stuck-on-ocb-loadimage-failed-security-violation)
-* [卡在 OCABC: Memory pool allocation failure - Not Found](#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
-* [卡在 Buffer Too Small](#stuck-on-buffer-too-small)
-* [卡在 Plist only kext has CFBundleExecutable key](#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
-* [卡在 This version of Mac OS X is not supported: Reason Mac...](#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
-* [Couldn't allocate runtime area 错误](#couldn-t-allocate-runtime-area-errors)
-* [卡在 RTC..., PCI ConfigurationBegins, Previous Shutdown..., HPET, HID: Legacy...](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
-* [B550 主板卡在 ACPI Table loading](#B550-主板卡在-ACPI-table-loading)
-* [“Waiting for root device” 和 禁行符号](#waiting-for-root-device-or-prohibited-sign-error)
+* [卡在 [EB|#LOG:EXITBS:START]](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
+* [卡在 EndRandomSeed](#%E5%8D%A1%E5%9C%A8-endrandomseed)
+* [在 OpenCore 中选择 macOS 分区 后卡住](#%E5%9C%A8-opencore-%E4%B8%AD%E9%80%89%E6%8B%A9-macos-%E5%88%86%E5%8C%BA%E5%90%8E%E5%8D%A1%E4%BD%8F)
+* [内核崩溃：Invalid frame pointer](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83invalid-frame-pointer)
+* [卡在 [EB|LD:OFS] Err(0xE)](#%E5%90%AF%E5%8A%A8-preboot-%E5%88%86%E5%8C%BA%E6%97%B6%E5%8D%A1%E5%9C%A8-ebldofs-err0xe)
+* [卡在 OCB: LoadImage failed - Security Violation](#%E5%8D%A1%E5%9C%A8-ocb-loadimage-failed-security-violation)
+* [卡在 OCABC: Memory pool allocation failure - Not Found](#%E5%8D%A1%E5%9C%A8-ocabc-memory-pool-allocation-failure-not-found)
+* [卡在 Buffer Too Small](#%E5%8D%A1%E5%9C%A8-buffer-too-small)
+* [卡在 Plist only kext has CFBundleExecutable key](#%E5%8D%A1%E5%9C%A8-plist-only-kext-has-cfbundleexecutable-key)
+* [卡在 This version of Mac OS X is not supported: Reason Mac...](#%E5%8D%A1%E5%9C%A8-this-version-of-mac-os-x-is-not-supported-reason-mac)
+* [Couldn't allocate runtime area 错误](#couldnt-allocate-runtime-area-%E9%94%99%E8%AF%AF)
+* [卡在 RTC..., PCI ConfigurationBegins, Previous Shutdown..., HPET, HID: Legacy...](#卡在-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
+* [B550 主板卡在 ACPI Table loading](#b550-%E4%B8%BB%E6%9D%BF%E5%8D%A1%E5%9C%A8-acpi-table-loading)
+* [“Waiting for root device” 和 禁行符号](#waiting-for-root-device-%E5%92%8C%E7%A6%81%E6%AD%A2%E7%AC%A6%E5%8F%B7)
 * [X99 主板在 IOPCIFamily 发生内核崩溃](#kernel-panic-with-iopcifamily-on-x99)
-* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
-* [笔记本电脑禁行花屏](#scrambled-screen-on-laptops)
+* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#%E5%8D%A1%E5%9C%A8-ioconsoleusers-gioscreenlockgiolockstate-3-%E6%88%96%E9%99%84%E8%BF%91)
+* [笔记本花屏问题](#笔记本花屏问题)
 * [Navi 显卡（如：AMD 5700xt）在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [内核崩溃：Cannot perform kext summary](#kernel-panic-cannot-perform-kext-summary)
-* [内核崩溃：AppleIntelMCEReporter](#内核崩溃c-appleintelmcereporter)
-* [内核崩溃：AppleIntelCPUPowerManagement](#kernel-panic-appleintelcpupowermanagement)
+* [内核崩溃：Cannot perform kext summary](#内核崩溃-cannot-perform-kext-summary)
+* [内核崩溃：AppleIntelMCEReporter](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelmcereporter)
+* [内核崩溃：AppleIntelCPUPowerManagement](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelcpupowermanagement)
 * [笔记本键盘正常但触控板无反应](#笔记本键盘正常但触控板无反应)
 * [内核崩溃：Invalid frame pointer](#内核崩溃-invalid-frame-pointer)
-* [kextd stall[0]: AppleACPICPU](#kextd-stall-0-appleacpicpu)
-* [内核崩溃：AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
-* [Icelake 笔记本上的内核崩溃："Wrong CD Clock Frequency"](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake-laptop)
-* [卡在 Forcing CS_RUNTIME for entitlement in Big Sur](#stuck-at-forcing-cs-runtime-for-entitlement-in-big-sur)
+* [kextd stall[0]: AppleACPICPU](#%E5%8D%A1%E5%9C%A8-kextd-stall0-appleacpicpu)
+* [内核崩溃：AppleIntelI210Ethernet](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleinteli210ethernet)
+* [Icelake 笔记本上的内核崩溃："Wrong CD Clock Frequency"](#icelake-%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%B8%8A%E7%9A%84%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83wrong-cd-clock-frequency)
+* [卡在 Forcing CS_RUNTIME for entitlement in Big Sur](#%E5%AE%89%E8%A3%85-macos-big-sur-%E6%97%B6%E5%8D%A1%E5%9C%A8-forcing-cs_runtime-for-entitlement)
 * [卡在 ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
 
 ## 卡在 [EB|#LOG:EXITBS:START]
 
 本章节将分为三部分进行说明，请注意:
 
-* [Booter 配置问题](#Booter-配置问题)
-* [Kernel 配置问题](#kernel-配置问题)
-* [UEFI Issues](#uefi-issues)
-* [Virtual Machine Issues](#virtual-machine-issues)
+* [Booter 配置问题](#booter-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
+* [Kernel 配置问题](#kernel-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
+* [UEFI 配置问题](#uefi-issues)
+* [虚拟机问题](#virtual-machine-issues)
 
 ### Booter 配置问题
 
@@ -153,11 +153,11 @@ max_cpus_from_firmware not yet initialized
 
 ## 卡在 EndRandomSeed
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#stuck-on-eb-log-exitbs-start)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
 
 ## 在 OpenCore 中选择 macOS 分区后卡住
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]`](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
 
 * 注: 使用 [DEBUG 版本的 OpenCore](../debug.html) 可以让你更加轻松地发现问题的原因
 
@@ -484,7 +484,7 @@ boot-args 中添加 `npci=0x2000`
   * 如 `-igfxmlr` 启动参数。 这可能适用于显示为 "Divide by Zero" 的错误
 * 当启动 macOS 10.15.4 或更新版本，Coffee Lake 的核显可能还需要 `igfxonln=1`
 
-## 笔记本花屏问题（Scramble Screen？）
+## 笔记本花屏问题
 
 请在 UEFI 设定启用 CSM。该选项可能会出现在 "Boot legacy ROMs" 或其他的启动设置
 

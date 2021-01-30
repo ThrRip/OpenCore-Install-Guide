@@ -54,7 +54,7 @@
 * **SetupVirtualMap**
   * 在大多数固件上都需要启用这个设置项，如果禁用它很容易会导致内核崩溃, 除了以下情况：
     * 主要是 Z390 以及更早的主板需要启用这个开关
-    * 然而，某些固件（主要出现在 2020 年后的新产品）与该 Quirk 不兼容，启用这个 Quirk 反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
+    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
       * Intel Ice Lake 架构笔记本
       * Intel Comet Lake 架构主板（B460、H470、Z490 等）
       * AMD 的 B550 和 A520（更新了最新版本的 BIOS 的 X570 主板也包括在内）
@@ -146,7 +146,7 @@ max_cpus_from_firmware not yet initialized
 ### UEFI 配置问题
 
 * **ProvideConsoleGop**
-  * 这个 Quirk 用于过渡到下一个界面。这起初是 AptioMemoryFix 的一部分，但现在已经合并到 OpenCore，位于 `config.plist -> UEFI-> Output`
+  * 这个设置项用于过渡到下一个界面。这起初是 AptioMemoryFix 的一部分，但现在已经合并到 OpenCore，位于 `config.plist -> UEFI-> Output`
   * 从 0.5.6 版本开始，`sample.plist` 中的这个开关默认是被启用的
 * **IgnoreInvalidFlexRatio**
   * Broadwell 和更老的平台需要。**不适用于 AMD 或 Intel Skylake 及更新的平台**
@@ -177,7 +177,7 @@ max_cpus_from_firmware not yet initialized
 * **SetupVirtualMap**
   * 在大多数固件都需要启用这个 Quirk，如果禁用它很容易会导致内核崩溃, 除了以下情况：
     * 主要是 Z390 以及更早的主板需要启用这个开关
-    * 然而，某些固件（主要出现在 2020 年后的新产品）与该 Quirk 不兼容，启用这个 Quirk 反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
+    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
       * Intel Ice Lake 架构笔记本
       * Intel Comet Lake 架构主板（B460、H470、Z490 等）
       * AMD 的 B550 和 A520（更新了最新版本的 BIOS 的 X570 主板也包括在内）
@@ -469,7 +469,7 @@ boot-args 中添加 `npci=0x2000`
 
 对于这些使用 X99 主板的用户，请遵循以下解决办法：
 
-* 请确保以下 Kernel Quirk 被启用:
+* 请确保以下 Kernel设置项被启用:
   * `AppleCpuPmCfgLock`
   * `AppleXcpmCfgLock`
   * `AppleXcpmExtraMsrs`

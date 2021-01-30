@@ -4,41 +4,41 @@
 
 在初次启动**macOS 安装程序**到**出现安装器界面**时候会出现的部分问题
 
-* [卡在 [EB|#LOG:EXITBS:START]](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
-* [卡在 EndRandomSeed](#%E5%8D%A1%E5%9C%A8-endrandomseed)
-* [在 OpenCore 中选择 macOS 分区后卡住](#%E5%9C%A8-opencore-%E4%B8%AD%E9%80%89%E6%8B%A9-macos-%E5%88%86%E5%8C%BA%E5%90%8E%E5%8D%A1%E4%BD%8F)
-* [内核崩溃：Invalid frame pointer](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83invalid-frame-pointer)
-* [卡在 [EB|LD:OFS] Err(0xE)](#%E5%90%AF%E5%8A%A8-preboot-%E5%88%86%E5%8C%BA%E6%97%B6%E5%8D%A1%E5%9C%A8-ebldofs-err0xe)
-* [卡在 OCB: LoadImage failed - Security Violation](#%E5%8D%A1%E5%9C%A8-ocb-loadimage-failed-security-violation)
-* [卡在 OCABC: Memory pool allocation failure - Not Found](#%E5%8D%A1%E5%9C%A8-ocabc-memory-pool-allocation-failure-not-found)
-* [卡在 Buffer Too Small](#%E5%8D%A1%E5%9C%A8-buffer-too-small)
-* [卡在 Plist only kext has CFBundleExecutable key](#%E5%8D%A1%E5%9C%A8-plist-only-kext-has-cfbundleexecutable-key)
-* [卡在 This version of Mac OS X is not supported: Reason Mac...](#%E5%8D%A1%E5%9C%A8-this-version-of-mac-os-x-is-not-supported-reason-mac)
-* [Couldn't allocate runtime area 错误](#couldnt-allocate-runtime-area-%E9%94%99%E8%AF%AF)
+* [卡在 [EB|#LOG:EXITBS:START]](#卡在-eblogexitbsstart)
+* [卡在 EndRandomSeed](#卡在-endrandomseed)
+* [在 OpenCore 中选择 macOS 分区后卡住](#在-opencore-中选择-macos-分区后卡住)
+* [内核崩溃：Invalid frame pointer](#内核崩溃invalid-frame-pointer)
+* [启动 Preboot 分区时卡在 [EB|LD:OFS] Err(0xE)](#启动-preboot-分区时卡在-ebldofs-err0xe)
+* [卡在 OCB: LoadImage failed - Security Violation](#卡在-ocb-loadimage-failed-security-violation)
+* [卡在 OCABC: Memory pool allocation failure - Not Found](#卡在-ocabc-memory-pool-allocation-failure-not-found)
+* [卡在 Buffer Too Small](#卡在-buffer-too-small)
+* [卡在 Plist only kext has CFBundleExecutable key](#卡在-plist-only-kext-has-cfbundleexecutable-key)
+* [卡在 This version of Mac OS X is not supported: Reason Mac...](#卡在-this-version-of-mac-os-x-is-not-supported-reason-mac)
+* [Couldn't allocate runtime area 错误](#couldnt-allocate-runtime-area-错误)
 * [卡在 RTC..., PCI ConfigurationBegins, Previous Shutdown..., HPET, HID: Legacy...](#卡在-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
-* [B550 主板卡在 ACPI Table loading](#b550-%E4%B8%BB%E6%9D%BF%E5%8D%A1%E5%9C%A8-acpi-table-loading)
-* [“Waiting for root device”和禁行符号](#waiting-for-root-device-%E5%92%8C%E7%A6%81%E6%AD%A2%E7%AC%A6%E5%8F%B7)
-* [X99 主板在 IOPCIFamily 发生内核崩溃](#kernel-panic-with-iopcifamily-on-x99)
-* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#%E5%8D%A1%E5%9C%A8-ioconsoleusers-gioscreenlockgiolockstate-3-%E6%88%96%E9%99%84%E8%BF%91)
+* [B550 主板卡在 ACPI Table loading](#b550-主板卡在-acpi-table-loading)
+* [“Waiting for root device”和禁止符号](#waiting-for-root-device-和禁止符号)
+* [X99 主板在 IOPCIFamily 发生内核崩溃](#x99-主板在-iopcifamily-发生内核崩溃)
+* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#卡在-ioconsoleusers-gioscreenlockgiolockstate-3-或附近)
 * [笔记本花屏问题](#笔记本花屏问题)
 * [采用 Navi 核心的显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [内核崩溃：Cannot perform kext summary](#内核崩溃-cannot-perform-kext-summary)
-* [内核崩溃：AppleIntelMCEReporter](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelmcereporter)
-* [内核崩溃：AppleIntelCPUPowerManagement](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleintelcpupowermanagement)
+* [内核崩溃：AppleIntelMCEReporter](#内核崩溃-appleintelmcereporter)
+* [内核崩溃：AppleIntelCPUPowerManagement](#内核崩溃-appleintelcpupowermanagement)
 * [笔记本电脑的键盘正常但触控板无法工作](#笔记本的键盘正常但触控板无法工作)
-* [内核崩溃：Invalid frame pointer](#内核崩溃-invalid-frame-pointer)
-* [kextd stall[0]: AppleACPICPU](#%E5%8D%A1%E5%9C%A8-kextd-stall0-appleacpicpu)
+
+* [kextd stall[0]: AppleACPICPU](#卡在-kextd-stall0-appleacpicpu)
 * [内核崩溃：AppleIntelI210Ethernet](#%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83-appleinteli210ethernet)
-* [Icelake 笔记本上的内核崩溃“Wrong CD Clock Frequency”](#icelake-%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%B8%8A%E7%9A%84%E5%86%85%E6%A0%B8%E5%B4%A9%E6%BA%83wrong-cd-clock-frequency)
-* [卡在 Forcing CS_RUNTIME for entitlement in Big Sur](#%E5%AE%89%E8%A3%85-macos-big-sur-%E6%97%B6%E5%8D%A1%E5%9C%A8-forcing-cs_runtime-for-entitlement)
-* [卡在 ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
+* [Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”](#icelake-笔记本上的内核崩溃wrong-cd-clock-frequency)
+* [安装 macOS Big Sur 时卡在 Forcing CS_RUNTIME for entitlement](#安装-macos-big-sur-时卡在-forcing-cs_runtime-for-entitlement)
+* [卡在 ramrod(^^^^^^^^^^^^^)](#卡在-ramrod)
 
 ## 卡在 [EB|#LOG:EXITBS:START]
 
 本章节将分为三部分进行说明，请注意:
 
-* [Booter 配置问题](#booter-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
-* [Kernel 配置问题](#kernel-%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98)
+* [Booter 配置问题](#booter-配置问题)
+* [Kernel 配置问题](#kernel-配置问题)
 * [UEFI 配置问题](#uefi-配置问题)
 * [虚拟机问题](#虚拟机问题)
 
@@ -47,7 +47,7 @@
 在 Booter 部分的主要问题是:
 
 * **DevirtualiseMmio**
-  * 某些特定的 MMIO 区域仍然需要正常工作，因此您需要在 `Booter -> MmioWhitelist` 中排除这些区域，或者直接禁用这个 Quirk。 详情请参考: [如何使用 DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
+  * 某些特定的 MMIO 区域仍然需要正常工作，因此您需要在 `Booter -> MmioWhitelist` 中排除这些区域，或者直接禁用这个设置项。 详情请参考: [如何使用 DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
   * 对于 TRx40 用户，请启用这个设置项
   * 对于 X99 用户，因为一些固件会使其失效，所以请禁用这个设置项
 
@@ -143,25 +143,29 @@ max_cpus_from_firmware not yet initialized
 
 :::
 
-### UEFI 问题
+### UEFI 配置问题
 
 * **ProvideConsoleGop**
   * 这个 Quirk 用于过渡到下一个界面。这起初是 AptioMemoryFix 的一部分，但现在已经合并到 OpenCore，位于 `config.plist -> UEFI-> Output`
-  * 从 0.5.6 版本开始，sample.plist 中的这个开关默认是被启用的
+  * 从 0.5.6 版本开始，`sample.plist` 中的这个开关默认是被启用的
 * **IgnoreInvalidFlexRatio**
   * Broadwell 和更老的平台需要。**不适用于 AMD 或 Intel Skylake 及更新的平台**
 
+### 虚拟机问题
+
+* 已知 VMWare 15 会卡在 `[EB|#LOG:EXITBS:START]`，VMWare 16 修复了这个问题。
+
 ## 卡在 EndRandomSeed
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#卡在-eblogexitbsstart)
 
 ## 在 OpenCore 中选择 macOS 分区后卡住
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]`](#%E5%8D%A1%E5%9C%A8-eblogexitbsstart)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]`](#卡在-eblogexitbsstart)
 
 * 注: 使用 [DEBUG 版本的 OpenCore](../debug.html) 可以让你更加轻松地发现问题的原因
 
-## 内核崩溃：Invalid frame pointer`
+## 内核崩溃：Invalid frame pointer
 
 这个问题和 `Booter -> Quirks` 的配置有关，请您检查这些项：
 
@@ -319,13 +323,15 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 
 ## 卡在 `Plist only kext has CFBundleExecutable key`
 
-config.plist 中缺失或配置了错误的 Kext 可执行文件路径，可以使用
+这是由于 config.plist 中缺失或配置了错误的 Kext 可执行文件路径，可以使用
 ProperTree 快照添加 (Cmd/Ctrl+R) 来修复
 
 ## 卡在 `This version of Mac OS X is not supported: Reason Mac...`
 
-这个错误是由于当前设置的 SMBIOS 机型版本的不兼容将要安装的 macOS。 确
-保 `PlatformInfo -> Generic` 中填写了合适的机型信息并勾选了 `Automatic` . 如果您想查询完整的 SMBIOS 列表和 macOS 系统支持详情，请访问: [Choosing the right SMBIOS](../../extras/smbios-support.md)
+这个错误是由于当前设置的 SMBIOS 机型与将要安装的 macOS 版本不兼容。请您确
+认 `PlatformInfo -> Generic` 中填写了合适的机型信息，并勾选了 `Automatic`
+
+如果您想查询完整的 SMBIOS 列表和 macOS 系统支持详情，请访问：[Choosing the right SMBIOS](../../extras/smbios-support.md)
 
 ::: details macOS 10.15, Catalina 支持的 SMBIOS
 
@@ -412,7 +418,7 @@ boot-args 中添加 `npci=0x2000`
 
 ## "Waiting for Root Device" 和禁止符号
 
-* 其他名称: 停止符号、花屏
+* 其他名称: 停止符号、花屏、禁行
 
 这主要是 USB 或 SATA 错误，有许多方法来修复这个问题：
 
@@ -459,7 +465,7 @@ boot-args 中添加 `npci=0x2000`
 
 要注意的是，您只有在安装 macOS 后才会遇到这些问题。SATA 问题不会影响启动 macOS 安装器
 
-## X99 主板上的内核崩溃 IOPCIFamily
+## X99 主板在 IOPCIFamily 发生内核崩溃
 
 对于这些使用 X99 主板的用户，请遵循以下解决办法：
 
@@ -528,7 +534,7 @@ Skip: 0
 * 忘记为带有可执行文件的 Kext 填写二进制文件路径，或错误地为没有可执行文件的 Kext 填写了二进制文件路径（如 `USBPort.kext`, `XHCI-unspported.kext` 没有可执行文件）
 * 不要重复添加相同的 kext 到 `config.plist`(如： including multiple copies of VoodooInput from multiple kexts, 我们推荐启用顺序在前的那个，然后禁用后面的那个)
 
-注：这个错误看起来非常像 [内核崩溃 Invalid frame pointer](#kernel-panic-on-invalid-frame-pointer)
+注：这个错误看起来非常像 [内核崩溃：Invalid frame pointer](#内核崩溃invalid-frame-pointer)
 
 ## 内核崩溃 `AppleIntelMCEReporter`
 
@@ -613,7 +619,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 最后的 `PciRoot(0x0)/Pci(0x1F,0x6)` 就是您需要添加到 config.plist 的设备路径，同时为其添加属性 `device-id` 值为 `F2150000`（data 类型）
 
-## Icelake 笔记本上的内核崩溃“Wrong CD Clock Frequency”
+## Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”
 
 ![cdc](../../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
 
@@ -654,7 +660,3 @@ FakeSMC 限制在 Big Sur 及更新版本）
 
 当更换 kexts 时，请确保您的 `config.plist` 没有同时启用 FakeSMC 和
 VirtualSMC，否则两者会互相冲突。
-
-### 虚拟机问题
-
-* 已知 VMWare 15 会卡在 `[EB|#LOG:EXITBS:START]`，VMWare 16 修复了这个问题。

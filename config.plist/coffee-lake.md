@@ -3,26 +3,26 @@
 | 支持 | 版本 |
 | :--- | :--- |
 | 支持的 OpenCore 版本 | 0.6.5 |
-| 支持的最低 macOS 版本 | macOS 10.13, High Sierra |
+| 初始 macOS 支持版本 | macOS 10.13, High Sierra |
 
 ## 起点
 
-制作一份 config.plist 文件看起来很难，但其实一点都不难，仅仅就是需要一些时间而已。本指南会涵盖了所有需要你配置的配置项，不会让你陷入孤立无援的地步。这也意味着，如果你碰到什么问题，对照本指南检查你的配置设置以确保他们是正确的。OpenCore 需要注意的主要事项：
+虽然制作一个 config.plist 文件似乎很难，但其实并不是。它只是需要一些时间，但是此指南将会告诉你如何配置所有项目，不会让你陷入孤立无援的地步。这也意味着，如果你遇到问题，再浏览一遍你的配置以确保它们全部正确。使用 OpenCore 时较为重要的几点：
 
-* **所有的属性都应被定义**, OpenCore中的配置项不存在默认值的说法，所以 **除非明确指出，否则不要删除任何配置项**. 如果本指南中没有提到某个选项，就一定不要修改它。
-* **Sample.plist不能拿来就用**, 必须按照你的系统配置过后才能使用。
-* **不要用各种配置器**, 这些配置器不按照 OpenCore 的标准来，更有甚者像 Mackie 这样的往里面加 Clover 的配置项导致 plist 文件损坏！
+* **所有的属性都必须被定义**，OpenCore 不会自动填上默认值，所以**不要删除任何属性，除非明确地告知了需要删除**。如果本指南没有阐述某个属性，保留它的默认值。
+* **Sample.plist 不能直接使用**, 你必须将它配置得适合你的电脑。
+* **不要使用针对性的配置器（configurator）**, 它们几乎不会考虑到 OpenCore 的配置，甚至有些配置器——例如 Mackie 的——会添加 Clover 的设置项然后使 plist 出错！
 
-现在，基于上面提到的注意事项，这是我们接下来要用到的用具
+尽管如此，还是简短地提示一下我们需要的工具：
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * 通用 plist 文件编辑器
+  * 通用的 plist 编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
   * 用于生成 SMBIOS 数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参照上一章节获取该文件: [config.plist Setup](../config.plist/README.md)
 
-**再开始配置 OpenCore 之前，多看几遍本指南以确保你能正确地配置。注意，指南中的图片可能并不总是最新的，所以一定要阅读图片下面的文字，并以文字为准，如果文字中没有提到，就一定不要修改，保持原状即可。**
+**而且，请在放置好 OpenCore 之前不止一遍地阅读此指南，以确保你已经无误地配置了 OpenCore。记住，指南中的图片并非一直都是最新的，所以请阅读它们下面的文本，如果遇到没有提及的属性，保留它们的默认值即可。**
 
 ## ACPI
 
@@ -30,15 +30,15 @@
 
 ### Add
 
-::: 小贴士
+::: tip 信息
 
-这将是你给你的系统添加 SSDT 文件的地方，这对于**引导 macOS**非常重要，有很多用处，比如 [USB 映射](https://dortania.github.io/OpenCore-Post-Install/usb/), [禁用不支持的 GPU](../extras/spoof.md) 等等。 对于我们的系统, **这甚至是启动系统必须的**. 要制作 SSDT 文件，请参照: [**ACPI 入门**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你为你的系统添加 SSDT 的地方，它们对于 **引导 macOS** 非常重要，而且很多用于[定位 USB](https://dortania.github.io/OpenCore-Post-Install/usb/)、[屏蔽不支持的显卡](https://dortania.github.io/OpenCore-Post-Install/) 等等。对于我们的的系统来说，**它们甚至是引导时不可或缺的项目**。可以在这里找到制作和使用它们的指南：[**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-我们只需要几个 SSDT 文件就能达到 Clover 所提供的功能:
+我们需要添加一些 SSDT 来得到一些 Clover 提供的功能：
 
-| 必需的SSDT | 描述 |·
+| 需要的 SSDT | 说明 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 针对 Haswell 及更高版本的 CPU 启用原生电源管理，更多信息参考 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/)。 |
+| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 允许使用 Haswell 或更高版本的 CPU 的原生电源管理。查看 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) 以了解更多。 |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
 | **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. See [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |

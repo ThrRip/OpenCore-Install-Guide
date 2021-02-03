@@ -7,7 +7,7 @@
 
 ## 起点
 
-虽然制作一个 config.plist 文件似乎很难，但其实并不是。它只是需要一些时间，但是此指南将会告诉你如何配置所有项目，你不会被抛弃在寒风中。这同时代表，如果你有问题，再浏览一遍你的配置以确保它们全部正确。使用 OpenCore 时较为重要的几点：
+虽然制作一个 config.plist 文件似乎很难，但其实并不是。它只是需要一些时间，但是此指南将会告诉你如何配置所有项目，不会让你陷入孤立无援的地步。这也意味着，如果你遇到问题，再浏览一遍你的配置以确保它们全部正确。使用 OpenCore 时较为重要的几点：
 
 * **所有属性都必须被定义**，OpenCore 不会自动填上默认值，所以**不要删除任何属性，除非明确地告知了需要删除**。如果本指南没有阐述某个属性，保留它的默认值。
 * **Sample.plist 不能直接使用**，你必须将它配置得适合你的电脑。
@@ -32,7 +32,7 @@
 
 ::: tip 信息
 
-这是你为你的系统添加 SSDT 的地方，它们对于 **引导 macOS** 非常重要，而且很多用于 [定位 USB](https://dortania.github.io/OpenCore-Post-Install/usb/)、 [屏蔽不支持的显卡](https://dortania.github.io/OpenCore-Post-Install/) 等等。 对于我们的的系统来说，**它们甚至是引导时不可或缺的项目**。可以在这里找到制作和使用它们的指南：[**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你为你的系统添加 SSDT 的地方，它们对于**引导 macOS** 非常重要，而且很多用于[定位 USB](https://dortania.github.io/OpenCore-Post-Install/usb/)、[屏蔽不支持的显卡](https://dortania.github.io/OpenCore-Post-Install/) 等等。对于我们的的系统来说，**它们甚至是引导时不可或缺的项目**。可以在这里找到制作和使用它们的指南：[**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 我们需要添加一些 SSDT 来得到一些 Clover 提供的功能：
 

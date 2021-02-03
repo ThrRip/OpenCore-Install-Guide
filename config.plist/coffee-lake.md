@@ -1,28 +1,28 @@
-# Desktop Coffee Lake
+# 台式机 Coffee Lake
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.5 |
-| Initial macOS Support | macOS 10.13, High Sierra |
+| 支持的 OpenCore 版本 | 0.6.5 |
+| 支持的最低 macOS 版本 | macOS 10.13, High Sierra |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+制作一份 config.plist 文件看起来很难，但其实一点都不难，仅仅就是需要一些时间而已。本指南会涵盖了所有需要你配置的配置项，不会让你陷入孤立无援的地步。这也意味着，如果你碰到什么问题，对照本指南检查你的配置设置以确保他们是正确的。OpenCore 需要注意的主要事项：
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有的属性都应被定义**, OpenCore中的配置项不存在默认值的说法，所以 **除非明确指出，否则不要删除任何配置项**. 如果本指南中没有提到某个选项，就一定不要修改它。
+* **Sample.plist不能拿来就用**, 必须按照你的系统配置过后才能使用。
+* **不要用各种配置器**, 这些配置器不按照 OpenCore 的标准来，更有甚者像 Mackie 这样的往里面加 Clover 的配置项导致 plist 文件损坏！
 
-Now with all that, a quick reminder of the tools we need
+现在，基于上面提到的注意事项，这是我们接下来要用到的用具
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用 plist 文件编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成 SMBIOS 数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 参照上一章节获取该文件: [config.plist Setup](../config.plist/README.md)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+**再开始配置 OpenCore 之前，多看几遍本指南以确保你能正确地配置。注意，指南中的图片可能并不总是最新的，所以一定要阅读图片下面的文字，并以文字为准，如果文字中没有提到，就一定不要修改，保持原状即可。**
 
 ## ACPI
 
@@ -30,15 +30,15 @@ Now with all that, a quick reminder of the tools we need
 
 ### Add
 
-::: tip Info
+::: 小贴士
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这将是你给你的系统添加 SSDT 文件的地方，这对于**引导 macOS**非常重要，有很多用处，比如 [USB 映射](https://dortania.github.io/OpenCore-Post-Install/usb/), [禁用不支持的 GPU](../extras/spoof.md) 等等。 对于我们的系统, **这甚至是启动系统必须的**. 要制作 SSDT 文件，请参照: [**ACPI 入门**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+我们只需要几个 SSDT 文件就能达到 Clover 所提供的功能:
 
-| Required_SSDTs | Description |
+| 必需的SSDT | 描述 |·
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | 针对 Haswell 及更高版本的 CPU 启用原生电源管理，更多信息参考 [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/)。 |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
 | **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. See [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |

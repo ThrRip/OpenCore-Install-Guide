@@ -26,26 +26,26 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * 用于识别 HFS 分区（如：macOS 安装器、恢复环境分区/镜像）。**不要把这个驱动和其他 HFS 驱动相混淆**
-  * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
+  * 对于 Sandy Bridge 及更旧的架构（以及一些低端的 Ivy Bridge（i3 和 Celerons）），请查看下面的“传统用户”章节
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
-  * Reminder this was bundled in OpenCorePkg we downloaded earlier
+  * 作为 [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg) 的替代品, 作为 OpenCore 的一个扩展，帮助 OpenCore 向 boot.efi 打补丁以此来修复 NVRAM 和提供更好的内存管理
+  * 我们刚刚下载的 OpenCorePkg 已经包含了这个文件
 
 :::
 
 ### 传统用户
 
-在以上几点之外，如果您的主板不支持 UEFI（2011 及更早时期），您将需要以下驱动。 Pay close attention to each entry as you may not need all 4:
+在以上几点之外，如果您的主板不支持 UEFI（2011 及更早时期），您将需要以下驱动。 请仔细阅读每一项，因为大部分情况下你并不需要全部 4 个驱动:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * 用于 OpenCore 选择器，**适用于使用 DuetPkg 的传统平台**，[不推荐在支持 UEFI 的架构上使用，甚至有害（Ivy Bridge 及更新）](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * 用于 OpenCore 选择器，**适用于使用 DuetPkg 的传统平台**，[不推荐在支持 UEFI 的架构上使用，甚至有害（Ivy Bridge 及更新的架构）](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * 传统版本的 HfsPlus，用于缺失 RDRAND 指令支持的平台。这种情况通常见于 Sandy Bridge 及更旧的架构（以及一些低端的 Ivy Bridge（i3 和 Celerons））
-  * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
+  * 不要将此驱动与 HfsPlus.efi 相混淆，请根据您的硬件来选择
 * [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
   * 用于启动 OS X 10.7 到 10.9 版本的恢复环境
   * 适用于 Sandy Bridge 及更旧的架构（以及一些低端的 Ivy Bridge（i3 和 Celerons）），由于 RDRAND 命令的缺失，您还可能需要使用 [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi)
-  * 自 OS X 10.10，Yosemite 起，不再需要此驱动
+  * 自 OS X 10.10 Yosemite 起，不再需要此驱动
 
 这些文件需要被放置到 EFI 的 Drivers 文件夹下
 
@@ -66,7 +66,7 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 * **Windows 或 Linux 要注意**：在这些系统上，内核扩展看起来更像一个文件夹，请**重复检查** 这些文件夹是否带有一个可见的 .kext 后缀，如果没有，也请不要手动添加。
   * 如果您下载的内核扩展带有扩展名为 `.dSYM` 的文件，您可以直接将其删除。它只用于调试作用
-* **注意位置**：这些文件 **must** be placed under `EFI/OC/Kexts/`.
+* **注意位置**：这些文件 **must** 被放置在 `EFI/OC/Kexts/`.
 
 所有在下方列出的内核扩展都能在 [Kext Repo](http://kexts.goldfish64.com/) 找到 **编译后的** 文件. 这里的内核扩展会在每一次提交后更新
 
@@ -78,27 +78,27 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * 模拟白苹果上的 SMC 芯片，缺少这个 macOS 将无法启动
-  * 一个可选项是 FakeSMC which can have better or worse support, most commonly used on legacy hardware.
+  * 一个可选项是 FakeSMC ，可能会提供更好或者更坏的支持，主要用于传统硬件
   * 需要 OS X 10.6 或更新版本
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
-  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
-  * 注意 that Lilu and plugins 需要 OS X 10.8 或更新版本 to function
+  * 一个用于向许多进程打补丁的内核扩展，为 AppleALC、WhateverGreen、VirtualSMC 以及许多其他内核扩展所依赖。缺少 Lilu，这些内核扩展将无法正常工作
+  * Lilu 以及依赖它的插件都需要 OS X 10.8 或更新版本
   
-::: details 传统 "必须使用" kexts
+::: details 传统“必须使用”的内核扩展
 
-For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
+对于这些打算在 32 位硬件上运行 OS X 10.7 及更旧版本的用户，您可能需要使用以下内核扩展来替代 VirtualSMC:
 
 * [FakeSMC-32](https://github.com/khronokernel/Legacy-内核扩展/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
-如果您不打算启动这些旧版本系统，您可以忽略掉这个内核扩展。
+如果您不打算安装这些旧版本系统，您可以忽略掉这个内核扩展
 
-* **OS X 10.4 和 10.5 要注意**：Even on 64-bit CPUs, OS X 的内核空间也是 32 位的。所以我们推荐您使用 FakeSMC-32 来代替 VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
+* **OS X 10.4 和 10.5 要注意**：即使是 64 位的 CPU , OS X 的内核空间也是 32 位的。所以我们推荐您使用 FakeSMC-32 来替代 VirtualSMC，特别是将 FakeSMC-32 的 `Arch` 项设为 `i386` 并且将 VirtualSMC 的设为 `x86_64`。这个向导会在之后深入讨论这些项的设置
 
 :::
 
-### VirtualSMC 插件
+### VirtualSMC 的插件
 
-启动 macOS 并不依赖于以下内核扩展，它们只用于提供附加功能，如硬件监控（要注意虽然 VirtualSMC 支持 10.6，这些插件需要 10.8 及更新版本):
+启动 macOS 并不依赖于以下内核扩展，它们只用于提供附加功能，如硬件监控（要注意虽然 VirtualSMC 支持 10.6，这些插件需要 10.8 及更新版本)：
 
 * SMCProcessor.kext
   * 用于监控 CPU 温度，**不会在基于 AMD CPU 的电脑上工作**
@@ -109,7 +109,7 @@ For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want t
   * 如果您的电脑没有环境光传感器，请不要使用这个内核扩展，否则会导致一些问题
 * SMCBatteryManager.kext
   * 用于读取笔记本电脑的当前电池电量，**台式机可以忽略这个**
-  * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup：[修复电量读取](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
+  * 除非您的电池经过修复，否则不要使用这个内核扩展，会导致问题。对于初次安装，请忽略这个内核扩展。安装后您可以遵循这个页面的方法来配置：[修复电量读取](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
   * 用于支持系统控制模式（System Management Mode，SMM）从而更好地监控和控制戴尔品牌电脑的风扇
   * **如果您没有一台受支持的戴尔品牌电脑，请不要使用这个内核扩展**，大多数戴尔品牌的电脑都能从这个内核扩展受益
@@ -158,11 +158,11 @@ For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want t
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * 用于瑞昱（Realtek）的千兆以太网卡
   * 需要 OS X 10.8-11(2.2.0)、10.12-13(v2.2.2)、10.14+(2.3.0)
-  * **注意: 当您在使用 RealtekRTL8111 v2.3.0 时，瑞昱的千兆以太网有时会无法正确地工作。如果您遇到了这个问题，请尝试回退到 2.2.2 版本**
+  * **注意: 当您在使用 RealtekRTL8111 v2.3.0 时，以太网有时会无法正确地工作。如果您遇到了这个问题，请尝试回退到 2.2.2 版本**
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * 用于驱动 Realtek 2.5Gb 以太网卡
   * 需要 macOS 10.15 或更新版本
-* 对于 Intel i225-V NICs，Comet Lake 的 DeviceProperty 章节中给出了将其驱动的补丁。不需要额外的内核扩展
+* 对于 Intel i225-V NICs，Comet Lake 的 DeviceProperties 章节中给出了将其驱动的补丁。不需要额外的内核扩展
   * 需要 macOS 10.15 或更新版本
 
 ::: details 传统以太网内核扩展

@@ -4,7 +4,7 @@
 
 在初次启动 **macOS 安装程序** 到 **出现安装器界面** 时会出现的部分问题
 
-* [卡在 [EB|#LOG:EXITBS:START]](#卡在-eblogexitbsstart)
+* [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
 * [卡在 EndRandomSeed](#卡在-endrandomseed)
 * [在 OpenCore 中选择 macOS 分区后卡住](#在-opencore-中选择-macos-分区后卡住)
 * [内核崩溃：Invalid frame pointer](#内核崩溃invalid-frame-pointer)
@@ -33,7 +33,7 @@
 * [安装 macOS Big Sur 时卡在 Forcing CS_RUNTIME for entitlement](#安装-macos-big-sur-时卡在-forcing-cs_runtime-for-entitlement)
 * [卡在 ramrod(^^^^^^^^^^^^^)](#卡在-ramrod)
 
-## 卡在 [EB|#LOG:EXITBS:START]
+## 卡在 `[EB|#LOG:EXITBS:START]`
 
 本章节将分为三部分进行说明，请注意:
 
@@ -171,13 +171,13 @@ max_cpus_from_firmware not yet initialized
 
 * **DevirtualiseMmio**
   * 某些特定的 MMIO 区域仍然需要正常工作，因此您需要在 `Booter -> MmioWhitelist` 中排除这些区域，或者直接禁用这个开关。 详情请参考: [如何使用 DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
-  * 对于 TRx40 用户，启用这个 Quirk
-  * 对于 X99 用户，因为一些固件会使其失效，所以请禁用这个 Quirk
+  * 对于 TRx40 用户，启用这个设置项
+  * 对于 X99 用户，因为一些固件会使其失效，所以请禁用这个设置项
 
 * **SetupVirtualMap**
-  * 在大多数固件都需要启用这个 Quirk，如果禁用它很容易会导致内核崩溃, 除了以下情况：
+  * 在大多数固件都需要启用这个设置项，如果禁用它很容易会导致内核崩溃, 除了以下情况：
     * 主要是 Z390 以及更早的主板需要启用这个开关
-    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此 Quirk：
+    * 然而，某些固件（主要出现在 2020 年后的新产品）与该设置项不兼容，启用这个设置项反而会导致内核崩溃，如果您拥有以下机器或主板，请禁用此设置项：
       * Intel Ice Lake 架构笔记本
       * Intel Comet Lake 架构主板（B460、H470、Z490 等）
       * AMD 的 B550 和 A520（更新了最新版本的 BIOS 的 X570 主板也包括在内）
@@ -219,7 +219,7 @@ OCABC: MAT support is 1
 
 这是由于 preboot 分区没有被正确地更新，你需要进入到 Recovery 来修复它：
 
-1. 启用位于 `UEFI -> APFS` 的 `JumpstartHotplug` （如果没有启用这个 Quirk， macOS Big Sur 的 Recovery 可能无法启动）
+1. 启用位于 `UEFI -> APFS` 的 `JumpstartHotplug` （如果没有启用这个设置项， macOS Big Sur 的 Recovery 可能无法启动）
 2. 启动进入 macOS Recovery
 3. 打开终端，按照如下操作:
 

@@ -2,21 +2,21 @@
 
 * 支持的版本：0.6.6
 
-本章节主要讨论正常启动 macOS 所需的各种文件。在开始之前，我们希望您已经对您自己的硬件有了充分的了解，并在之前成功制作过一台黑苹果，因为我们不会在这里提供太过深层的信息。
+本章节主要讨论正常启动 macOS 所需要的各种文件。在开始之前，因为我们不会在这里提供太过深层的信息，我们希望您已经对您自己拥有的硬件有了充分的了解，并在之前成功制作过一台黑苹果
 
 > 判断 macOS 是否支持我的硬件的最好办法是什么?
 
-查看 [硬件限制](macos-limits.md) 来了解 macOS 需要什么来启动，Clover 和 OpenCore 支持的硬件范围相差无几
+查看 [硬件限制](macos-limits.md) 来了解 macOS 支持在什么硬件上启动，Clover 和 OpenCore 支持的硬件范围相差无几
 
 > 有什么方法来弄清楚我的电脑的具体硬件信息吗?
 
-请查阅之前的章节：[查找您的硬件](./find-hardware.md)
+请阅读之前的章节：[查找您的硬件](./find-hardware.md)
 
 ## 固件驱动
 
 OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱动，同时它们可以拓展 OpenCore 的修补能力，或使 OpenCore 选择器支持显示不同类型的驱动器（如：HFS 驱动器）。
 
-* **注意位置**：这些文件 **必须** 被放置在 `EFI/OC/Drivers/`
+* **注意位置**：这些文件**必须**被放置在 `EFI/OC/Drivers/`
 
 ### 通用
 
@@ -64,11 +64,11 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 .kext 文件是内核扩展（**K**ernel **Ext**ension），您可以把这个当作是 macOS 的驱动，这些文件需要放置在 EFI 分区里的 Kexts 文件夹
 
-* **Windows 或 Linux 要注意**：在这些系统上，内核扩展看起来更像一个文件夹，请**重复检查** 这些文件夹是否带有一个可见的 .kext 后缀，如果没有，也请不要手动添加。
+* **Windows/Linux 请注意**：在这些系统上，内核扩展看起来更像一个文件夹，请**重复检查** 这些文件夹是否带有一个可见的 .kext 后缀，如果没有，也请不要手动添加。
   * 如果您下载的内核扩展带有扩展名为 `.dSYM` 的文件，您可以直接将其删除。它只用于调试作用
-* **注意位置**：这些文件 **must** 被放置在 `EFI/OC/Kexts/`.
+* **注意位置**：这些文件**必须**被放置在 `EFI/OC/Kexts/`.
 
-所有在下方列出的内核扩展都能在 [Kext Repo](http://kexts.goldfish64.com/) 找到 **编译后的** 文件. 这里的内核扩展会在每一次提交后更新
+所有在下方列出的内核扩展都能在 [Kext Repo](http://kexts.goldfish64.com/) 找到 **编译后的** 文件。这里的内核扩展会在每一次提交后更新
 
 ### 必须使用
 
@@ -84,7 +84,7 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
   * 一个用于向许多进程打补丁的内核扩展，为 AppleALC、WhateverGreen、VirtualSMC 以及许多其他内核扩展所依赖。缺少 Lilu，这些内核扩展将无法正常工作
   * Lilu 以及依赖它的插件都需要 OS X 10.8 或更新版本
   
-::: details 传统“必须使用”的内核扩展
+::: details 传统 “必须使用” 的内核扩展
 
 对于这些打算在 32 位硬件上运行 OS X 10.7 及更旧版本的用户，您可能需要使用以下内核扩展来替代 VirtualSMC:
 
@@ -98,7 +98,7 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 ### VirtualSMC 的插件
 
-启动 macOS 并不依赖于以下内核扩展，它们只用于提供附加功能，如硬件监控（要注意虽然 VirtualSMC 支持 10.6，这些插件需要 10.8 及更新版本)：
+启动 macOS 并不依赖于以下内核扩展，它们只用于提供附加功能如硬件状态监控（要注意虽然 VirtualSMC 支持 10.6，这些插件需要 10.8 及更新版本)：
 
 * SMCProcessor.kext
   * 用于监控 CPU 温度，**不会在基于 AMD CPU 的电脑上工作**
@@ -109,9 +109,9 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
   * 如果您的电脑没有环境光传感器，请不要使用这个内核扩展，否则会导致一些问题
 * SMCBatteryManager.kext
   * 用于读取笔记本电脑的当前电池电量，**台式机可以忽略这个**
-  * 除非您的电池经过修复，否则不要使用这个内核扩展，会导致问题。对于初次安装，请忽略这个内核扩展。安装后您可以遵循这个页面的方法来配置：[修复电量读取](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
+  * 除非您的电池经过修复，否则不要使用这个内核扩展，不然会导致一些问题。对于初次安装，请忽略这个内核扩展。安装后您可以遵循这个页面的方法来配置：[修复电量读取](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
-  * 用于支持系统控制模式（System Management Mode，SMM）从而更好地监控和控制戴尔品牌电脑的风扇
+  * 用于提供对系统控制模式（System Management Mode，SMM）的支持从而更好地监控和控制戴尔品牌电脑的风扇
   * **如果您没有一台受支持的戴尔品牌电脑，请不要使用这个内核扩展**，大多数戴尔品牌的电脑都能从这个内核扩展受益
 
 ### 图形卡/显示卡
@@ -141,24 +141,24 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 ### 以太网
 
-我们假设您已经知道自己的以太网卡的型号，要记住商品详情页面通常会列出网卡的类型.
+我们假设您已经知道自己的以太网卡的型号，商品详情页面通常会列出网卡的类型.
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
-  * 用于驱动大多数英特尔（Intel）网络接口控制器，基于 I211 芯片组的网络接口控制器则需要使用 `SmallTreeIntel82576.kext`
+  * 用于驱动大多数 Intel 网络接口控制器，基于 I211 芯片组的网络接口控制器则需要使用 `SmallTreeIntel82576.kext`
   * Intel 82578、82579、i217、i218 和 i219 网卡免驱
   * 需要 OS X 10.9 或更新版本，10.6-10.8 版本的用户请使用 IntelSnowMausi 来支持更旧版本的系统
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * 用于驱动 i211 网卡，基于 SmallTree 内核扩展修改
-  * 大多数 AMD 主板都需要此内核扩展来驱动英特尔网络接口控制器
+  * 大多数 AMD 主板都需要此内核扩展来驱动 Intel 网络接口控制器
   * 需要 OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * 用于驱动 Atheros 和 Killer 网络接口控制器
   * 需要 OS X 10.8 或更新版本
   * 注意：Atheros Killer E2500 实际上是基于 Realtek 芯片的，对于这些电脑请使用 [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) 来代替
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
-  * 用于瑞昱（Realtek）的千兆以太网卡
+  * 用于驱动 Realtek 的千兆以太网卡
   * 需要 OS X 10.8-11(2.2.0)、10.12-13(v2.2.2)、10.14+(2.3.0)
-  * **注意: 当您在使用 RealtekRTL8111 v2.3.0 时，以太网有时会无法正确地工作。如果您遇到了这个问题，请尝试回退到 2.2.2 版本**
+  * **注意: 当您在使用 RealtekRTL8111 v2.3.0 时，有时以太网会无法正确地工作。如果您遇到了这个问题，请尝试回退到 2.2.2 版本**
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * 用于驱动 Realtek 2.5Gb 以太网卡
   * 需要 macOS 10.15 或更新版本
@@ -170,18 +170,18 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 主要和传统 macOS 安装或老旧 PC 硬件相关
 
 * [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e/releases)
-  * 主要用于英特尔 10/100MBe 以太网控制器
+  * 用于驱动 Intel 10/100MBe 以太网控制器
   * 需要 10.6 或更新版本
 * [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
-  * 主要用于瑞昱 10/100MBe 以太网控制器
+  * 用于驱动 Realtek 10/100MBe 以太网控制器
   * 需要 macOS 10.12 或更新版本，并使用 v2.0.0 以上版本的内核扩展
 * [BCM5722D](https://github.com/chris1111/BCM5722D/releases)
-  * 主要用于博通 BCM5722 以太网控制器
+  * 用于驱动 Broadcom BCM5722 以太网控制器
   * 需要 OS X 10.6 或更新版本
 
 :::
 
-还要注意的时，部分 NIC 被 macOS 原生支持：
+还要注意的时，部分网络接口控制器被 macOS 原生支持：
 
 ::: details 原生以太网卡控制器
 
@@ -202,7 +202,7 @@ pci1d6a,c0   = Aquantia AQC113
 pci1d6a,4c0  = Aquantia AQC113
 ```
 
-**注意**：由于许多 Aquantia NIC 主控芯片的固件较为过时，您可能需要通过 Linux/Windows 更新其固件来确保它能兼容 macOS。
+**注意**：由于许多 Aquantia NIC 主控芯片的固件较为过时，您可能需要通过 Linux/Windows 更新其固件以确保它能兼容 macOS。
 
 #### Intel 系列
 
@@ -252,17 +252,17 @@ pci14e4,1686 = Broadcom BCM57766
     * H370
     * B360
     * H310
-    * Z390（Mojave 及更新版本不再需要）
+    * Z390（Mojave 及更新版本系统不再需要）
     * X79
     * X99
-    * 华擎主板（主要是 Intel 主板，但是 B460/Z490 及更新的主板却不再需要这个）
+    * 华擎主板（Intel 主板，但是 B460/Z490 及更新的主板不再需要这个）
 
 ### Wi-Fi 与蓝牙
 
-#### 英特尔 Intel
+#### Intel
 
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
-  * 为大量 Intel 无线网卡提供支持，由于整合了 IO80211Family，还能在 Recovery 中使用
+  * 为大量 Intel 无线网卡提供支持，由于整合了 IO80211Family，还能在恢复环境中使用
   * 需要 macOS 10.13 或更新版本并需要 Apple 安全启动来提供功能支持
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * 为 Intel 无线网卡提供 macOS 的蓝牙支持
@@ -281,10 +281,10 @@ pci14e4,1686 = Broadcom BCM57766
 
 :::
 
-#### 博通 Broadcom
+#### Broadcom
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * 用来为非 Apple、Fenvi 品牌的博通网卡打补丁，**无法驱动英特尔、Killer 或 瑞昱等品牌的网卡**
+  * 用来为非 Apple、Fenvi 品牌的 Broadcom 网卡打补丁，**无法驱动 Intel、Killer 或 Realtek等品牌的网卡**
   * 需要 OS X 10.10 或更新版本
   * 如果您在使用 Big Sur 版本的系统，请查看 [已知 Big Sur 上存在的问题](./extras/big-sur#known-issues) 来了解更多有关 AirPortBrcm4360 驱动的详情.
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
@@ -309,7 +309,7 @@ pci14e4,1686 = Broadcom BCM57766
 ### AMD CPU 专用内核扩展
 
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-  * 用于修复 AMD FX 平台的 USB，Ryzen 平台不推荐使用
+  * 用于修复 AMD FX 平台的 USB，不推荐在 Ryzen 平台使用
   * 需要 macOS 10.13 或更新版本
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * 用于提供对 FX 平台的音频支持和对 Ryzen 平台的前面板麦克风和耳机孔支持，不要与 AppleALC 相混淆。在 Zen 架构 CPU 上的音频质量比 AppleALC 要差
@@ -332,7 +332,7 @@ pci14e4,1686 = Broadcom BCM57766
   * 用来初始化和修复非 Apple 官方 NVMe 的电源管理
   * 需要 macOS 10.14 或更新版本
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-内核扩展/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
-  * 为大量的 SATA 控制器提供支持，主要用于解决笔记本无法在 macOS 看到 SATA 驱动器的问题. 推荐先不使用该内核扩展来测试是否可以看到 SATA 驱动器
+  * 为大量的 SATA 控制器提供支持，主要用于解决笔记本无法在 macOS 看到 SATA 驱动器的问题。推荐先不使用该内核扩展来进行测试
   * **macOS Big Sur 注意**：由于该版本的 AppleAHCIPort 移除了对许多 SATA 控制器的支持，您可能需要使用 [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) 来修复
     * Catalina 及更旧的版本可以忽略这个
 
@@ -347,7 +347,7 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### 笔记本电脑专用
 
-要弄清楚您的键盘和触控板是什么类型，请查看 Windows 设备管理器或在 Linux 执行 `dmesg | grep input`
+如果要弄清楚您的键盘和触控板是什么类型，请查看 Windows 设备管理器，或在 Linux 执行 `dmesg | grep input`
 
 #### 输入设备驱动
 
@@ -372,22 +372,22 @@ pci14e4,1686 = Broadcom BCM57766
 | 连接类型 | 插件名 | 描述 |
 | :--- | :--- | :--- |
 | Microsoft HID | VoodooI2CHID | 也支持 USB 连接的触控屏 |
-| ELAN Proprietary | VoodooI2CElan | ELAN1200+ 需要使用 VoodooI2CHID 来代替 |
-| Synaptics Proprietary | VoodooI2CSynaptics | Synaptics F12 协议需要使用 VoodooI2CHID 来代替 |
+| ELAN 专有协议 | VoodooI2CElan | ELAN1200+ 需要使用 VoodooI2CHID 来代替 |
+| Synaptics 专有协议 | VoodooI2CSynaptics | Synaptics F12 协议需要使用 VoodooI2CHID 来代替 |
 | ^^ | VoodooRMI | 支持 Synaptics 协议 F12/F3A ，它们通常也支持 Microsoft 的 HID 标准，所以您应该先尝试 VoodooI2CHID |
-| FTE1001 touchpad | VoodooI2CFTE | |
-| Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+| FTE1001 触控板 | VoodooI2CFTE | |
+| Atmel 多点触控协议 | VoodooI2CAtmelMXT | |
 :::
 
 #### 杂项
 
-请访问 [Kext.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/内核扩展.md) 来获取完整的受支持内核扩展列表
+请阅读 [Kext.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/内核扩展.md) 来获取完整的受支持内核扩展列表
 
 ## SSDT 热补丁
 
-您会在 AcpiSamples 文件夹看到许多样板 SSDT，并且可能好奇需要哪些 SSDT。因为 SSDT 需要根据平台来选择，所以我们会在 **配置 config.plist 的 ACPI 部分** 讨论您所需要的 SSDT。 还有一些专用的 SSDT 需要根据您的电脑来配置，如果我直接列出所有的 SSDT 来让您选择，您很有可能会被弄得晕头转向。
+您会在 AcpiSamples 文件夹里看到许多样板 SSDT，并且好奇您的电脑到底需要哪些 SSDT。因为 SSDT 需要根据平台来选择，所以我们会在 **配置 config.plist 的 ACPI 部分** 讨论您所需要的 SSDT。 还有一些专用的 SSDT 需要根据您的电脑来配置，如果我们直接列出所有的 SSDT 来让您选择，您很有可能会被弄得晕头转向。
 
-[ACPI 入门](https://dortania.github.io/Getting-Started-With-ACPI/) 会讨论为不同系统编写 SSDT 的相关内容
+[ACPI 快速入门](https://dortania.github.io/Getting-Started-With-ACPI/) 会讨论为不同系统编写 SSDT 的相关内容
 
 一个快速而又繁琐 SSDT 查询表（这些都是未编译的源文件，您需要将他们编译为 .aml 文件）：
 
@@ -406,13 +406,13 @@ pci14e4,1686 = Broadcom BCM57766
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
-| AMD (17/19h) | [B550 和 A520 需要 SSDT-CPUR](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
+| AMD (17/19h) | [B550 或 A520 需要 SSDT-CPUR](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
 ### 高性能台式电脑
 
 | 架构 | **CPU** | **EC** | **RTC** | **PCI** |
 | :-------: | :-----: | :----: | :-----: | :-----: |
-| Nehalem and Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
+| Nehalem 或 Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
 | Sandy Bridge-E | ^^ | ^^ | ^^ | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0) |
 | Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ |
 | Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |

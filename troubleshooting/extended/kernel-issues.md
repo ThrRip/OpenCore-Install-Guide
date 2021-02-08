@@ -1,4 +1,4 @@
-# 内核空间错误
+# 内核错误
 
 * 支持的版本：0.6.6
 
@@ -7,8 +7,8 @@
 * [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
 * [卡在 EndRandomSeed](#卡在-endrandomseed)
 * [在 OpenCore 中选择 macOS 分区后卡住](#在-opencore-中选择-macos-分区后卡住)
-* [内核崩溃：Invalid frame pointer](#内核崩溃invalid-frame-pointer)
-* [启动 Preboot 分区时卡在 [EB|LD:OFS] Err(0xE)](#启动-preboot-分区时卡在-ebldofs-err0xe)
+* [内核崩溃：Invalid frame pointer](#内核崩溃-invalid-frame-pointer)
+* [启动 Preboot 分区时卡在 [EB|LD:OFS] Err(0xE)](#启动-preboot-分区时卡在-eb-ld-ofs-err-0xe)
 * [卡在 OCB: LoadImage failed - Security Violation](#卡在-ocb-loadimage-failed-security-violation)
 * [卡在 OCABC: Memory pool allocation failure - Not Found](#卡在-ocabc-memory-pool-allocation-failure-not-found)
 * [卡在 Buffer Too Small](#卡在-buffer-too-small)
@@ -17,20 +17,20 @@
 * [Couldn't allocate runtime area 错误](#couldnt-allocate-runtime-area-错误)
 * [卡在 RTC..., PCI ConfigurationBegins, Previous Shutdown..., HPET, HID: Legacy...](#卡在-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
 * [B550 主板卡在 ACPI Table loading](#b550-主板卡在-acpi-table-loading)
-* [“Waiting for root device”和禁止符号](#waiting-for-root-device-和禁止符号)
+* [“Waiting for root device” 和禁止符号](#waiting-for-root-device-和禁止符号)
 * [X99 主板在 IOPCIFamily 发生内核崩溃](#x99-主板在-iopcifamily-发生内核崩溃)
-* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#卡在-ioconsoleusers-gioscreenlockgiolockstate-3-或附近)
+* [卡在 IOConsoleUsers: gIOScreenLock... 或附近](#卡在-ioconsoleusers-gioscreenlock-giolockstate-3-或附近)
 * [笔记本花屏问题](#笔记本花屏问题)
 * [采用 Navi 核心的 AMD 显卡在出现 IOConsoleUsers: gIOScreenLock... 之后黑屏](#采用-navi-核心的-amd-显卡在出现-ioconsoleusers-gioscreenlock-之后黑屏)
 * [内核崩溃：Cannot perform kext summary](#内核崩溃-cannot-perform-kext-summary)
 * [内核崩溃：AppleIntelMCEReporter](#内核崩溃-appleintelmcereporter)
 * [内核崩溃：AppleIntelCPUPowerManagement](#内核崩溃-appleintelcpupowermanagement)
-* [笔记本电脑的键盘工作正常，但触控板无法工作](#笔记本电脑的键盘工作正常但触控板无法工作)
-
-* [kextd stall[0]: AppleACPICPU](#卡在-kextd-stall0-appleacpicpu)
+* [笔记本电脑的键盘工作正常，但触控板无法工作](#笔记本电脑的键盘工作正常-但触控板无法工作)
+* [卡在 kextd stall[0]: AppleACPICPU](#卡在-kextd-stall-0-appleacpicpu)
 * [内核崩溃：AppleIntelI210Ethernet](#内核崩溃-appleinteli210ethernet)
-* [Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”](#icelake-笔记本上的内核崩溃wrong-cd-clock-frequency)
-* [安装 macOS Big Sur 时卡在 Forcing CS_RUNTIME for entitlement](#安装-macos-big-sur-时卡在-forcing-cs_runtime-for-entitlement)
+* [Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”](#icelake-笔记本上的内核崩溃-wrong-cd-clock-frequency)
+* [内核崩溃：“cckprng_int_gen”](#内核崩溃-cckprng-int-gen)
+* [安装 macOS Big Sur 时卡在 Forcing CS_RUNTIME for entitlement](#安装-macos-big-sur-时卡在-forcing-cs-runtime-for-entitlement)
 * [卡在 ramrod(^^^^^^^^^^^^^)](#卡在-ramrod)
 
 ## 卡在 `[EB|#LOG:EXITBS:START]`
@@ -157,11 +157,11 @@ max_cpus_from_firmware not yet initialized
 
 ## 卡在 EndRandomSeed
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#卡在-eblogexitbsstart)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
 
 ## 在 OpenCore 中选择 macOS 分区后卡住
 
-和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]`](#卡在-eblogexitbsstart)
+和上文提到过的问题一致: [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
 
 * 注: 使用 [DEBUG 版本的 OpenCore](../debug.html) 可以让你更加轻松地发现问题的原因
 
@@ -613,11 +613,11 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 会输出以下内容：
 
-```bash
+```
 00:1f.6 8086:15f3 /PC00@0/GBE1@1F,6 = PciRoot(0x0)/Pci(0x1F,0x6)
 ```
 
-最后的 `PciRoot(0x0)/Pci(0x1F,0x6)` 就是您需要添加到 config.plist 的设备路径，同时为其添加属性 `device-id` 值为 `F2150000`（data 类型）
+最后出现的 `PciRoot(0x0)/Pci(0x1F,0x6)` 就是您需要添加到 config.plist 的设备路径，同时为其添加属性 `device-id` 值为 `F2150000`（data 类型）
 
 ## Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”
 
@@ -625,7 +625,7 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 请确保 `boot-args` 添加了 `-igfxcdc`
 
-## 内核崩溃："cckprng_int_gen"
+## 内核崩溃：“cckprng_int_gen”
 
 完整信息：
 
@@ -639,13 +639,13 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
   * 添加 [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) 到您的 config.plist 和 EFI 里
 * SSDT-CPUR 的错误使用
 
-对于后者, 确保你只在 **B550 and A520** 主板上使用 SSDT-CPUR。不要在 X570 或更旧的主板上使用（如 B450 或 A320）
+对于后者, 确保你只在 **B550 或 A520** 主板上使用 SSDT-CPUR。不要在 X570 或更旧的主板上使用（如 B450 或 A320）
 
 ## 安装 macOS Big Sur 时卡在 `Forcing CS_RUNTIME for entitlement`
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
-这实际上是 macOS 在密封系统分区, 看起来 macOS 像是卡住了，实际上**并没有**。**不要重启电脑**，你只需要一些耐心和时间
+这实际上是 macOS 在密封系统分区, 看起来 macOS 像是卡住了，实际上**并没有**。**请不要重启电脑**，你只需要一些耐心和时间
 
 ## 卡在 `ramrod`(^^^^^^^^^^^^^)
 

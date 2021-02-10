@@ -2,7 +2,7 @@
 
 | 支持 | 版本 |
 | :--- | :--- |
-| 支持的 OpenCore 版本 | 0.6.5 |
+| 支持的 OpenCore 版本 | 0.6.6 |
 | 初始 macOS 支持版本 | macOS 10.13, High Sierra |
 
 ## 起点

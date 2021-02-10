@@ -106,7 +106,7 @@ OCABC: MAT support is 1
 * **AppleXcpmExtraMsrs**
   * 可能需要，主要用于奔腾、HEDT 和其他不被 macOS 原生支持的老旧架构.
 
-#### 经典 Intel 用户
+#### 传统 Intel 用户
 
 对于 macOS Big Sur, 许多固件在确定 CPU 核心数量上存在问题，这会导致早期启动错误和内核崩溃。从串口输出中，你可以看到崩溃信息：
 
@@ -121,7 +121,7 @@ max_cpus_from_firmware not yet initialized
 
 但在一些特别的机器如 HP Compaq DC 7900 上，即使启用了这个设置项，它们的固件依然会导致内核崩溃。所以我们要强制指定 CPU 核心数量。只有在 `AvoidRuntimeDefrag` 失效时才应该使用以下补丁：
 
-::: details 经典 CPU 核心数量补丁
+::: details 传统 CPU 核心数量补丁
 
 添加以下补丁（将 B8 04 00 00 00 C3 中的 **04** 更换为你硬件支持的 CPU 线程数
 目）

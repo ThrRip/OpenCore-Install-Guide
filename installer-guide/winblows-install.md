@@ -12,7 +12,7 @@
 
 ## 下载 macOS
 
-获取经典安装程序真的非常简单，首先获取一份 [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) 的副本，然后进入 `/Utilities/macrecovery/` 目录。接着，拷贝 macrecovery 所在文件夹的路径： 
+获取传统安装程序真的非常简单，首先获取一份 [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) 的副本，然后进入 `/Utilities/macrecovery/` 目录。接着，拷贝 macrecovery 所在文件夹的路径：
 
 * 注意：0.6.4 和更低版本的 macrecovery.py 构建是损坏的，你需要[下载 master 分支的副本](https://github.com/acidanthera/OpenCorePkg/archive/master.zip)并使用放置于 `Utilities/macrecovery/` 目录下的那一个
 
@@ -89,7 +89,7 @@ python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
   * 仅 UEFI 系统支持（例如：2012 年及以后的系统）
 * [使用“diskpart”的方法](#使用-diskpart-的方法)
   * 基于命令行，工作量稍大
-  * 需要经典系统（例如：无 UEFI 支持，2012 年以前的系统）
+  * 需要传统系统（例如：无 UEFI 支持，2012 年以前的系统）
 
 ### 使用“磁盘管理”的方法
 
@@ -158,7 +158,7 @@ ASSIGN LETTER=E
 
 ![](../images/installer-guide/winblows-install-md/com-efi-done.png)
 
-::: details 设置经典安装
+::: details 设置传统安装
 
 如果你的固件不支持 UEFI，查看下面的说明：
 

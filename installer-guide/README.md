@@ -25,11 +25,11 @@
 
 * [macOS 用户](../installer-guide/mac-install.md)
   * 支持 OS X 10.4 到至今的版本
-  * 支持经典和 UEFI 安装
+  * 支持传统和 UEFI 安装
 * [Windows 用户](../installer-guide/winblows-install.md)
   * 支持 OS X 10.7 到至今的版本
   * 只支持在线安装
-  * 支持经典和 UEFI 安装
+  * 支持传统和 UEFI 安装
 * [Linux 用户（UEFI）](../installer-guide/linux-install.md)
   * 支持 OS X 10.7 到至今的版本
   * 只支持在线安装

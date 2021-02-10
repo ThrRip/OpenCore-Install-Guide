@@ -26,7 +26,7 @@ OpenCore 会在 UEFI 环境下使用固件驱动。启动系统需要这些驱�
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * 用于识别 HFS 分区（如：macOS 安装器、恢复环境分区/镜像）。**不要把这个驱动和其他 HFS 驱动相混淆**
-  * 对于 Sandy Bridge 及更旧的架构（以及一些低端的 Ivy Bridge（i3 和 Celerons）），请查看下面的“传统用户”章节
+  * 对于 Sandy Bridge 及更旧的架构（以及一些低端的 Ivy Bridge（i3 和 Celerons）），请查看下面的 “传统用户” 章节
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * 作为 [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg) 的替代品, 作为 OpenCore 的一个扩展，帮助 OpenCore 向 boot.efi 打补丁以此来修复 NVRAM 和提供更好的内存管理
   * 我们刚刚下载的 OpenCorePkg 已经包含了这个文件

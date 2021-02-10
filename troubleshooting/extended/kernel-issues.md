@@ -2,7 +2,7 @@
 
 * 支持的版本：0.6.6
 
-在初次启动 **macOS 安装程序** 到 **出现安装器界面** 时会出现的部分问题
+在初次启动 **macOS 安装程序**到**出现安装器界面**时会出现的部分问题
 
 * [卡在 [EB|#LOG:EXITBS:START]](#卡在-eb-log-exitbs-start)
 * [卡在 EndRandomSeed](#卡在-endrandomseed)
@@ -26,7 +26,7 @@
 * [内核崩溃：AppleIntelMCEReporter](#内核崩溃-appleintelmcereporter)
 * [内核崩溃：AppleIntelCPUPowerManagement](#内核崩溃-appleintelcpupowermanagement)
 * [笔记本电脑的键盘工作正常，但触控板无法工作](#笔记本电脑的键盘工作正常-但触控板无法工作)
-* [卡在 kextd stall[0]: AppleACPICPU](#卡在-kextd-stall-0-appleacpicpu)
+* [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
 * [内核崩溃：AppleIntelI210Ethernet](#内核崩溃-appleinteli210ethernet)
 * [Icelake 笔记本上的内核崩溃：“Wrong CD Clock Frequency”](#icelake-笔记本上的内核崩溃-wrong-cd-clock-frequency)
 * [内核崩溃：“cckprng_int_gen”](#内核崩溃-cckprng-int-gen)
@@ -542,10 +542,10 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 这通常是因为缺失或配置了错误的 `NullCPUPowerManagement`。请从 `Kernel -> Add` 和 `EFI/OC/Kexts` 中移除 `NullCPUPowerManagement`，然后启用 `Kernel -> Emulate` 下的 `DummyPowerManagement`
 
-* **注意**: 对于一些旧版 Intel CPU (如： Penryn 或更早之前的架构)，这可能是由于 IRQ 冲突或者 HPET 设备被禁用所导致。如果要解决这个问题，以下二选一:
+* **注意**：对于一些旧版 Intel CPU (如： Penryn 或更早之前的架构)，这可能是由于 IRQ 冲突或者 HPET 设备被禁用所导致。如果要解决这个问题，以下二选一:
   * [SSDTTime 的 FixHPET 选项](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
   * 强制启用 HPET 设备
-  
+
 ::: details 强制启用 HPET 设备
 
 在 ACPI -> Patch:
@@ -582,13 +582,13 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 
 1. VoodooGPIO、VoodooInput 和 VoodooI2CServices 这三者之间可以是任意顺序（这些内核扩展位于 `VoodooI2C.kext/Contents/PlugIns`）
 2. VoodooI2C.kext
-3. 卫星驱动（Satellites Kext，如 VoodooI2CHID）
+3. 作为插件的内核扩展
 
 确保 `SSDT-GPIO` 存在于 `EFI/OC/ACPI` 并在 `config.plist` 的 `ACPI -> Add` 加载和启用。如果依然存在问题，请查阅 [ACPI 入门 - GPIO 页面](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html).
 
 :::
 
-## 卡在 `kextd stall[0]: AppleACPICPU`
+## `kextd stall[0]: AppleACPICPU`
 
 这是因为缺失或使用了损坏的 SMC 模拟器，请检查以下内容：
 
@@ -601,10 +601,10 @@ macOS Catalina 对多 CPU 接口的支持存在问题。一个有趣的事实是
 对于这些带有 i225-V NIC 网卡的 Comet lake 主板, 您可能会遇到在 i210 kext 发生的内核崩溃。为解决这个问题，确保您配置了正确的以太网卡 PciRoot。一般为以下两者之一：
 
 * `PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)`
-  * 默认是这个, 主要由 Asus 和 Gigabyte 主板使用
+  * 默认是这个, 主要在华硕和技嘉的主板上使用
 * `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
   * 一些 OEM 会用这个来代替
-  
+
 对于这些具有奇怪的 PciRoot 的主板，您首先需要完全安装好 macOS，然后使用 [gfxutil](https://github.com/acidanthera/gfxutil/releases) 来找出正确的路径:
 
 ```bash

@@ -302,7 +302,7 @@
 
 ### Scheme
 
-设置与经典启动（Legacy booting）有关（例如 10.4-10.6），大多数情况下你可以跳过，然而对于一些使用经典启动的操作系统，你可以查看下方：
+设置与传统启动（Legacy booting）有关（例如 10.4-10.6），大多数情况下你可以跳过，然而对于一些使用传统启动的操作系统，你可以查看下方：
 
 ::: details 更多深层的信息
 
@@ -645,7 +645,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 
 ### ProtocolOverrides
 
-主要有关于虚拟机、经典 Mac 和文件保险箱用户。查看这里以获得更多信息： [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+主要有关于虚拟机、传统 Mac 和文件保险箱用户。查看这里以获得更多信息： [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 

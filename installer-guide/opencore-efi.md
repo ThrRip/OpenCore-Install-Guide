@@ -33,9 +33,9 @@
   * CrScreenshotDxe.efi
     * 用于在 UEFI 中创建截图，我们不需要
   * OpenUsbKbDxe.efi
-    * 用于在**经典系统上运行 DuetPkg** 的 OpenCore 引导菜单，[不推荐，甚至在 Ivy Bridge 和更新的平台上是有害的](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+    * 用于在**传统系统上运行 DuetPkg** 的 OpenCore 引导菜单，[不推荐，甚至在 Ivy Bridge 和更新的平台上是有害的](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
   * UsbMouseDxe.efi
-    * 和 OpenUsbKbDxe 一样，应当只有使用 DuetPkg 的经典系统才需要
+    * 和 OpenUsbKbDxe 一样，应当只有使用 DuetPkg 的传统系统才需要
   * NvmExpressDxe.efi
     * 用于 NVMe 驱动没有内建于固件中的 Haswell 和更旧的平台
   * XhciDxe.efi

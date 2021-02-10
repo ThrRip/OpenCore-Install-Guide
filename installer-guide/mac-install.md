@@ -9,7 +9,7 @@
 
 ## 下载 macOS：较新版本
 
-* 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看[下载 macOS：经典版本](#下载-macos-经典版本)
+* 这个方式允许你下载 macOS 10.13 和更高版本，对于 10.12 和更低版本请查看[下载 macOS：传统版本](#下载-macos-传统版本)
 
 在一台安装了 macOS 的设备上，获取你想要安装的 macOS 版本，只需直接进入 App Store 并下载想要的操作系统发行版，然后继续查看 [**创建安装器**](#创建安装器)。
 
@@ -72,13 +72,13 @@
 
 这样就可以跳转至[创建安装器](#创建安装器)以完成你的工作了。
 
-## 下载 macOS：经典版本
+## 下载 macOS：传统版本
 
 * 此方式允许你下载很多的旧版本 OS X，当前支持所有 OS X 的英特尔版本（10.4 至当前版本）
 
-::: details 获取经典版本的 macOS：离线方式（支持 10.10-10.12）
+::: details 获取传统版本的 macOS：离线方式（支持 10.10-10.12）
 
-### 经典版本 macOS：离线方式
+### 传统版本 macOS：离线方式
 
 此方式允许我们从 Apple 下载完整的安装器，但是限制到了 10.10 Yosemite，所以更旧的操作系统需要通过下方提到的“在线方式”获取。
 
@@ -158,11 +158,11 @@ mv Install\ macOS\ Sierra.app /Applications
 
 :::
 
-::: details 获取经典版本的 macOS：在线方式（支持 10.7-10.15）
+::: details 获取传统版本的 macOS：在线方式（支持 10.7-10.15）
 
-### 经典版本 macOS：在线方式
+### 传统版本 macOS：在线方式
 
-此方式允许我们从 Apple 下载经典版本的 macOS，包括 10.7 到当前版本，但是这些支持恢复模式的安装器，所以需要安装器内部有互联网连接
+此方式允许我们从 Apple 下载传统版本的 macOS，包括 10.7 到当前版本，但是这些支持恢复模式的安装器，所以需要安装器内部有互联网连接
 
 你将会使用 macrecovery.py 作为替代以开始。此工具实际上已经捆绑在了 OpenCorePkg 中：
 
@@ -226,9 +226,9 @@ python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 :::
 
-::: details 获取经典版本的 macOS：磁盘映像（支持 10.4-10.6）
+::: details 获取传统版本的 macOS：磁盘映像（支持 10.4-10.6）
 
-### 经典版本 macOS：磁盘映像
+### 传统版本 macOS：磁盘映像
 
 此方式依赖从 Apple 或 Acidanthera 的托管映像，并将其恢复到您的驱动器。
 
@@ -303,7 +303,7 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
 现在我们将要格式化 USB 驱动器以准备 macOS 安装程序和 OpenCore。我们要使用 GUID 分区表和 macOS 扩展（HFS+）分区格式。这将会创建两个分区：主要的 `MyVolume` 和另一个用于让你的固件获取引导文件以启动的，名为 `EFI` 的分区。
 
 * 注意：默认情况下，磁盘工具只会显示分区——按 Cmd/Win+2 以显示所有设备（或者你也可以点按“视图”按钮）
-* 注意 2：跟随“经典版本的 macOS：在线方式”部分的用户可以跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
+* 注意 2：跟随“传统版本的 macOS：在线方式”部分的用户可以跳转到[配置 OpenCore 的 EFI 源](#配置-opencore-的-efi-源)
 
 ![格式化 USB 驱动器](../images/installer-guide/mac-install-md/format-usb.png)
 
@@ -319,7 +319,7 @@ sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstall
 
 你也可以将 `createinstallmedia` 中的路径替换为你的安装程序所在的路径（驱动器的名称也一样）。
 
-::: details 经典版本的 createinstallmedia 命令
+::: details 传统版本的 createinstallmedia 命令
 
 从 Apple 自己的网站上拉取的：[How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
 
@@ -350,11 +350,11 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
 
 :::
 
-## 经典设置
+## 传统设置
 
 对于不支持 UEFI 启动的系统，查看下面的部分：
 
-::: details 配置经典启动
+::: details 配置传统启动
 
 你需要跟随下面的说明来开始：
 
